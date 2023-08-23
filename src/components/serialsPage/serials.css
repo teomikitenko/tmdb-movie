@@ -1,0 +1,260 @@
+
+ol{
+    list-style: none;
+    padding:  0 !important;
+    margin: 0;
+  }
+  span{
+    padding: 0;
+    margin: 0;
+    font-family:'Source Sans 3';
+    color: aliceblue;
+  }
+  p{
+    padding: 0 !important;
+    margin: 0 !important  ;
+    font-family:'Source Sans 3';
+    color: aliceblue;
+    word-wrap: normal;
+  
+  }
+  .wrapper{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    position: relative;
+    height: 100%;
+    ;
+  }
+  .img_backdrop{
+    position: absolute;
+    filter: brightness(0.2);
+    top: 0;
+    height: 0;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+
+  .conteiner{
+    
+    display: flex;
+    height: 100%;
+  
+  }
+  .content{
+    display: flex;
+    padding: 30px;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+
+  }
+    .content_img{
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    width: 344px;
+    height: 510px; 
+
+  }  
+  .img_title{
+    position:absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .text_content{
+    padding-top: 25px;
+    z-index: 100;
+    width: 972px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+  }
+  
+ .text_content_title_serials{
+  color:  #fff !important;
+  font-weight: 700;
+  font-family: "Source Sans 3",Arial,sans-serif;
+  font-size:2.2rem ;
+}
+.text_overview{
+  color: #fff !important;
+  font-family: 'Source Sans 3';
+  font-size: 16px;
+  line-height: 25px;
+}
+.creator_bottom{
+  margin-top: 20px;
+
+}
+.creator{
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(3,1fr);
+}
+.text_creator {
+  color: #fff !important;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+
+}
+.position{
+  color: #fff !important;
+  font-size: .9em;
+   font-weight: 500; 
+   line-height: 20px;
+   font-family:'Source Sans 3';
+
+}
+h3{
+  color: aliceblue;
+  font-size: 20.8px;
+  font-family:'Source Sans 3';
+  font-weight: bold;
+}
+.tagline{
+  color: #fff !important;
+  font-size: 17.6px;
+  font-style: italic;
+  opacity: .7;
+}
+.certification_serials{
+    line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  padding:  0.06em 4px 0.15em!important;
+  border: 1px solid gray;
+  margin-right: 12px;
+  border-radius: 2px;
+  color: gray;
+}
+.date{
+  margin-right: 12px;
+  font-weight: 500;
+  font-size: 15px
+
+}
+.genres{
+  position: relative;
+  margin-right: 12px;
+ 
+}
+.genres span{
+  font-weight: 500;
+  font-size: 15px
+}
+.genres::before{
+  content: "•";
+  position: absolute;
+  top: 0;
+  left: -10px;
+  width: 6px;
+  height: 6px;
+  color: aliceblue;
+}
+.runtime{
+  position: relative;
+  font-weight: 500;
+  font-size: 15px
+}
+.runtime:before{
+position: absolute;
+content: "•";
+  position: absolute;
+  top: 0;
+  left: -10px;
+  width: 6px;
+  height: 6px;
+  color: aliceblue;
+}
+.auto{
+  margin-bottom:  15px !important;
+  font-size: 1.3em;
+  font-weight: 600;
+  margin-top: 15px;
+  color: aliceblue;
+  font-family: 'Source Sans 3';
+}
+.tagline{
+  margin-top: 15px !important;
+}
+ .progress_bar{
+  display: flex;
+  margin-top: 15px;
+  background-color: transparent;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+} 
+.raiting_info{
+  display: flex;
+  width: 100px;
+  height: 75px;
+}
+.raiting_users{
+  display: inline-block;
+  font-weight: 700;
+  font-size: 16px;
+}
+.my_circle{
+ position: relative;
+ height: 60px;
+ width: 60px;
+ border: 4px solid  #11171e;
+ background: conic-gradient(#fbfdc2 272.6deg, #796f05	 0deg );
+ border-radius: 50%;
+  display: flex;
+ align-items: center;
+ justify-content: center;
+
+}
+ .my_circle::after{
+  position: absolute;
+  content: '';
+  width: 90%;
+  height: 90%;
+  background-color:#11171e;
+  border-radius: 50%;
+  
+} 
+.my_circle_percent{
+  z-index: 1000;
+  color: aliceblue !important;
+  text-align: center;
+}
+.panel_top_billed_slider_serials{
+  width: 100%;
+  height: 330px;
+}
+.card_container{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 311px;
+  border-radius: 8px;
+  border: 1px solid rgba(227,227,227, 1); 
+}
+
+.network{
+  margin-bottom: 9px;
+}
+.for_network_img{
+position: relative;
+width: 73px;
+height: 30px;
+
+}
+.for_network_img img{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+}

@@ -1,0 +1,353 @@
+.container_info_person{
+    padding: 30px 40px;
+    display: flex;
+    width: 100%;
+  }
+  .left_person_column{
+    min-width: 300px;
+    width: 300px;
+    background-color: #fff;
+  }
+  .right_person_column{
+    max-width: 920px;
+    width: calc(100vw - 300px - 80px);
+    background-color: #fff;
+    padding-left: 30px;
+   
+  }
+  .container_profile{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  
+  }
+  .poster_profile{
+    width: 100%;
+    height: 450px;
+    min-width: 300px;
+    
+  }
+  .profile_img_container{
+    position: relative;
+   width: 100%;
+   height: 100%;
+   border-radius: 8px;
+   overflow: hidden;
+  }
+  .profile_img_container img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  
+  }
+  .social_links{
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+  }
+  .facts_about_person{
+    width: 100%;
+  
+    }
+   .facts_about_person p{
+    margin-bottom: 20px;
+  
+   }
+  
+  .column_another_info{
+    width: 100%;
+    margin-top: 30px;
+  
+  }
+  .facts_about_person h2
+  {
+    margin-bottom: 10px;
+    font-weight: 600;
+  font-size: 1.3em;
+  }
+  .facts_about_person ul li+li{
+    margin-top: 8px;
+  }
+  .facts_about_person ul li{
+    margin-bottom: 10px;
+  }
+  .social_links {
+  display: flex;
+  gap: 10px;
+  }
+  .icon_link{
+  height: 30px;
+  margin-bottom: 30px;
+  }
+  .icon_link .logo_social{
+  position: relative;
+  width: 30.39px;
+  }
+  .logo_social img{
+  position: relative;
+  width:100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  }
+  .right_person_column{
+  display: flex;
+  flex-direction: column;
+  }
+  .right_person_column section{
+  width: 100%;
+  }
+  .section .title{
+  width: 100%;
+  }
+  .title_name{
+  color: #000;
+  margin: 0 !important;
+  padding-top: 6px;
+  font-size: 2.2rem !important;
+  font-weight: 600 !important;
+  }
+  .title_name  a{
+  font-weight: 700;
+  color: #000;
+  }
+  section.wrapper_bio{
+  margin-top: 30px;
+  width: 100%;
+  }
+  .wrapper_bio h3{
+    
+    color: #000;
+  margin: 0 0 4px;
+  font-weight: 600;
+  font-size: 1.3em;
+  margin-bottom: 8px;
+  }
+  .container_works_list h3{
+    color: #000 !important;
+  }
+  .wrapper_bio p{
+  margin-bottom: 0;
+  padding-bottom: 22px;
+  line-height: 22px;
+  }
+  section.swiper_movies{
+    display: flex;
+    flex-direction: column;
+  margin-top: 30px;
+  width: 100%;
+  }
+  .known_for{
+  width: 100%;
+  height: 100%;
+  }
+  .known_for h3{
+    color: #000;
+  font-weight: 600;
+  font-size: 1.3em;
+  margin-bottom: 8px;
+  }
+ 
+  .img_slide{
+  height: 195px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  }
+  .img_slide img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
+  
+  .known_for .swiper{
+    width: 100%;
+     height: 100%;
+   }
+  .container_for_title{
+    padding-top: 10px;
+    width: 100%;
+    height: calc(235px - 195px);
+  }
+/*   .swiper-slide{
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+   width: 130px !important;
+   max-width: 195px;
+  height: 235px; 
+  } */
+  .title_movie{
+    text-align: center;
+    color: #000;
+    font-size: .9em;
+    font-weight: 400;
+    padding-top: 4px;
+    line-height: 16px;
+  }
+  .img_slide img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  }
+  .swiper-wrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+  
+  }
+   .swiper-scrollbar-drag{
+    top: 1px !important; 
+    height: 6px !important;
+    background-color: #c8c8c8 !important ;
+  } 
+  .swiper-scrollbar{
+   background-color: transparent !important;
+   
+  }
+  section.works{
+    margin-top: 20px;
+    position: relative;
+  }
+  .container_works_list h3{
+    font-weight: 600;
+      font-size: 1.3em;
+  }
+  
+  table.works_list{
+    position: relative;
+    z-index: 100;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid rgba(227,227,227,1);
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    background-color: #fff;
+    margin: 10px 0 0;
+    box-sizing: border-box;
+  }
+  table.works_list tr:last-child .credit_group{
+    border-bottom-width: 0 !important;
+
+  } 
+  table.credit_group {
+      width: 100%;
+      margin: 0;
+      border-collapse: separate;
+      border-bottom: 1px solid #dedede;
+      padding: 10px 0;
+  }
+
+  
+  td.year{
+    margin-top: 16px;
+    color: #000000;
+    width: 64px;
+      font-weight: 400;
+      vertical-align: top;
+      text-align: center;
+  }
+  table.credit_group tbody td:not(.separator) {
+    padding: 8px 16px;
+  }
+  td.separator{
+  position: relative;
+    width: 24px;
+    padding-bottom: 24px;
+    /* height: 56px; */
+  }
+  .container_separator{
+    position: absolute;
+    width:16px;
+    height: 16px;
+    top: 11px;
+  }
+  .container_separator img{
+  width: 100%;
+  height: 100%;
+  }
+  .role_group p{
+    color: #000 !important;
+      font-weight: 600;
+      font-size: 16px;
+  }
+  span.group{
+    display: block;
+    color: rgba(0,0,0,.5);
+    padding-left: 14px;
+  
+  }
+  span.character{
+    color: rgba(0,0,0,.8);
+    margin-left: 4px;
+  }
+  .no_padding{
+    padding-bottom: 0 !important;
+  }
+  
+  .years_field{ 
+    display: flex;
+    gap: 3px;
+    flex-wrap: nowrap;
+  }
+
+/* .css-i4bv87-MuiSvgIcon-root{
+  color:rgba(1,180,228);
+} */
+.MuiAccordionSummary-content{
+  flex-direction: column;
+}
+.MuiAccordionSummary-expandIconWrapper{
+  position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.Mui-disabled{
+  background-color: #fff !important;
+  opacity: 1 !important;
+}
+.MuiMenu-root{
+  width: 400px;
+  height: 300px;
+}
+/* .MuiBackdrop-root{
+  width: 300px;
+  width: 400px;
+} */
+.MuiPaper-root{
+  overflow: hidden;
+}
+.button_name{
+  position: relative;
+  text-transform: none;
+  font-family: "Source Sans Pro",Arial,sans-serif;
+    font-size: 1.1em;
+}
+
+.MuiMenuItem-root p{
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  font-weight: 400;
+    line-height: 24px;
+}
+.MuiPopper-root{
+  z-index: 150;
+  border: 1px solid rgba(227,227,227,1);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.03), 0 4px 5px 0 rgba(0,0,0,.04) !important;
+  background-color: #fff;
+}
+.MuiMenuList-padding{
+  padding: 8px !important;
+}

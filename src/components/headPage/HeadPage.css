@@ -1,0 +1,145 @@
+.wrapper_all{
+min-height: 100%;
+display: flex;
+flex-direction: column;
+}
+main{
+  flex: 1 1 auto;
+}
+
+.wrapper_head{
+    width: 100%;
+    height: 64px;
+    background-color: rgba(3,37,65);
+    display: flex;
+    align-items: center; 
+  }
+  .conteiner_for_head{
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+  }
+  .drop_text{
+    color: black;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    font-size: 16px;
+  } 
+  .menu_head{
+    width: 100%;
+    display: flex;
+    padding: 0 40px;      
+    /* justify-content: space-between; */
+  }
+  .nav_bar_menu>ul{
+    display: flex;
+    margin-left: 25px;
+    padding: 0 10px;      
+    justify-content: space-between;
+    width: 314px;
+  }
+  .category_menu{
+    font-size: 16px;
+    font-weight: 600;
+  }
+ 
+  .li_movies{
+    position: relative;
+  } 
+
+   .drop_movies{
+    display:none;
+    top: 20px;
+    width: 202.625px; 
+    height: 138px;
+    padding-top: 16px;
+    position: absolute;
+    z-index: 2000;
+    
+  }
+   .drop_menu_movies{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    flex-direction: column;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding-left: 10px; 
+} 
+
+.movies_category{
+  cursor: pointer;
+}
+.li_movies:hover .drop_movies {
+  display: block;
+  cursor: pointer;
+  }
+ 
+
+ .li_serials{
+  position: relative;
+} 
+.drop_serials{
+  display:none;
+  top: 20px;
+  width: 202.625px; 
+  height: 138px;
+  padding-top: 16px;
+  position: absolute;
+  z-index: 2000;
+}
+.drop_menu_serials{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  flex-direction: column;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  padding-left: 10px;
+  
+}
+
+.li_serials{
+  cursor: pointer;
+
+}
+
+.li_serials:hover .drop_serials {
+display: block;
+cursor: pointer;
+}
+
+ .li_person{
+  position: relative;
+}
+.persons_category{
+  cursor: pointer;
+}
+.drop_persons{
+  display:none;
+  top: 20px;
+  width: 202.625px; 
+  padding-top: 37px;
+  position: absolute;
+  z-index: 2000;
+}
+
+.drop_menu_persons{
+  width: 100%;
+  padding: 5px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: white;
+}
+.li_persons:hover .drop_persons {
+  display: block;
+  cursor: pointer;
+ }  

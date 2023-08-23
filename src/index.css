@@ -1,0 +1,48 @@
+html{
+  height: 100%;
+}
+
+ #root{
+  height: 100%;
+} 
+.wrapper_conteiner{
+    max-width: 1310px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+
+  }
+   *{
+  
+    box-sizing: border-box;
+   }
+    :active, :hover, :focus {
+      outline: 0;
+      outline-offset: 0;
+  }
+  
+  h2,h3,p{
+    padding: 0;
+    margin: 0;
+    font-family: "Source Sans 3",Arial,sans-serif;
+  }
+  ul,
+  ol,a {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
+
+  body{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Source Sans 3",Arial,sans-serif;
+    background-color: #fff;
+  } 

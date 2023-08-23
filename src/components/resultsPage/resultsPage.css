@@ -1,0 +1,222 @@
+
+.container_blocks {
+    display: flex;
+    width: 100%;
+    padding: 30px 40px;
+    height: 100%;
+  }
+  .grey_column {
+    max-width: 1270px;
+    min-width: 260px;
+    min-height: 465px;
+  }
+  .search_bar_info {
+    width: 100%;
+    height: 378px;
+    border: 1px solid rgba(227, 227, 227, 1);
+    border-radius: 8px;
+    margin: 0 0 4px;
+  }
+  .info_card h2{
+    font-size: 1.2em;
+    line-height: 1.2em;
+    margin-bottom: 0;
+    font-weight: 600;
+  }
+
+  .white_column {
+    width: 100%;
+    padding-left: 30px;
+  }
+
+  .results_flex {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .card_results {
+    display: flex;
+    width: 100%;
+    min-height: 143px;
+    overflow: hidden;
+  }
+  .card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(227, 227, 227, 1);
+    background-color: #fff;
+    border-radius: 8px;
+  }
+  .poster_card {
+    position: relative;
+    min-width: 94px;
+    width: 94px;
+    height: 141px;
+  }
+  .poster_card img {
+    border: 0.5px solid transparent;
+    border-radius: 8px 0 0 8px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
+  .poster_card_no_image{
+    position: relative;
+        background-color: #dbdbdb; 
+        min-width: 94px;
+        width: 94px;
+        height: 141px;
+  }
+.poster_card_no_image img{
+  transform: scale(.5);
+  border: 0.5px solid transparent;
+   border-radius: 8px 0 0 8px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+}
+.no_profile_poster{
+background-color:#dbdbdb;
+border-radius: 8px;
+
+}
+.no_profile_poster img{
+  transform: scale(.7);
+}
+
+  .text_card {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+  }
+        
+  .card_name  {
+    font-size: 1.2em;
+    line-height: 1.2em;
+    font-weight: 600;
+    color: #000 !important;
+ 
+  }
+  .release_date_card {
+    white-space: nowrap;
+    color: #999;
+ 
+  }
+  .overview_card {
+    overflow: hidden;
+    margin-top: 20px;
+    width: 100%;
+    height: 42px;
+    display: -webkit-box;
+    display: -ms-box;
+    display: box;
+    -webkit-line-clamp: 2;
+    -moz-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+
+  }
+
+  .bar_panel_info {
+    width: 100%;
+    height: 100%;
+  }
+  .bar_panel_info > h3 {
+    background-color: rgba(1, 180, 228);
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    margin: 0;
+    font-weight: 600;
+    padding: 20px;
+    color: #fff;
+    border-radius:8px 8px  0 0 ;
+  }
+
+  .search_menu_scroller {
+    height: 100%;
+    width: 100%;
+  }
+  .panel_filters {
+    padding-top: 8px;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+  }
+  .panel_filters a {
+    color: #000;
+    width: 100%;
+    height: 100%;
+    padding: 10px 20px;
+  }
+  .panel_filters li {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.4em;
+  }
+  .panel_filters span {
+    background-color: #fff;
+    color: #000;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.8em;
+    font-weight: 300;
+    font-family: "Roboto Mono", monospace !important;
+    background-color: rgba(0, 0, 0, 0.08);
+    padding: 0 10px;
+    border-radius: 8px;
+    margin-right: 20px;
+    white-space: nowrap;
+  }
+  .active_filter {
+    background: rgba(0, 0, 0, 0.08);
+  }
+   p{
+    padding: 0;
+    margin: 0;
+    color: #000 !important;
+  } 
+  .profile_text{
+    position: relative;
+    display: flex;
+    gap: 8px;
+  }
+  .profile_text p:first-child:after{
+    content:  '• ';
+    margin-left: 2px;
+   position: absolute;
+   top: 0;
+   color: #000;
+  }
+  .profile_card{
+    display: flex;
+    width: 100%;
+    height: 70px;
+    margin-right: 20px;
+  }
+  .profile_poster_card{
+    height: 100%;
+  width: 70px;
+    position: relative;
+  }
+  .profile_poster_card img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
+   
