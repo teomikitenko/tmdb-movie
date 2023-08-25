@@ -53,6 +53,15 @@ const eng={
   3	:"Не бінарна"
 
 }
+const choiseType=(type)=>{
+  switch(type){
+    case'movies':
+    return <Movies data={data} eng={eng}/>
+    case'serials':
+    return <Serials data={data.tv_credits.cast}/>
+    default:return null
+  }
+}
 
    return(
       <div className="wrapper_conteiner">
@@ -198,9 +207,7 @@ const eng={
             </section>
             <section  className="works">
              <MyMenu set={setChoise} choise={choise} />
-    {/*  {data.movies_credits&&choise === 'serials'&&<Serials data={data.tv_credits.cast} 
-     />} */}
-     {data.movies_credits&&choise === 'movies'&&<Movies data={data} eng={eng}/>}
+       {data.movie_credits&&choiseType(choise)}
             </section>
           </div>
         </div>
@@ -279,6 +286,29 @@ const AccordionBio=({data})=>{
 
 const Movies=({data,eng})=>{
 
+   const sorted=(a,b)=>{
+    let dateA=new Date(a[0].release_date);
+    let dateB=new Date(b[0].release_date);
+    if (dateB<dateA) {
+      return -1;
+    }
+    if (dateB>dateA ) {
+      return 1;
+    }
+    return 0;
+    } 
+   
+const allYears=(dep)=>{
+  const origArray=new Set()
+  movies(dep).map(film=>{
+    if(film.release_date){
+      return origArray.add( new Date(film.release_date).getFullYear())    
+     } 
+    })
+    return Array.from(origArray).sort((a,b)=>a-b).reverse()
+}
+  const newArray=(dep)=>allYears(dep).map(date=>movies(dep).filter(d=>new Date(d.release_date).getFullYear() === date))
+ 
   const roleFim=(dep,res)=>{
   if(dep === "Acting"&&!res.character){
     return null
@@ -292,25 +322,13 @@ const Movies=({data,eng})=>{
                             <span className="group">
                             <span className="character">...{eng[data.known_for_department][1]}</span>
                           </span>
-  }
+  
 
 
-const sorted=(a,b)=>{
-  let dateA=new Date(a.release_date);
-  let dateB=new Date(b.release_date);
-  if (dateB<dateA) {
-    return -1;
-  }
-  if (dateB>dateA ) {
-    return 1;
-  }
-  return 0;
-  }
 
-  const movies=(dep)=>{
-    return dep === 'Acting'? data.movie_credits.cast:data.movie_credits.crew.filter(job=>job.department === dep)
-    }
-
+}
+const movies=(dep)=> dep === 'Acting'? data.movie_credits.cast:data.movie_credits.crew.filter(job=>job.department === dep)
+console.log(newArray('Directing'))
   return(
     <div className="container_works_list">
                  <h3 >{data.known_for_department === "Acting"? eng[data.known_for_department]:eng[data.known_for_department][0]} </h3> 
@@ -318,7 +336,7 @@ const sorted=(a,b)=>{
                    <tbody>
                     {movies(data.known_for_department)
                        .filter(res=>!res.release_date)
-                      .toSorted(sorted).map(res=>(
+                     /*  .toSorted(sorted) */.map(res=>(
                         <tr key={res.id}>
                           <td>
                           <table className="credit_group">
@@ -342,32 +360,36 @@ const sorted=(a,b)=>{
                           </td>
                         </tr>
                       ))}  
-                      {movies(data.known_for_department)
-                       .filter(res=>res.release_date)
-                      .toSorted(sorted).map((res,index)=>(
+                  
+                        {newArray(data.known_for_department).map((res,index)=>(
                         <tr key={res.id}>
                           <td>
                           <table className={index === index.length-1?"credit_group no_bottom_border": 'credit_group'}>
                           <tbody>
-                            <tr>
-                            <td className="year">{new Date(res.release_date).getFullYear()}</td>
-                          <td className={res.character||data.known_for_department !== "Acting"? "separator": "separator no_padding"} >
-                              <div className="container_separator">
-                                <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-298-circle-empty-04c378f484e29180410eb305f586561b024cc969e038a8687fffd641f55b894c.svg" alt="separator"/>
-                              </div>
-                            </td>
-                            <td className="role_group">
-                              <a className="tooltip" href="">
-                               <p>{res.title}</p> 
-                              </a>
-                               {roleFim(data.known_for_department,res)}
-                             </td>
-                            </tr>
+                              {res.map(movie=>(
+                                <>
+                                <tr>
+                                    <td className="year">{new Date(res[0].release_date).getFullYear()}</td>
+                                    <td className={res.character||data.known_for_department !== "Acting"? "separator": "separator no_padding"} >
+                                        <div className="container_separator">
+                                          <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-298-circle-empty-04c378f484e29180410eb305f586561b024cc969e038a8687fffd641f55b894c.svg" alt="separator"/>
+                                        </div>
+                                      </td>
+                                      <td className="role_group">
+                                      <a className="tooltip" href="">
+                                  <p>{movie.title}</p> 
+                                 </a>
+                                  {roleFim(data.known_for_department,movie)}
+                                  </td>
+                                  </tr>
+                                      </>
+                              ))}
+      
                           </tbody>
                         </table>
                           </td>
                         </tr>
-                      ))}     
+                      ))}       
                   </tbody> 
                 </table>
               </div>
