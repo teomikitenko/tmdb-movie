@@ -1,5 +1,5 @@
 import './persons.css'
-import { useLoaderData, useParams } from 'react-router-dom'
+import { useLoaderData } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
