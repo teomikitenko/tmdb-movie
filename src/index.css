@@ -2,15 +2,32 @@ html{
   height: 100%;
 }
 
- #root{
+/* #root{
   height: 100%;
-} 
+  
+} */
 .wrapper_conteiner{
-    max-width: 1310px;
+    max-width: 1260px;
     height: 100%;
     margin: 0 auto;
-    background-color: #fff;
+    /* background-color: #fff; */
 
+  }
+  @media screen and (max-width: 1200px){
+    .wrapper_conteiner{
+      max-width: 900px;
+      height: 100%;
+      margin: 0 auto;
+    }
+    
+  }
+  @media screen and (max-width: 901px){
+    .wrapper_conteiner{
+      max-width: 850px;
+      height: 100%;
+      margin: 0 auto;
+    }
+    
   }
    *{
   
@@ -46,3 +63,13 @@ html{
     font-family: "Source Sans 3",Arial,sans-serif;
     background-color: #fff;
   } 
+  .wrapper_all{
+    width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  }
+  main{
+    flex: 1 1 auto;
+  }
