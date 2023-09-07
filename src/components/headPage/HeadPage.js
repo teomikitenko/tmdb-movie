@@ -21,14 +21,16 @@ export default function HeadPage(){
       <span className='movies_category category_menu'>Фільми</span>
       <div className='drop_movies'>
         <ul className='drop_menu_movies'>
-        <li className='drop_items_movies'>
-            <Link to={'/upcomingFilms'}>  
+        <li className='drop_items_movies'>  
           <span   className='drop_text'>Популярні</span>
-              </Link> </li> 
+            </li> 
         <li className='drop_items_movies'>
           <span className='drop_text'>Зараз у кіно</span>
           </li>
-        <li className='drop_items_movies'><span className='drop_text' >Очікувані</span></li>
+        <li className='drop_items_movies'>
+        <Link to={'/upcomingFilms'}>  
+        <span className='drop_text' >
+          Очікувані</span> </Link></li>
         <li className='drop_items_movies'><span className='drop_text' >Рейтингові</span></li>
         </ul>
         
