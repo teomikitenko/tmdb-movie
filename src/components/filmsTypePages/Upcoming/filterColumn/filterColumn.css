@@ -1,0 +1,44 @@
+.filters_column{
+    display: flex;
+    flex-direction: column;
+    width: 260px; 
+    border: 1px solid black;
+    }
+.genres_content{
+    width: 100%;
+    padding: 14px 16px 16px;
+}
+    .genres_content ul{
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 9px;
+        column-gap: 13px;
+        margin-top: 8px;
+    }
+    .genres_content ul>li{
+        border-radius: 14px;
+        border: 1px solid #9e9e9e;
+        padding: 4px 12px;
+        font-size: .9em;
+    }
+    li.genre:hover{
+        cursor: pointer;
+        background-color: rgba(1,180,228);
+        color: #fff;
+    }
+     .MuiAccordionSummary-expandIconWrapper{
+        bottom: 9px;
+        right: 4px;
+        
+    }
+    .sorting_type{
+        width: 100%;
+        padding: 14px 16px 16px;
+    }
+    select{
+        width: 100%;
+        height: 33.6px;
+        padding: 6px 12px 6px 12px;
+        border-radius: 8px;
+    }
+ 

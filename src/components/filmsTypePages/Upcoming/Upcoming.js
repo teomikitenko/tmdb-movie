@@ -7,6 +7,8 @@ import {
   CSSTransition,
   TransitionGroup,
 } from 'react-transition-group'
+import { FilterColumn } from './filterColumn/filtersColumn'
+
 
 const UpcomingFilms=()=>{
   const dispatch=useDispatch()
@@ -51,10 +53,10 @@ const UpcomingFilms=()=>{
         <div className="wrapper_conteiner">
         <div className="content_column_wrapper">
           <div className="title">
-            <p>Популярні</p>
+            <p>Очікувані фільми</p>
           </div>
           <div className="content_media">
-            <div className="filters_column"></div>
+            <FilterColumn/>
               <div className="cards_column">
                  <section className="media_results">
                     <TransitionGroup component={null}> 
