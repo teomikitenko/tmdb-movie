@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { Provider } from 'react-redux'
@@ -13,26 +13,30 @@ import SearchAllResults from './components/resultsPage/searchAllResult'
 import Persons from './components/personsPage/persons';
 import Person from './components/person/Person';
 import Serials from './components/serialsPage/serials';
-
-
+import EnterInPage from './components/authorizationPage/authorization';
+import UpcomingFilms from './components/filmsTypePages/Upcoming/Upcoming';
+import { loadUpcomingMovies } from './components/filmsTypePages/Upcoming/Upcoming';
 const token='eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDAxODZhZGFiZmFmYzA0MzBjOTQzOWQ3NjkxMmE4OCIsInN1YiI6IjY0YTAxNjg1NGE1MmY4MDBlODJkNjBmYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Gl1ryFSJiWHXhKjzFXBD_ZB3o9GGEOgPlw2Sr-hkhpE'
-const options={
-    method:'GET',
-    headers:{
-        accept:'application/json',
-        Authorization:`Bearer ${token}`
-    }
-}
 
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: `Bearer ${token}`
+  }
+};
 const router=createBrowserRouter(
     createRoutesFromElements( 
       <Route  path='/' element={<HeadPage/>}> 
-      <Route  index element={<Header/>}/>
+       <Route  index element={<Header/>}/>
       <Route path='films/:idFilm'
        loader={async({params})=>{
         return fetch(`https://api.themoviedb.org/3/movie/${params.idFilm}?append_to_response=credits%2Cvideos,%2Cimages%2Cexternal_ids&language=uk%2Cen`,options)
        }} 
-       element={<ContentPoster/>}/>
+      element={<ContentPoster/>}/>
+       <Route path='/upcomingFilms' element={<UpcomingFilms/>}
+       /* loader={loadUpcomingMovies} */
+       />
       <Route path='results/:res' element={<SearchAllResults/>}/>
       <Route path='persons' element={<Persons/>} />
       <Route path='persons/:idPerson'
@@ -44,7 +48,8 @@ const router=createBrowserRouter(
        loader={async({params})=>{
         return fetch(`https://api.themoviedb.org/3/tv/${params.idSerial}?append_to_response=credits%2Cimages%2Cvideos%2Cexternal_ids&language=en`,options)
        }} 
-      element={<Serials/>} />
+      element={<Serials/>} /> 
+      <Route path='/auth' element={<EnterInPage/>}/>
       </Route>
     )
   )

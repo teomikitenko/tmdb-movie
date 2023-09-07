@@ -1,0 +1,102 @@
+
+.content_column_wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    }
+    .content_media{
+        display: flex;
+        width: 100%;
+          min-height:1100px ;  
+        
+        }
+        
+        .filters_column{
+        width: 260px; 
+        background-color: aqua;
+        }
+        .cards_column{
+          display: flex;
+        
+          flex-direction: column;
+         border: 1px solid black;
+        width: calc(100vw - 73px - 18px - 260px);
+        }
+        .media_results{
+          display: grid;
+          padding-left: 30px;
+          grid-template-columns: repeat(5,174px);
+          grid-template-rows: repeat(4,auto);
+          gap: 27.2px;
+        }
+        .card_media{
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 2px 8px rgba(0,0,0,.1);
+          border-radius: 8px;
+          overflow: hidden;
+          opacity: 1;
+        }
+        
+        .card_image_wrapper{
+          position: relative;
+          width: 100%;
+          height: 261px;
+        }
+        .card_image_wrapper img{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        }
+        .card_text_wrapper{
+          flex-grow: 1;
+          padding: 25px 10px 10px;
+        }
+        .title_text{
+          font-weight: 700;
+        }
+        .date_text{
+          font-weight: 1em;
+          opacity: .6;
+        }
+        .download_more{
+          display: flex;
+          cursor: pointer;
+          justify-content: center;
+          align-items: center;
+          margin-top: 30px;
+          width: 100%;
+          height: 50px;
+          grid-column:  span 5;
+          border-radius: 8px;
+          background-color: rgba(1,180,228);
+        }
+        .download_more p{
+          color: #fff;
+          font-size: 1.8em;
+          font-weight: 700;
+        }
+        .disabled{
+         display: none;
+          background-color: rgb(47, 56, 58);
+           
+        }
+        .my-node-enter {
+          opacity: 0;
+          transition: opacity 800ms ease-in-out;
+      
+        }
+        .my-node-enter-active {
+          opacity: 1;
+           transition: opacity 800ms ease-in-out; 
+        }
+         .my-node-exit {
+          opacity: 1;
+        }
+        .my-node-exit-active {
+          opacity: 0;
+          transition: opacity 800ms ease-in-out;
+        } 

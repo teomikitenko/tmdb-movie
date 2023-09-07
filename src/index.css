@@ -2,15 +2,11 @@ html{
   height: 100%;
 }
 
-/* #root{
-  height: 100%;
-  
-} */
+
 .wrapper_conteiner{
-    max-width: 1260px;
+    max-width: 1270px;
     height: 100%;
     margin: 0 auto;
-    /* background-color: #fff; */
 
   }
   @media screen and (max-width: 1200px){
@@ -69,6 +65,7 @@ html{
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
   }
   main{
     flex: 1 1 auto;

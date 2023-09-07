@@ -1,11 +1,13 @@
-import { Outlet,Link } from 'react-router-dom'
+import { Outlet,Link} from 'react-router-dom'
 import './HeadPage.css'
 import Footer from '../footer/footer'
-import { useEffect } from 'react'
+
 
 export default function HeadPage(){
+
     return(
       <div className="wrapper_all">
+        
       <header className="wrapper_head">
       <div className="wrapper_conteiner">
 <div className="conteiner_for_head ">
@@ -19,7 +21,10 @@ export default function HeadPage(){
       <span className='movies_category category_menu'>Фільми</span>
       <div className='drop_movies'>
         <ul className='drop_menu_movies'>
-        <li className='drop_items_movies'><span className='drop_text' >Популярні</span></li>
+        <li className='drop_items_movies'>
+            <Link to={'/upcomingFilms'}>  
+          <span   className='drop_text'>Популярні</span>
+              </Link> </li> 
         <li className='drop_items_movies'>
           <span className='drop_text'>Зараз у кіно</span>
           </li>

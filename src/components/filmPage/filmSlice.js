@@ -39,10 +39,7 @@ export const fetchFilms=createAsyncThunk(
       const response=await fetch(url,options)
       return await response.json()
     }
-
 )
-
-
 const initialState={
     trendingFilms:[],
     loadingStatus:'idle',
