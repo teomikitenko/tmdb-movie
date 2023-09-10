@@ -47,7 +47,7 @@ const UpcomingFilms=()=>{
 
   } 
      
-    useEffect(()=>{dispatch(fetchTypeFilm(page))},[page]) 
+    useEffect(()=>{dispatch(fetchTypeFilm(page))},[page,genre]) 
  
     return(
         <div className="wrapper_conteiner">
@@ -56,7 +56,7 @@ const UpcomingFilms=()=>{
             <p>Очікувані фільми</p>
           </div>
           <div className="content_media">
-            <FilterColumn/>
+            <FilterColumn chanGenre={setGenre}/>
               <div className="cards_column">
                  <section className="media_results">
                     <TransitionGroup component={null}> 

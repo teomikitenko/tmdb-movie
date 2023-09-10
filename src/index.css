@@ -1,5 +1,6 @@
 html{
   height: 100%;
+  overflow-y: scroll;
 }
 
 
@@ -29,10 +30,10 @@ html{
   
     box-sizing: border-box;
    }
-    :active, :hover, :focus {
-      outline: 0;
-      outline-offset: 0;
-  }
+     :active, :hover, :focus {
+      outline: 0 !important;
+      outline-offset: 0 !important;
+  } 
   
   h2,h3,p{
     padding: 0;
