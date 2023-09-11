@@ -8,9 +8,13 @@ import { useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { changeSortingType,changeFilter } from '../../filmsTypeSlice';
+import { useDispatch } from 'react-redux';
+
 
 
 export const FilterColumn=({changeGenre})=>{
+    
     return(
 <div className="filters_column">
 <Sorting/>
@@ -19,11 +23,90 @@ export const FilterColumn=({changeGenre})=>{
 )
 }
 
-const Filter=({changeGenre})=>{
+const Filter=()=>{
     const[open,setOpen]=useState(true)
-    const genresArray=[
-        'Історичний','Бойовик','Вестерн','Військовий','Детектив','Документальний','Драма','Жахи','Комедія','Кримінал','Мелодрама','Музика','Мультфільм','Пригоди','Сімейний','Телефільм','Трилер','Фантастика','Фентезі'
-     ]
+    
+    const genresArray= [
+        {
+            id: 36,
+            name: "Історичний"
+          },
+          {
+            id: 28,
+            name: "Бойовик"
+          },
+          {
+            id: 37,
+            name: "Вестерн"
+          },
+          {
+            id: 10752,
+            name: "Військовий"
+          },
+          {
+            id: 9648,
+            name: "Детектив"
+          },
+          {
+            id: 99,
+            name: "Документальний"
+          },
+          {
+            id: 18,
+            name: "Драма"
+          },
+          {
+            id: 27,
+            name: "Жахи"
+          },
+          {
+            id: 35,
+            name: "Комедія"
+          },
+          {
+            id: 80,
+            name: "Кримінал"
+          },  
+          {
+            id: 10749,
+            name: "Мелодрама"
+          },
+          {
+            id: 10402,
+            name: "Музика"
+          },
+          {
+            id: 16,
+            name: "Мультфільм"
+          },
+          {
+            id: 12,
+            name: "Пригоди"
+          },
+          {
+            id: 10751,
+            name: "Сімейний"
+          },
+          {
+            id: 10770,
+            name: "Телефільм"
+          },
+          {
+            id: 53,
+            name: "Триллер"
+          },
+          {
+            id: 878,
+            name: "Фантастика"
+          },   {
+            id: 14,
+            name: "Фентезі"
+          }
+       
+        
+        
+      ]
+     const dispatch=useDispatch()
     return(
         <div className="filters_media_content">
         <Accordion 
@@ -37,7 +120,7 @@ const Filter=({changeGenre})=>{
         <div className="genres_content">
    <Typography sx={{fontWeight:'300',fontSize:'.9em',color: '#000'}} variant='h3'>Жанри</Typography> 
        <ul>
-        {genresArray.map(genre=><li onClick={()=>changeGenre(genre)} className='genre'>{genre}</li>)}
+        {genresArray.map(genre=><li key={genre.id}  onClick={()=>dispatch(changeFilter(genre.id))}  className='genre'>{genre.name}</li>)}
     </ul>
  </div>
         </AccordionDetails>
@@ -47,6 +130,7 @@ const Filter=({changeGenre})=>{
 }
 const Sorting=()=>{
     const typeArr=['Популярні','Непопулярні','Рейтинг високий','Рейтинг низький']
+    const dispatch=useDispatch()
     return(
         <div className="sorting_media_content">
     <Accordion
@@ -61,13 +145,15 @@ const Sorting=()=>{
     <Typography sx={{fontWeight:'300px'}} paragraph>Сортувати результати за </Typography>
     <Select 
     defaultValue='Популярні' 
-    IconComponent={ArrowDropDownIcon} 
+    IconComponent={ArrowDropDownIcon}
+    onChange={(e)=>dispatch(changeSortingType(e.target.value))} 
     sx={{marginTop:'15px',width:'100%',height: '33.6px',borderRadius:'0.25em',backgroundColor: '#e4e7eb'}}
       MenuProps={{ style: { position: 'absolute',fontFamily:'Source Sans 3' }, disableScrollLock: true,}} >
             {typeArr.map(type=>{
                 return(
-                    <MenuItem value={type}>
-                        <Typography sx={{fontSize:'.9em',fontWeight:'400'}}>{type}</Typography>
+                    <MenuItem value={type}
+                    key={type}>
+                        <Typography sx={{fontSize:'0.9em',fontWeight:'400'}}>{type}</Typography>
                     </MenuItem>
                 )
             })}

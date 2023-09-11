@@ -1,6 +1,6 @@
 import './upcoming.css'
 import { useEffect, useState,useRef } from 'react'
-import { fetchTypeFilm } from '../filmsTypeSlice'
+import { fetchTypeFilm,changeGenreFilm } from '../filmsTypeSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinearProgress } from '@mui/material'
 import {
@@ -11,15 +11,19 @@ import { FilterColumn } from './filterColumn/filtersColumn'
 
 
 const UpcomingFilms=()=>{
+ 
+
+
   const dispatch=useDispatch()
   const[hideButton,setHideButton]=useState(false)
   const[page,setPage]=useState(1)
-  const[genre,setGenre]=useState()
-
   const base_poster='https://image.tmdb.org/t/p/w500'
 
   const data=useSelector(state=>state.typeFilmsCategory.upcomingFilms)
   const flag=useSelector(state=>state.typeFilmsCategory.loadingStatus)
+  const genre=useSelector(state=>state.typeFilmsCategory.filterType)
+
+  
   const classNames = require('classnames');
   const divClass=classNames({
    'download_more':true,
@@ -38,25 +42,24 @@ const UpcomingFilms=()=>{
       document.body.offsetHeight, document.documentElement.offsetHeight,
       document.body.clientHeight, document.documentElement.clientHeight
     );
-    console.log(scrollHeight)
-    console.log(document.documentElement.clientHeight + window.pageYOffset)
-    if(hideButton&&document.documentElement.clientHeight + window.pageYOffset >= document.documentElement.scrollHeight-150){
-      console.log('scroll')
+    if(hideButton&&document.documentElement.clientHeight + window.pageYOffset >= scrollHeight-300){
       setPage(page+1) 
     }
 
   } 
      
-    useEffect(()=>{dispatch(fetchTypeFilm(page))},[page,genre]) 
- 
+    useEffect(()=>{dispatch(fetchTypeFilm({page,genre}))},[page]) 
+    useEffect(()=>{dispatch(changeGenreFilm(genre))},[genre]) 
+
     return(
+      
         <div className="wrapper_conteiner">
         <div className="content_column_wrapper">
           <div className="title">
             <p>Очікувані фільми</p>
           </div>
           <div className="content_media">
-            <FilterColumn chanGenre={setGenre}/>
+            <FilterColumn />
               <div className="cards_column">
                  <section className="media_results">
                     <TransitionGroup component={null}> 
@@ -80,10 +83,10 @@ const UpcomingFilms=()=>{
                       </CSSTransition>
                     
                      )  
-                    })}
+                    })} 
                    </TransitionGroup>
                        {!hideButton&&flag === 'loading'&&<Loader/>} 
-                  {                 <div onClick={()=>{
+                  {page<=1&& <div onClick={()=>{
                    setPage(page+1) 
                      setHideButton(true)  
                  }} className={divClass}>
@@ -108,44 +111,7 @@ export const Loader=()=>{
        sx={{width:"100%",position:'fixed',top:'0',left:'0'}}/> 
   )
 }
-/* const MediaResults=()=>{
-  return(
-    <section className="media_results">
-    <TransitionGroup component={null}> 
-  {data.map(film=>{
-     return(
-      <CSSTransition
-      key={film.id}
-      timeout={500}
-      classNames="my-node">
-            <div  className="card_media">
-        <div className="card_image_wrapper">
-          <img src={base_poster+film.poster_path} alt=""/>
-        </div>
-        <div className="card_text_wrapper">
-          <div className="text_title_card">
-            <p className="title_text">{film.title}</p>
-            <p className="date_text">{film.release_date}</p>
-          </div>
-        </div>
-      </div> 
-      </CSSTransition>
-    
-     )  
-    })}
-   </TransitionGroup>
-       {flag === 'loading'&&<Loader/>} 
-  {                 <div onClick={()=>{
-   setPage(page+1) 
-     setButton(true)  
- }} className={divClass}>
-  <p >Завантажити більше</p>
-  </div>
- } 
-</section> 
-  )
-}
- */
+
 
 
 
