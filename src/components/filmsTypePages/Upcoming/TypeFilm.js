@@ -1,7 +1,8 @@
 import './typeFilm.css'
 import { useEffect, useState} from 'react'
-import { fetchTypeFilm,changeSortGenreFilm } from '../filmsTypeSlice'
-import { useDispatch, useSelector } from 'react-redux'
+import { ChangePage,changeSortGenreFilm } from '../filmsTypeSlice'
+import { useDispatch, useSelector} from 'react-redux'
+import { createSelector } from 'reselect'
 import { LinearProgress } from '@mui/material'
 import {
   CSSTransition,
@@ -10,6 +11,15 @@ import {
 import { FilterColumn } from './filterColumn/filtersColumn'
 import { sortingFilm } from '../filmsTypeSlice'
 
+
+const selectValues = createSelector(
+  state=>state.typeFilmsCategory.filmsArray,
+  state=>state.typeFilmsCategory.loadingStatus,
+  state=>state.typeFilmsCategory.filterType,
+  state=>state.typeFilmsCategory.sortingType,
+  (data,flag,genre,sort) => ({data,flag,genre,sort })
+);
+
 const TypeFilm=()=>{
  
   const dispatch=useDispatch()
@@ -17,40 +27,37 @@ const TypeFilm=()=>{
   const[page,setPage]=useState(1)
   const base_poster='https://image.tmdb.org/t/p/w500'
 
-  const data=useSelector(state=>state.typeFilmsCategory.filmsArray)
-  const flag=useSelector(state=>state.typeFilmsCategory.loadingStatus)
-  const genre=useSelector(state=>state.typeFilmsCategory.filterType)
-  const sort=useSelector(state=>state.typeFilmsCategory.sortingType)
+ const{data,flag,genre,sort}=useSelector(selectValues)
 
-
-  
   const classNames = require('classnames');
   const divClass=classNames({
    'download_more':true,
     
   })
-    useEffect(()=>{
+     useEffect(()=>{
   document.addEventListener('scroll',scrollListener)
   return ()=>document.removeEventListener('scroll',scrollListener)
-   },[page]) 
+   },[data]) 
 
 
-
+ 
    const scrollListener=()=>{
     let scrollHeight = Math.max(
       document.body.scrollHeight, document.documentElement.scrollHeight,
       document.body.offsetHeight, document.documentElement.offsetHeight,
       document.body.clientHeight, document.documentElement.clientHeight
     );
-    if(hideButton&&document.documentElement.clientHeight + window.pageYOffset >= scrollHeight-300){
+   console.log(document.documentElement.clientHeight + window.pageYOffset)
+    if(500+document.documentElement.clientHeight + window.pageYOffset >= scrollHeight){
       setPage(page+1) 
     }
 
-  } 
+  }  
      
-    useEffect(()=>{dispatch(fetchTypeFilm({page,genre}))},[page]) 
-    useEffect(()=>{dispatch(changeSortGenreFilm({genre,sort}))},[genre,sort]) 
-
+        useEffect(()=>{dispatch(ChangePage({page,genre,sort}))},[page]) 
+ 
+        useEffect(()=>{dispatch(changeSortGenreFilm({genre,sort}))},[genre,sort]) 
+   
 
     return(
       
@@ -87,13 +94,13 @@ const TypeFilm=()=>{
                     })} 
                    </TransitionGroup>
                        {!hideButton&&flag === 'loading'&&<Loader/>} 
-                  {page<=1&&flag === 'success'&& <div onClick={()=>{
+                {/*   {page<=1&&flag === 'success'&& <div onClick={()=>{
                    setPage(page+1) 
                      setHideButton(true)  
                  }} className={divClass}>
                   <p >Завантажити більше</p>
                   </div>
-                 } 
+                 }  */}
                 </section> 
               
               </div>

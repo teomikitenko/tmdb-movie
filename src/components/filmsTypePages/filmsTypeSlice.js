@@ -11,9 +11,9 @@ return `${new Date().getFullYear()}-${validMonth(new Date().getMonth() + 1)}-${n
 const validMonth=(date)=>{
     return date.toString().length>1? date: 0 + date.toString()
 } 
-export const  fetchTypeFilm=createAsyncThunk(
+export const  ChangePage=createAsyncThunk(
     'typeFilmSection',
-    async({page,genre})=>{
+    async({page,genre,sort})=>{
         const options = {
             method: 'GET',
             headers: {
@@ -21,13 +21,13 @@ export const  fetchTypeFilm=createAsyncThunk(
               Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDAxODZhZGFiZmFmYzA0MzBjOTQzOWQ3NjkxMmE4OCIsInN1YiI6IjY0YTAxNjg1NGE1MmY4MDBlODJkNjBmYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Gl1ryFSJiWHXhKjzFXBD_ZB3o9GGEOgPlw2Sr-hkhpE'
             }
           }
-        const res=await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=uk-UA&page=${page}&primary_release_year=${new Date().getFullYear()}&primary_release_date.gte=${nowDate()}&sort_by=popularity.desc&with_genres=${genre}`,options)
+        const res=await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=uk-UA&page=${page}&primary_release_year=${new Date().getFullYear()}&primary_release_date.gte=${nowDate()}&sort_by=${sort}&with_genres=${genre}`,options)
         return await res.json()
     }
 
 )
 export const  changeSortGenreFilm=createAsyncThunk(
-    'changeGenre',
+    'changeSortGenre',
     async({genre,sort})=>{
         const options = {
             method: 'GET',
@@ -44,7 +44,7 @@ export const  changeSortGenreFilm=createAsyncThunk(
 const initialState={
     filmsArray:[],
     loadingStatus:'idle',
-    filterType:'all',
+    filterType:28,
     sortingType:'popularity.desc',
 }
 
@@ -58,12 +58,12 @@ export const filmsTypeUpcomingSlice=createSlice({
     },
     extraReducers:(builder)=>{
         builder
-        .addCase(fetchTypeFilm.pending,state=>{state.loadingStatus='loading'})
-        .addCase(fetchTypeFilm.fulfilled,(state,action)=>{
+        .addCase(ChangePage.pending,state=>{state.loadingStatus='loading'})
+        .addCase(ChangePage.fulfilled,(state,action)=>{
             state.loadingStatus='success'
             state.filmsArray.push(...action.payload.results)
         })
-        .addCase(fetchTypeFilm.rejected,state=>{state.loadingStatus='error'})
+        .addCase(ChangePage.rejected,state=>{state.loadingStatus='error'})
         
 
        .addCase(changeSortGenreFilm.pending,state=>{state.loadingStatus='loading'})
