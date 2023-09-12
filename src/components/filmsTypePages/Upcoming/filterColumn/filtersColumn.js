@@ -129,7 +129,14 @@ const Filter=()=>{
     )
 }
 const Sorting=()=>{
-    const typeArr=['Популярні','Непопулярні','Рейтинг високий','Рейтинг низький']
+    const typeArr=
+  {'Популярні':'popularity.desc',
+  'Непопулярні':'popularity.asc',
+  'Рейтинг високий':'vote_average.desc',
+  'Рейтинг низький':'vote_average.asc'}
+  
+
+  
     const dispatch=useDispatch()
     return(
         <div className="sorting_media_content">
@@ -146,14 +153,14 @@ const Sorting=()=>{
     <Select 
     defaultValue='Популярні' 
     IconComponent={ArrowDropDownIcon}
-    onChange={(e)=>dispatch(changeSortingType(e.target.value))} 
+    onChange={(e)=>dispatch(changeSortingType(typeArr[e.target.value]))} 
     sx={{marginTop:'15px',width:'100%',height: '33.6px',borderRadius:'0.25em',backgroundColor: '#e4e7eb'}}
       MenuProps={{ style: { position: 'absolute',fontFamily:'Source Sans 3' }, disableScrollLock: true,}} >
-            {typeArr.map(type=>{
+            {Object.keys(typeArr).map(name=>{
                 return(
-                    <MenuItem value={type}
-                    key={type}>
-                        <Typography sx={{fontSize:'0.9em',fontWeight:'400'}}>{type}</Typography>
+                    <MenuItem value={name}
+                    key={name}>
+                        <Typography sx={{fontSize:'0.9em',fontWeight:'400'}}>{name}</Typography>
                     </MenuItem>
                 )
             })}

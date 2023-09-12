@@ -1,6 +1,6 @@
-import './upcoming.css'
-import { useEffect, useState,useRef } from 'react'
-import { fetchTypeFilm,changeGenreFilm } from '../filmsTypeSlice'
+import './typeFilm.css'
+import { useEffect, useState} from 'react'
+import { fetchTypeFilm,changeSortGenreFilm } from '../filmsTypeSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinearProgress } from '@mui/material'
 import {
@@ -8,20 +8,20 @@ import {
   TransitionGroup,
 } from 'react-transition-group'
 import { FilterColumn } from './filterColumn/filtersColumn'
+import { sortingFilm } from '../filmsTypeSlice'
 
-
-const UpcomingFilms=()=>{
+const TypeFilm=()=>{
  
-
-
   const dispatch=useDispatch()
   const[hideButton,setHideButton]=useState(false)
   const[page,setPage]=useState(1)
   const base_poster='https://image.tmdb.org/t/p/w500'
 
-  const data=useSelector(state=>state.typeFilmsCategory.upcomingFilms)
+  const data=useSelector(state=>state.typeFilmsCategory.filmsArray)
   const flag=useSelector(state=>state.typeFilmsCategory.loadingStatus)
   const genre=useSelector(state=>state.typeFilmsCategory.filterType)
+  const sort=useSelector(state=>state.typeFilmsCategory.sortingType)
+
 
   
   const classNames = require('classnames');
@@ -49,7 +49,8 @@ const UpcomingFilms=()=>{
   } 
      
     useEffect(()=>{dispatch(fetchTypeFilm({page,genre}))},[page]) 
-    useEffect(()=>{dispatch(changeGenreFilm(genre))},[genre]) 
+    useEffect(()=>{dispatch(changeSortGenreFilm({genre,sort}))},[genre,sort]) 
+
 
     return(
       
@@ -86,7 +87,7 @@ const UpcomingFilms=()=>{
                     })} 
                    </TransitionGroup>
                        {!hideButton&&flag === 'loading'&&<Loader/>} 
-                  {page<=1&& <div onClick={()=>{
+                  {page<=1&&flag === 'success'&& <div onClick={()=>{
                    setPage(page+1) 
                      setHideButton(true)  
                  }} className={divClass}>
@@ -115,4 +116,4 @@ export const Loader=()=>{
 
 
 
-export default UpcomingFilms
+export default TypeFilm

@@ -4,19 +4,19 @@ import App from './App';
 import { Provider } from 'react-redux'
 import {store} from './store'
 import './index.css';
-import { BrowserRouter as Router} from 'react-router-dom';
 import {Header} from './components/Header'
 import HeadPage from './components/headPage/HeadPage';
-import { Routes,Route,createBrowserRouter,createRoutesFromElements,RouterProvider} from 'react-router-dom';
+import {Route,createBrowserRouter,createRoutesFromElements,RouterProvider} from 'react-router-dom';
 import ContentPoster from './components/filmPage/contentPoster/contentPoster';
 import SearchAllResults from './components/resultsPage/searchAllResult'
 import Persons from './components/personsPage/persons';
 import Person from './components/person/Person';
 import Serials from './components/serialsPage/serials';
 import EnterInPage from './components/authorizationPage/authorization';
-import UpcomingFilms from './components/filmsTypePages/Upcoming/Upcoming';
-import { loadUpcomingMovies } from './components/filmsTypePages/Upcoming/Upcoming';
+import TypeFilm from './components/filmsTypePages/Upcoming/TypeFilm';
 import { createTheme,ThemeProvider} from '@mui/material/styles';
+
+
 const token='eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDAxODZhZGFiZmFmYzA0MzBjOTQzOWQ3NjkxMmE4OCIsInN1YiI6IjY0YTAxNjg1NGE1MmY4MDBlODJkNjBmYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Gl1ryFSJiWHXhKjzFXBD_ZB3o9GGEOgPlw2Sr-hkhpE'
 
 const options = {
@@ -56,9 +56,8 @@ const router=createBrowserRouter(
       
       <Route path='/upcomingFilms' element={
       <ThemeProvider theme={theme}>
-      <UpcomingFilms/>
+      <TypeFilm/>
       </ThemeProvider>
-
       }
        />
       

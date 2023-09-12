@@ -1,17 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { createApi,fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchFilms } from '../filmPage/filmSlice'
 const token='eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDAxODZhZGFiZmFmYzA0MzBjOTQzOWQ3NjkxMmE4OCIsInN1YiI6IjY0YTAxNjg1NGE1MmY4MDBlODJkNjBmYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Gl1ryFSJiWHXhKjzFXBD_ZB3o9GGEOgPlw2Sr-hkhpE'
 
 
 
 const nowDate=()=>{
-return `${new Date().getFullYear()}-0${new Date().getMonth() + 1}-${new Date().getDate()}` 
+return `${new Date().getFullYear()}-${validMonth(new Date().getMonth() + 1)}-${new Date().getDate()}` 
  
 }
-console.log(nowDate())
- 
+const validMonth=(date)=>{
+    return date.toString().length>1? date: 0 + date.toString()
+} 
 export const  fetchTypeFilm=createAsyncThunk(
     'typeFilmSection',
     async({page,genre})=>{
@@ -27,9 +26,9 @@ export const  fetchTypeFilm=createAsyncThunk(
     }
 
 )
-export const  changeGenreFilm=createAsyncThunk(
+export const  changeSortGenreFilm=createAsyncThunk(
     'changeGenre',
-    async(genre)=>{
+    async({genre,sort})=>{
         const options = {
             method: 'GET',
             headers: {
@@ -37,17 +36,16 @@ export const  changeGenreFilm=createAsyncThunk(
               Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDAxODZhZGFiZmFmYzA0MzBjOTQzOWQ3NjkxMmE4OCIsInN1YiI6IjY0YTAxNjg1NGE1MmY4MDBlODJkNjBmYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Gl1ryFSJiWHXhKjzFXBD_ZB3o9GGEOgPlw2Sr-hkhpE'
             }
           }
-        const res=await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=uk-UA&page=1&primary_release_year=${new Date().getFullYear()}&primary_release_date.gte=${nowDate()}&sort_by=popularity.desc&with_genres=${genre}`,options)
+        const res=await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=uk-UA&page=1&primary_release_year=${new Date().getFullYear()}&primary_release_date.gte=${nowDate()}&sort_by=${sort}&with_genres=${genre}`,options)
         return await res.json()
     }
 
 )
 const initialState={
-    upcomingFilms:[],
+    filmsArray:[],
     loadingStatus:'idle',
     filterType:'all',
-    sortingType:'popular',
-    pageCount:'0'
+    sortingType:'popularity.desc',
 }
 
 export const filmsTypeUpcomingSlice=createSlice({
@@ -63,20 +61,28 @@ export const filmsTypeUpcomingSlice=createSlice({
         .addCase(fetchTypeFilm.pending,state=>{state.loadingStatus='loading'})
         .addCase(fetchTypeFilm.fulfilled,(state,action)=>{
             state.loadingStatus='success'
-            state.upcomingFilms.push(...action.payload.results)
-           state.pageCount=action.payload.page
+            state.filmsArray.push(...action.payload.results)
         })
         .addCase(fetchTypeFilm.rejected,state=>{state.loadingStatus='error'})
         
 
-       .addCase(changeGenreFilm.pending,state=>{state.loadingStatus='loading'})
-       .addCase(changeGenreFilm.fulfilled,(state,action)=>{
+       .addCase(changeSortGenreFilm.pending,state=>{state.loadingStatus='loading'})
+       .addCase(changeSortGenreFilm.fulfilled,(state,action)=>{
            state.loadingStatus='success'
-           state.upcomingFilms=action.payload.results
-           state.pageCount=action.payload.page
+           state.filmsArray=action.payload.results
 
        })
-       .addCase(changeGenreFilm.rejected,state=>{state.loadingStatus='error'}) 
+       .addCase(changeSortGenreFilm.rejected,state=>{state.loadingStatus='error'}) 
+
+        
+       /* .addCase(sortingFilm.pending,state=>{state.loadingStatus='loading'})
+       .addCase(sortingFilm.fulfilled,(state,action)=>{
+           state.loadingStatus='success'
+           state.filmsArray=action.payload.results
+
+       })
+       .addCase(sortingFilm.rejected,state=>{state.loadingStatus='error'}) 
+ */
 
     },
     }

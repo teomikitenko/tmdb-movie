@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit'
 import {reducer as filmReducer} from '../components/filmPage/filmSlice'
 import { trendingPersons } from '../components/personsPage/personQuery'
 import{reducer as searchReducer} from '../components/filmPage/searchSlice'
-import {  filmsTypeUpcomingSlice} from '../components/filmsTypePages/filmsTypeSlice'
 import {reducer as typeFilmsCategory} from '../components/filmsTypePages/filmsTypeSlice'
 import { multiFind } from '../components/filmPage/searchSlice'
    
