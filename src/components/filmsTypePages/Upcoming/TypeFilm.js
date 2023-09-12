@@ -48,7 +48,7 @@ const TypeFilm=()=>{
       document.body.clientHeight, document.documentElement.clientHeight
     );
    console.log(document.documentElement.clientHeight + window.pageYOffset)
-    if(500+document.documentElement.clientHeight + window.pageYOffset >= scrollHeight){
+    if(hideButton&&document.documentElement.clientHeight + window.pageYOffset >= scrollHeight-400){
       setPage(page+1) 
     }
 
@@ -93,14 +93,14 @@ const TypeFilm=()=>{
                      )  
                     })} 
                    </TransitionGroup>
-                       {!hideButton&&flag === 'loading'&&<Loader/>} 
-                {/*   {page<=1&&flag === 'success'&& <div onClick={()=>{
+                       {flag === 'loading'&&<Loader/>} 
+                   {page<=1&&flag === 'success'&& <div onClick={()=>{
                    setPage(page+1) 
                      setHideButton(true)  
                  }} className={divClass}>
                   <p >Завантажити більше</p>
                   </div>
-                 }  */}
+                 }  
                 </section> 
               
               </div>
