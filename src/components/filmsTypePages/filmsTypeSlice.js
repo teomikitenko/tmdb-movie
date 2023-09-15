@@ -33,6 +33,7 @@ export const filmsTypeUpcomingSlice = createSlice({
     },
     clearData: (state) => {
       state.filmsArray.splice(0, state.filmsArray.length);
+      state.filterType='all'
     },
     changeFilter: (state, action) => {
       state.filterType = action.payload;
