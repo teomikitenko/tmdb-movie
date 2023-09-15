@@ -323,10 +323,7 @@
   width: 400px;
   height: 300px;
 }
-/* .MuiBackdrop-root{
-  width: 300px;
-  width: 400px;
-} */
+
 .MuiPaper-root{
   overflow: hidden;
 }

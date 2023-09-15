@@ -8,9 +8,14 @@
     .content_media{
         display: flex;
         width: 100%;
-          min-height:1100px ;  
+          min-height:1100px ; 
+          justify-content: center; 
         }
-        .title>p{
+        .title_type_media{
+          margin-bottom: 20px;
+          padding-left: 40px;
+        }
+        .title_type_media>p{
           font-size: 1.6em;
           font-weight: 600;
         }

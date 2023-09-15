@@ -241,7 +241,8 @@ content: "•";
   text-align: center;
 }
    
-/* section info_about_film */
+
+
 .info_about_film{
   width: 100%;
   height: 100%;
@@ -251,13 +252,16 @@ content: "•";
   display: flex;
   width: 100%;
   min-height: 100vh;
-  padding: 30px;
+  padding-top: 30px;
+  justify-content: center;
 }
 .left_white_column{
   display: flex;
   flex-direction: column;
   width: calc(100vw - 80px - 268px);
+  max-width: calc(1400px - 80px - 268px);
   padding-right: 30px;
+  flex-grow: 1;
 }
 .text_column{
   font-weight: 600;
@@ -339,8 +343,8 @@ height: 18px;
 display: block;
 }
 .right_grey_column{
-  min-width: 268px;
-  width: 268px;
+  min-width: 260px;
+  width: 260px;
   }  
 .info_status_links{
   width: 100%;
