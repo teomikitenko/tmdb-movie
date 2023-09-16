@@ -38,7 +38,7 @@ export default function HeadPage() {
                           </Link>
                         </li>
                         <li className="drop_items_movies">
-                          <Link to={"/top-rated"}>
+                          <Link to={"/top-rated-movies"}>
                             <span className="drop_text">Рейтингові</span>
                           </Link>
                         </li>

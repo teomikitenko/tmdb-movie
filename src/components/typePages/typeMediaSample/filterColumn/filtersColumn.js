@@ -8,101 +8,35 @@ import {useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { changeSortingType, changeFilter } from "../../filmsTypeSlice";
-import { useDispatch } from "react-redux";
+import { changeSortingType, changeFilter } from "../../filmsTypePages/filmsTypeSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
 
-export const FilterColumn = ({type}) => {
+const genreSelector=createSelector(
+  state => state.typeFilmsCategory.genresArray,
+  state => state.typeSerialsCategory.genresArray,
+  (genresMoviesArray,genresSerialsArray)=>({genresMoviesArray,genresSerialsArray})
+)
+
+
+export const FilterColumn = ({type,mediaType}) => {
   
   return (
     <div className="filters_column">
       <Sorting type={type} />
-      <Filter />
+      <Filter mediaType={mediaType} />
     </div>
   );
 };
 
-const Filter = () => {
+const Filter = ({mediaType}) => {
   const [open, setOpen] = useState(true);
-
-  const genresArray = [
-    {
-      id: 36,
-      name: "Історичний",
-    },
-    {
-      id: 28,
-      name: "Бойовик",
-    },
-    {
-      id: 37,
-      name: "Вестерн",
-    },
-    {
-      id: 10752,
-      name: "Військовий",
-    },
-    {
-      id: 9648,
-      name: "Детектив",
-    },
-    {
-      id: 99,
-      name: "Документальний",
-    },
-    {
-      id: 18,
-      name: "Драма",
-    },
-    {
-      id: 27,
-      name: "Жахи",
-    },
-    {
-      id: 35,
-      name: "Комедія",
-    },
-    {
-      id: 80,
-      name: "Кримінал",
-    },
-    {
-      id: 10749,
-      name: "Мелодрама",
-    },
-    {
-      id: 10402,
-      name: "Музика",
-    },
-    {
-      id: 16,
-      name: "Мультфільм",
-    },
-    {
-      id: 12,
-      name: "Пригоди",
-    },
-    {
-      id: 10751,
-      name: "Сімейний",
-    },
-    {
-      id: 10770,
-      name: "Телефільм",
-    },
-    {
-      id: 53,
-      name: "Триллер",
-    },
-    {
-      id: 878,
-      name: "Фантастика",
-    },
-    {
-      id: 14,
-      name: "Фентезі",
-    },
-  ];
+const {genresMoviesArray,genresSerialsArray}=useSelector(genreSelector)
   const dispatch = useDispatch();
+
+  const checkedMediaType=(mediaType)=> {
+   return mediaType === 'movies'? genresMoviesArray : genresSerialsArray
+  }
   return (
     <div className="filters_media_content">
       <Accordion
@@ -133,7 +67,7 @@ const Filter = () => {
               Жанри
             </Typography>
             <ul>
-              {genresArray.map((genre) => (
+              {checkedMediaType(mediaType).map((genre) => (
                 <li
                   key={genre.id}
                   onClick={() => dispatch(changeFilter(genre.id))}

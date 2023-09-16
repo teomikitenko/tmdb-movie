@@ -19,8 +19,87 @@ const initialState = {
   filmsArray: [],
   loadingStatus: "idle",
   filterType: "all",
-  sortingType: "",
-  sortingStatus:'pending'
+  sortingType: null,
+  sortingStatus:'pending',
+  genresArray:[
+      {
+        id: 36,
+        name: "Історичний",
+      },
+      {
+        id: 28,
+        name: "Бойовик",
+      },
+      {
+        id: 37,
+        name: "Вестерн",
+      },
+      {
+        id: 10752,
+        name: "Військовий",
+      },
+      {
+        id: 9648,
+        name: "Детектив",
+      },
+      {
+        id: 99,
+        name: "Документальний",
+      },
+      {
+        id: 18,
+        name: "Драма",
+      },
+      {
+        id: 27,
+        name: "Жахи",
+      },
+      {
+        id: 35,
+        name: "Комедія",
+      },
+      {
+        id: 80,
+        name: "Кримінал",
+      },
+      {
+        id: 10749,
+        name: "Мелодрама",
+      },
+      {
+        id: 10402,
+        name: "Музика",
+      },
+      {
+        id: 16,
+        name: "Мультфільм",
+      },
+      {
+        id: 12,
+        name: "Пригоди",
+      },
+      {
+        id: 10751,
+        name: "Сімейний",
+      },
+      {
+        id: 10770,
+        name: "Телефільм",
+      },
+      {
+        id: 53,
+        name: "Триллер",
+      },
+      {
+        id: 878,
+        name: "Фантастика",
+      },
+      {
+        id: 14,
+        name: "Фентезі",
+      },
+    ]
+  
 };
 
 export const filmsTypeUpcomingSlice = createSlice({
@@ -29,10 +108,11 @@ export const filmsTypeUpcomingSlice = createSlice({
   reducers: {
     clearSortingValue: (state) => {
       state.sortingStatus='pending'
-      state.sortingType = "";
+      state.sortingType = null;
     },
-    clearData: (state) => {
-      state.filmsArray.splice(0, state.filmsArray.length);
+    resetData: (state) => {
+      state.filmsArray.splice(0, state.filmsArray.length)
+      state.sortingType = null
       state.filterType='all'
     },
     changeFilter: (state, action) => {
@@ -134,6 +214,6 @@ export const filmsTypeUpcomingSlice = createSlice({
       });
   },
 });
-export const { changeFilter, changeSortingType, clearData, clearSortingValue } =
+export const { changeFilter, changeSortingType, resetData, clearSortingValue } =
   filmsTypeUpcomingSlice.actions;
 export const { reducer } = filmsTypeUpcomingSlice;

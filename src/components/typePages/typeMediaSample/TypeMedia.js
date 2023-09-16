@@ -1,11 +1,11 @@
-import "./typeFilm.css";
+import "./typeMedia.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { LinearProgress } from "@mui/material";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { FilterColumn } from "./filterColumn/filtersColumn";
-import { memo } from "react";
+import { changeSortingType,clearSortingValue,resetData } from "../filmsTypePages/filmsTypeSlice";
 
 const selectValues = createSelector(
   (state) => state.typeFilmsCategory.filmsArray,
@@ -16,23 +16,25 @@ const selectValues = createSelector(
     data,
     flag,
     genre,
-    sort,
+    sort
   })
 );
 
-const TypeFilm = memo(({
+const TypeMedia = ({
   changePageThunk,
   filteSortThunk,
   title,
   type,
-  sort,
+  mediaType,
+  endpoint
 }) => {
   const dispatch = useDispatch();
   const [hideButton, setHideButton] = useState(false);
   const [page, setPage] = useState(1);
+  const[flagSort,setFlagSort]=useState(false)
   const base_poster = "https://image.tmdb.org/t/p/w500";
 
-  const { data, flag, genre /* , sort  */} = useSelector(selectValues);
+  const { data, flag, genre, sort } = useSelector(selectValues);
  
   const classNames = require("classnames");
   const divClass = classNames({
@@ -63,23 +65,32 @@ const TypeFilm = memo(({
     }
   };
 
-
   useEffect(() => {
-    if(page>=2)dispatch(changePageThunk({ page, genre, sort }));
+    if(page>=2) dispatch(changePageThunk({ page, genre, sort }));
   }, [page]);
+  
+  useEffect(()=>{
+    dispatch(resetData());
+    setFlagSort(true)
+    dispatch(changeSortingType(endpoint));
+    console.log('екземпляр TypeFilm ')
+    return () =>{
+      dispatch(clearSortingValue())
+    }
+  },[])
 
-   useEffect(() => {
-    if(sort)dispatch(filteSortThunk({ genre, sort }));
-  }, [genre,sort]);
+    useEffect(() => {
+    if(flagSort)dispatch(filteSortThunk({ genre, sort }));
+  }, [genre,sort,flagSort]); 
 
   return (
-   <div className="wrapper_conteiner">
+   sort&&<div className="wrapper_conteiner">
       <div className="content_column_wrapper">
         <div className="title_type_media">
           <p>{title}</p>
         </div>
         <div className="content_media">
-          <FilterColumn type={type} />
+          <FilterColumn type={type} mediaType={mediaType} />
           <div className="cards_column">
             <section className="media_results">
               <TransitionGroup component={null}>
@@ -123,7 +134,7 @@ const TypeFilm = memo(({
       </div>
     </div>
   );
-});
+};
 export const Loader = () => {
   return (
     <LinearProgress
@@ -132,4 +143,4 @@ export const Loader = () => {
   );
 };
 
-export default TypeFilm;
+export default TypeMedia;

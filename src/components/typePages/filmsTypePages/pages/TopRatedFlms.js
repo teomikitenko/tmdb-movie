@@ -1,12 +1,12 @@
-import TypeFilm from "./Upcoming/TypeFilm";
-import { theme } from "../..";
+import TypeMedia from "../../typeMediaSample/TypeMedia";
+import { theme } from "../../../../index";
 import { ThemeProvider } from "@mui/material";
 import { useEffect } from "react";
 import {
   changeSortingType,
-  clearData,
+  resetData,
   clearSortingValue,
-} from "./filmsTypeSlice";
+} from "../filmsTypeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 
@@ -17,24 +17,33 @@ const sortSelector=createSelector(
   )
 
 
-
-const PopularFilm = ({ changePageThunk, filteSortThunk, title, endpoint }) => {
+const TopRatedFilms = ({
+  changePageThunk,
+  filteSortThunk,
+  title,
+  endpoint,
+  mediaType
+}) => {
   const {sort,sortingStatus} = useSelector(sortSelector);
+  console.log('запрос звідси')
 
    const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(clearData());
-    dispatch(changeSortingType(endpoint));
-    return () => dispatch(clearSortingValue());
-  }, []); 
-
+/*   useEffect(() => {
+    dispatch(resetData());
+     dispatch(changeSortingType(endpoint)); 
+     return () =>{
+      dispatch(clearSortingValue())
+    } ;
+  }, []); */
+ /* debugger */
   return (
-    sort && sortingStatus=== 'success' && (
+   /*  sort &&  sortingStatus === 'success'&&  */(
       <ThemeProvider theme={theme}>
-        <TypeFilm
+        <TypeMedia
+          mediaType={mediaType}
           changePageThunk={changePageThunk}
           filteSortThunk={filteSortThunk}
-          type="Популярні"
+          type="Рейтинг високий"
           endpoint={endpoint}
           title={title}
           sort={sort}
@@ -43,4 +52,4 @@ const PopularFilm = ({ changePageThunk, filteSortThunk, title, endpoint }) => {
     )
   );
 };
-export default PopularFilm;
+export default TopRatedFilms;

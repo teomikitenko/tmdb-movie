@@ -2,7 +2,8 @@ import { configureStore } from '@reduxjs/toolkit'
 import {reducer as filmReducer} from '../components/filmPage/filmSlice'
 import { trendingPersons } from '../components/personsPage/personQuery'
 import{reducer as searchReducer} from '../components/filmPage/searchSlice'
-import {reducer as typeFilmsCategory} from '../components/filmsTypePages/filmsTypeSlice'
+import {reducer as typeFilmsCategory} from '../components/typePages/filmsTypePages/filmsTypeSlice'
+import {reducer as typeSerialsCategory} from '../components/typePages/serialsTypePages/serialsTypeSlice'
 import { multiFind } from '../components/filmPage/searchSlice'
    
 const myMiddleware=(store)=>(next)=>(action)=>{
@@ -18,7 +19,7 @@ const myMiddleware=(store)=>(next)=>(action)=>{
 
 export const store=configureStore({
     reducer:{
-      filmReducer,searchReducer,typeFilmsCategory,
+      filmReducer,searchReducer,typeFilmsCategory,typeSerialsCategory,
       [multiFind.reducerPath]:multiFind.reducer,
       [trendingPersons.reducerPath]:trendingPersons.reducer},
     middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(myMiddleware,
