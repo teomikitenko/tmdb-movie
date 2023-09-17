@@ -2,8 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const ChangePopularFilmPage = createAsyncThunk(
   "changePopularFilmPage",
-  async ({ page, genre, sort },thunkApi) => {
-    console.log(thunkApi)
+  async ({ page, genre, sort }) => {
     const options = {
       method: "GET",
       headers: {

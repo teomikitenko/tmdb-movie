@@ -4,39 +4,80 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {useState } from "react";
+import { useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { changeSortingType, changeFilter } from "../../filmsTypePages/filmsTypeSlice";
+import {
+  changeSortingType,
+  changeFilter,
+} from "../../filmsTypePages/filmsTypeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
+import {
+  changeSerialsFilter,
+  changeSerialsSortingType,
+} from "../../serialsTypePages/serialsTypeSlice";
 
-const genreSelector=createSelector(
-  state => state.typeFilmsCategory.genresArray,
-  state => state.typeSerialsCategory.genresArray,
-  (genresMoviesArray,genresSerialsArray)=>({genresMoviesArray,genresSerialsArray})
-)
+const genreSelector = createSelector(
+  (state) => state.typeFilmsCategory.genresArray,
+  (state) => state.typeSerialsCategory.genresArray,
+  (state) => state.typeSerialsCategory.type,
+  (state) => state.typeFilmsCategory.type,
+  (state) => state.typeSerialsCategory.sortingType,
+  (state) => state.typeFilmsCategory.sortingType,
+  (
+    genresMoviesArray,
+    genresSerialsArray,
+    serialType,
+    filmType,
+    serialsSort,
+    filmSort
+  ) => ({
+    genresMoviesArray,
+    genresSerialsArray,
+    serialType,
+    filmType,
+    serialsSort,
+    filmSort,
+  })
+);
 
+export const FilterColumn = ({ mediaType }) => {
+  const {
+    genresMoviesArray,
+    genresSerialsArray,
+    serialType,
+    filmType,
+    serialsSort,
+    filmSort,
+  } = useSelector(genreSelector);
 
-export const FilterColumn = ({type,mediaType}) => {
-  
   return (
     <div className="filters_column">
-      <Sorting type={type} />
-      <Filter mediaType={mediaType} />
+      <Sorting
+        mediaType={mediaType}
+        filmType={filmType}
+        filmSort={filmSort}
+        serialType={serialType}
+        serialsSort={serialsSort}
+      />
+      <Filter
+        mediaType={mediaType}
+        movies={genresMoviesArray}
+        serials={genresSerialsArray}
+      />
     </div>
   );
 };
 
-const Filter = ({mediaType}) => {
+const Filter = ({ mediaType, movies, serials }) => {
   const [open, setOpen] = useState(true);
-const {genresMoviesArray,genresSerialsArray}=useSelector(genreSelector)
   const dispatch = useDispatch();
 
-  const checkedMediaType=(mediaType)=> {
-   return mediaType === 'movies'? genresMoviesArray : genresSerialsArray
-  }
+  const checkedMediaType = (mediaType) => {
+    return mediaType === "movies" ? movies : serials;
+  };
   return (
     <div className="filters_media_content">
       <Accordion
@@ -70,7 +111,13 @@ const {genresMoviesArray,genresSerialsArray}=useSelector(genreSelector)
               {checkedMediaType(mediaType).map((genre) => (
                 <li
                   key={genre.id}
-                  onClick={() => dispatch(changeFilter(genre.id))}
+                  onClick={() =>
+                    dispatch(
+                      mediaType === "movies"
+                        ? changeFilter(genre.id)
+                        : changeSerialsFilter(genre.id)
+                    )
+                  }
                   className="genre"
                 >
                   {genre.name}
@@ -83,14 +130,22 @@ const {genresMoviesArray,genresSerialsArray}=useSelector(genreSelector)
     </div>
   );
 };
-const Sorting = (props) => {
+const Sorting = ({
+  filmType,
+  serialType,
+  mediaType,
+}) => {
   const typeArr = {
-    'Популярні': "popularity.desc",
-    'Непопулярні': "popularity.asc",
+    Популярні: "popularity.desc",
+    Непопулярні: "popularity.asc",
     "Рейтинг високий": "vote_average.desc",
     "Рейтинг низький": "vote_average.asc",
   };
-
+  const checkMediaType = (arg) => {
+    return mediaType === "movies"
+      ? changeSortingType(arg)
+      : changeSerialsSortingType(arg);
+  };
 
   const dispatch = useDispatch();
   return (
@@ -116,17 +171,20 @@ const Sorting = (props) => {
         <AccordionDetails sx={{ borderTop: "1px solid #eee" }}>
           <div className="sorting_type">
             <Typography sx={{ fontWeight: "300px" }} paragraph>
-              Сортувати результати за{" "}
+              Сортувати результати за
             </Typography>
             <Select
-              defaultValue={props.type}
+              value={mediaType === "movies" ? filmType : serialType}
               IconComponent={ArrowDropDownIcon}
-              onChange={(e) =>{
-                dispatch(changeSortingType(typeArr[e.target.value]))
-                console.log(typeArr[e.target.value])
-              }
-              
-              }
+              onChange={(e) => {
+                dispatch(
+                  checkMediaType({
+                    endpoint: typeArr[e.target.value],
+                    type: e.target.value,
+                  })
+                );
+                console.log(typeArr[e.target.value]);
+              }}
               sx={{
                 marginTop: "15px",
                 width: "100%",

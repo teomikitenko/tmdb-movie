@@ -33,14 +33,17 @@ import {
   ChangePopularFilmPage,
   SortGenrePopularFilm,
 } from "./components/typePages/filmsTypePages/thunks/popularFilmThunk";
-import NowPlayingFilm from "./components/typePages/filmsTypePages/pages/NowPlayingFilms";
-import TopRatedFilms from "./components/typePages/filmsTypePages/pages/TopRatedFlms";
-import PopularFilm from "./components/typePages/filmsTypePages/pages/PopularFilm";
-import UpcomingFilms from "./components/typePages/filmsTypePages/pages/UpcomingFilms";
-import AiringTodaySerials from "./components/typePages/serialsTypePages/pages/airingTodaySerials";
-import NowOnTvSerials from "./components/typePages/serialsTypePages/pages/nowOnTVSerials";
-import TopRatedSerials from "./components/typePages/serialsTypePages/pages/topRatedSerials";
-import PopularSerials from "./components/typePages/serialsTypePages/pages/popularSerials";
+import {
+  ChangePopularSerialsPage,
+  SortGenrePopularSerials,
+} from "./components/typePages/serialsTypePages/thunks/popularSerialsThunk";
+import {
+  ChangeRaitingSerialsPage,
+  SortGenreTopRatedSerials,
+} from "./components/typePages/serialsTypePages/thunks/topRatedSerialsThunk";
+import { ChangeAiringTodaySerialsPage,SortGenreAiringTodaySerials } from "./components/typePages/serialsTypePages/thunks/airingTodaySerialsThunk";
+import TypeMedia from "./components/typePages/typeMediaSample/TypeMedia";
+import { ChangeNowOnTVSerialsPage, SortGenreNowOnTVSerials } from "./components/typePages/serialsTypePages/thunks/nowOnTvSerialsThunk";
 const token =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDAxODZhZGFiZmFmYzA0MzBjOTQzOWQ3NjkxMmE4OCIsInN1YiI6IjY0YTAxNjg1NGE1MmY4MDBlODJkNjBmYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Gl1ryFSJiWHXhKjzFXBD_ZB3o9GGEOgPlw2Sr-hkhpE";
 
@@ -51,6 +54,90 @@ const options = {
     Authorization: `Bearer ${token}`,
   },
 };
+const moviesPagesType = [
+  {
+    id: 1,
+    path: "/upcoming-films",
+    mediaType: "movies",
+    changePageThunk: ChangeUpcomingFilmsPage,
+    filteSortThunk: SortGenreUpcomingFilms,
+    title: "Очікувані фільми",
+    endpoint: "popularity.desc",
+    type: "Популярні",
+  },
+  {
+    id: 2,
+    path: "/now-playing",
+    mediaType: "movies",
+    changePageThunk: ChangeNowPlayingPage,
+    filteSortThunk: SortGenreNowPlaying,
+    title: "Фільми, що зараз у кіно",
+    endpoint: "popularity.desc",
+    type: "Популярні",
+  },
+  {
+    id: 3,
+    path: "/top-rated-movies",
+    mediaType: "movies",
+    changePageThunk: ChangeRaitingFilmsPage,
+    filteSortThunk: SortGenreRaitingFilms,
+    title: "Фільми з найвищими рейтингами",
+    endpoint: "vote_average.desc",
+    type: "Рейтинг високий",
+  },
+  {
+    id: 4,
+    path: "/popular-films",
+    mediaType: "movies",
+    changePageThunk: ChangePopularFilmPage,
+    filteSortThunk: SortGenrePopularFilm,
+    title: "Популярні фільми",
+    endpoint: "popularity.desc",
+    type: "Популярні",
+  },
+];
+const serialPagesType = [
+  {
+    id: 5,
+    path: "/popular-serials",
+    mediaType: "serials",
+    changePageThunk: ChangePopularSerialsPage,
+    filteSortThunk: SortGenrePopularSerials,
+    title: "Популярні серіали",
+    endpoint: "popularity.desc",
+    type: "Популярні",
+  },
+   {
+    id: 6,
+    path: "/top-rated-serials",
+    mediaType: "serials",
+    changePageThunk: ChangeRaitingSerialsPage,
+    filteSortThunk: SortGenreTopRatedSerials,
+    title: "Серіали з найвищими рейтингами",
+    endpoint: "vote_average.desc",
+    type: "Рейтинг високий",
+  },
+  {
+    id: 7,
+    path: "/on-air-today",
+    mediaType: "serials",
+    changePageThunk: ChangeAiringTodaySerialsPage,
+    filteSortThunk: SortGenreAiringTodaySerials,
+    title: "Серіали, що сьогодні в ефірі",
+    endpoint: "popularity.desc",
+    type: "Популярні",
+  },
+  {
+    id: 8,
+    path: "/on-tv",
+    mediaType: "serials",
+    changePageThunk: ChangeNowOnTVSerialsPage,
+    filteSortThunk: SortGenreNowOnTVSerials,
+    title: "Серіали, що виходять зараз",
+    endpoint: "popularity.desc",
+    type: "Популярні",
+  },
+];
 export const theme = createTheme({
   components: {
     MuiSvgIcon: {
@@ -81,111 +168,98 @@ const router = createBrowserRouter(
         }}
         element={<ContentPoster />}
       />
+
+      {moviesPagesType.map((page) => {
+        return (
           <Route
+          
+            path={page.path}
+            element={
+              <ThemeProvider theme={theme}>
+                <TypeMedia
+                  key={page.id} 
+                  mediaType={page.mediaType}
+                  changePageThunk={page.changePageThunk}
+                  filteSortThunk={page.filteSortThunk}
+                  title={page.title}
+                  endpoint={page.endpoint}
+                  type={page.type}
+                />
+              </ThemeProvider>
+            }
+          />
+        );
+      })}
+      {serialPagesType.map((page) => {
+        return (
+          <Route
+            
+            path={page.path}
+            element={
+              <ThemeProvider theme={theme}>
+                <TypeMedia
+                  key={page.id}
+                  mediaType={page.mediaType}
+                  changePageThunk={page.changePageThunk}
+                  filteSortThunk={page.filteSortThunk}
+                  title={page.title}
+                  endpoint={page.endpoint}
+                  type={page.type}
+                />
+              </ThemeProvider>
+            }
+          />
+        );
+      })}
+
+      {/* <Route
         path="/airing-today"
         element={
           <AiringTodaySerials
-            mediaType='serials'
+            mediaType="serials"
             changePageThunk={ChangeUpcomingFilmsPage}
             filteSortThunk={SortGenreUpcomingFilms}
             title="Очікувані фільми"
             endpoint="popularity.desc"
-
           />
         }
       />
-          <Route
+      <Route
         path="/now-on-tv"
         element={
           <NowOnTvSerials
-            mediaType='serials'
+            mediaType="serials"
             changePageThunk={ChangeUpcomingFilmsPage}
             filteSortThunk={SortGenreUpcomingFilms}
             title="Очікувані фільми"
             endpoint="popularity.desc"
-
           />
         }
       />
-          <Route
+      <Route
         path="/top-rated-tv"
         element={
           <TopRatedSerials
-            mediaType='serials'
+            mediaType="serials"
             changePageThunk={ChangeUpcomingFilmsPage}
             filteSortThunk={SortGenreUpcomingFilms}
             title="Очікувані фільми"
             endpoint="popularity.desc"
-
           />
         }
       />
-          <Route
+      <Route
         path="/popular-serials"
         element={
           <PopularSerials
-            mediaType='serials'
+            mediaType="serials"
             changePageThunk={ChangeUpcomingFilmsPage}
             filteSortThunk={SortGenreUpcomingFilms}
             title="Очікувані фільми"
             endpoint="popularity.desc"
-
           />
         }
-      />
-
-      <Route
-        path="/upcoming-films"
-        element={
-          <UpcomingFilms
-            mediaType='movies'
-            changePageThunk={ChangeUpcomingFilmsPage}
-            filteSortThunk={SortGenreUpcomingFilms}
-            title="Очікувані фільми"
-            endpoint="popularity.desc"
-
-          />
-        }
-      />
-      <Route
-        path="/now-playing"
-        element={
-          <NowPlayingFilm
-          mediaType='movies'
-            changePageThunk={ChangeNowPlayingPage}
-            filteSortThunk={SortGenreNowPlaying}
-            title="Фільми, що зараз у кіно"
-            endpoint="popularity.desc"
-
-          />
-        }
-      />
-      <Route
-        path="/top-rated-movies"
-        element={
-          <TopRatedFilms
-          mediaType='movies'
-            changePageThunk={ChangeRaitingFilmsPage}
-            filteSortThunk={SortGenreRaitingFilms}
-            title="Фільми з найвищими рейтингами"
-            endpoint="vote_average.desc"
-
-          />
-        }
-      />
-      <Route
-        path="/popular-films"
-        element={
-          <PopularFilm
-          mediaType='movies'
-            changePageThunk={ChangePopularFilmPage}
-            filteSortThunk={SortGenrePopularFilm}
-            title="Популярні фільми"
-            endpoint="popularity.desc"
-
-          />
-        }
-      />
+      /> */}
 
       <Route path="results/:res" element={<SearchAllResults />} />
       <Route path="persons" element={<Persons />} />

@@ -19,6 +19,7 @@ const initialState = {
   filmsArray: [],
   loadingStatus: "idle",
   filterType: "all",
+  type:null,
   sortingType: null,
   sortingStatus:'pending',
   genresArray:[
@@ -110,8 +111,9 @@ export const filmsTypeUpcomingSlice = createSlice({
       state.sortingStatus='pending'
       state.sortingType = null;
     },
-    resetData: (state) => {
+    resetData: (state,action) => {
       state.filmsArray.splice(0, state.filmsArray.length)
+      state.type=action.payload
       state.sortingType = null
       state.filterType='all'
     },
@@ -120,7 +122,8 @@ export const filmsTypeUpcomingSlice = createSlice({
     },
     changeSortingType: (state, action) => {
       state.sortingStatus='success'
-      state.sortingType = action.payload;
+      state.type=action.payload.type
+      state.sortingType = action.payload.endpoint;
     },
   },
   extraReducers: (builder) => {

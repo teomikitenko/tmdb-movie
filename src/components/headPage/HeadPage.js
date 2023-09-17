@@ -52,16 +52,26 @@ export default function HeadPage() {
                     <div className="drop_serials">
                       <ul className="drop_menu_serials">
                         <li className="drop_items_serials">
-                          <span className="drop_text">Популярні</span>
+                          <Link to={"/popular-serials"}>
+                            <span className="drop_text">Популярні</span>
+                          </Link>
                         </li>
                         <li className="drop_items_serials">
+                          <Link to={'/on-air-today'}>
                           <span className="drop_text">Cьогодні в ефірі</span>
+                          </Link>
+                          
                         </li>
                         <li className="drop_items_serials">
+                          <Link to={'/on-tv'}>
                           <span className="drop_text">Зараз на ТБ</span>
+                          </Link>
+                          
                         </li>
                         <li className="drop_items_serials">
-                          <span className="drop_text">Рейтингові</span>
+                          <Link to={"/top-rated-serials"}>
+                            <span className="drop_text">Рейтингові</span>
+                          </Link>
                         </li>
                       </ul>
                     </div>
