@@ -1,6 +1,7 @@
 import './SearchPanel.css'
 import { useState } from 'react'
 import { useNavigate} from 'react-router-dom'
+import { Typography } from '@mui/material'
 
 
 export default function SearchPanel(){
@@ -14,12 +15,14 @@ const submitform=(e)=>{
 
     return(
         <div className="wrapper_search_panel">
+          
   <div className="poster_container">
     <img className="image_back" src= 'https://image.tmdb.org/t/p/original//84cS9oEm33jD05T0p39TbwADY8.jpg' alt=""/>
-    <div className="content_panel">
+    <div className="wrapper_conteiner">
+     <div className="content_panel">
     <div className="title">
-      <h2>Ласкаво просимо.</h2>
-      <h3>Мільйони фільмів, серіалів і персон. Досліджуйте зараз.</h3>
+      <Typography variant='h2'>Ласкаво просимо.</Typography>
+      <Typography variant='h3'  >Мільйони фільмів, серіалів і персон. Досліджуйте зараз.</Typography>
     </div>
     <div className="form_input">
       <form onSubmit={submitform}>
@@ -27,8 +30,9 @@ const submitform=(e)=>{
         <input type="submit" value="Search"/>
       </form>
     </div>
-    </div>
+    </div> 
         
+    </div>
     </div>
   </div>
     )

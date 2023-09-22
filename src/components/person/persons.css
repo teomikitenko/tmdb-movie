@@ -1,6 +1,7 @@
 .container_info_person{
     padding: 30px 40px;
     display: flex;
+    justify-content: center;
     width: 100%;
   }
   .left_person_column{

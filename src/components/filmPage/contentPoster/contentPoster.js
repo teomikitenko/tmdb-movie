@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../contentPoster/contentPoster.css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -21,8 +21,15 @@ const Func = ({ data }) => {
   const [crew, setCrew] = useState(null);
   const [videoUrl, setVideoUrl] = useState({ url: null });
   const [open, setOpen] = useState(false);
-
+  const certification=(dates)=>{
+   const usDate=dates.results.filter(c=> c.iso_3166_1 === 'US')
+   if(usDate[0].release_dates[0].certification)return usDate[0].release_dates[0].certification
+    else return 'NA'
+   
+   
+  }
   const base_youtube = "https://www.youtube.com/watch?v=";
+  const backdrop_img='https://image.tmdb.org/t/p/original';
   const base_img = "https://image.tmdb.org/t/p/w500";
   const profile_img = "https://image.tmdb.org/t/p/w185";
   const style = {
@@ -43,8 +50,6 @@ const Func = ({ data }) => {
       url: data.videos.results.filter((vid) => vid.type === "Trailer")[1],
     });
   }, []);
-
-  console.log(videoUrl);
 
   const percent =
     data.vote_average > 0 ? Math.round(data.vote_average * 10) : null;
@@ -86,7 +91,7 @@ const Func = ({ data }) => {
       return date.split("-").reverse().join("/");
     }
   };
-
+console.log(data)
   return (
     <div className="wrapper">
       {data ? (
@@ -94,7 +99,7 @@ const Func = ({ data }) => {
           <div className="wrapper_for_poster">
             <img
               className="img_backdrop"
-              src={base_img + data.backdrop_path}
+              src={backdrop_img + data.backdrop_path}
               alt=""
             />
             <div className="wrapper_conteiner ">
@@ -107,22 +112,21 @@ const Func = ({ data }) => {
                   />
                 </div>
                 <div className="text_content">
-                  <p className="text_content_title">{data.title}</p>
-
+                  <Typography  variant="poster_title">{data.title}</Typography>
                   <div className="text_content_date">
-                    <span className="certification">12+</span>
-                    <span className="date">
-                      {" "}
+                    <span className="certification">{certification(data.release_dates)}</span>
+                    <Typography component='span' variant="info_media" sx={{marginRight:'13px'}} className="date">
+                     
                       {buildDate(data.release_date)} (UA)
-                    </span>
-                    <span className="genres">
-                      {data.genres.map((genre, index) => (
-                        <span key={index}>{genre.name},</span>
-                      ))}
-                    </span>
-                    <span className="runtime">
+                    </Typography>
+                    <Box component='span' className="genres" sx={{marginRight:'13px'}}> {data.genres.map((genre, index) => (
+                        <Typography variant="info_media" component='span' key={index}>
+                        {index === data.genres.length-1? genre.name:genre.name + ','}
+                          </Typography>
+                      ))}</Box>
+                    <Typography variant="info_media" component='span' sx={{position:'relative'}} className="runtime">
                       {Math.trunc(data?.runtime / 60)}г {data.runtime % 60}хв
-                    </span>
+                    </Typography>
                   </div>
                   <div className="rating_info ">
                     <div className="progress_bar trailer">
@@ -251,6 +255,7 @@ const Func = ({ data }) => {
                         if (index < 9) {
                           return (
                             <SwiperSlide>
+                              <Link to={`/persons/${actor.id}`}>
                               <div class="card_container ">
                                 {actor.profile_path ? (
                                   <>
@@ -286,6 +291,8 @@ const Func = ({ data }) => {
                                   </>
                                 )}
                               </div>
+                              </Link>
+                            
                             </SwiperSlide>
                           );
                         } else return null;

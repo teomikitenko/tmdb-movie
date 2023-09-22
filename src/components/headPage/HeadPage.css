@@ -31,16 +31,16 @@
     padding: 0 40px;      
     /* justify-content: space-between; */
   }
+  .nav_bar_menu{
+  display: flex;
+  align-items: center;
+  }
   .nav_bar_menu>ul{
     display: flex;
     margin-left: 25px;
     padding: 0 10px;      
     justify-content: space-between;
     width: 314px;
-  }
-  .category_menu{
-    font-size: 16px;
-    font-weight: 600;
   }
  
   .li_movies{
@@ -104,10 +104,8 @@
   padding-left: 10px;
   
 }
-
 .li_serials{
   cursor: pointer;
-
 }
 
 .li_serials:hover .drop_serials {

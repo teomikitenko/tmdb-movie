@@ -139,48 +139,32 @@ h3{
 .certification{
   display: inline-block;
   text-align: center;
-  width: 33px;
-  height: 21px;
+  padding:1px 3px;
   border: 1px solid gray;
   margin-right: 12px;
   border-radius: 3px;
-  color: gray;
+  color: rgba(255,255,255,0.6);
 }
-.date{
-  margin-right: 12px;
-  font-weight: 500;
-  font-size: 15px
 
-}
-.genres{
-  position: relative;
-  margin-right: 12px;
- 
-}
-.genres span{
-  font-weight: 500;
-  font-size: 15px
-}
 .genres::before{
   content: "•";
   position: absolute;
   top: 0;
-  left: -10px;
+  left: -8px;
   width: 6px;
   height: 6px;
   color: aliceblue;
 }
 .runtime{
   position: relative;
-  font-weight: 500;
-  font-size: 15px
+ /*  font-weight: 500;
+  font-size: 16px */
 }
 .runtime:before{
-position: absolute;
-content: "•";
+  content: "•";
   position: absolute;
-  top: 0;
-  left: -10px;
+  top: 3px;
+  left: -8px;
   width: 6px;
   height: 6px;
   color: aliceblue;

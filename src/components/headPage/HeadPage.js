@@ -1,8 +1,22 @@
 import { Outlet, Link } from "react-router-dom";
 import "./HeadPage.css";
 import Footer from "../footer/footer";
+import { v4 as uuidv4 } from "uuid";
+import { Typography } from "@mui/material";
 
 export default function HeadPage() {
+  const movies = [
+    { id: uuidv4(), path: "/popular-films", title: "Популярні" },
+    { id: uuidv4(), path: "/now-playing", title: "Зараз у кіно" },
+    { id: uuidv4(), path: "/upcoming-films", title: "Очікувані" },
+    { id: uuidv4(), path: "//top-rated-movies", title: "Рейтингові" },
+  ];
+  const serials = [
+    { id: uuidv4(), path: "/popular-serials", title: "Популярні" },
+    { id: uuidv4(), path: "/on-air-today", title: "Cьогодні в ефірі" },
+    { id: uuidv4(), path: "/on-tv", title: "Зараз на ТБ" },
+    { id: uuidv4(), path: "/top-rated-serials", title: "Рейтингові" },
+  ];
   return (
     <div className="wrapper_all">
       <header className="wrapper_head">
@@ -18,67 +32,40 @@ export default function HeadPage() {
                 <ul>
                   <li className="li_movies">
                     <span className="movies_category category_menu">
-                      Фільми
+                      <Typography variant="h4">Фільми</Typography>
                     </span>
                     <div className="drop_movies">
                       <ul className="drop_menu_movies">
-                        <li className="drop_items_movies">
-                          <Link to={"/popular-films"}>
-                            <span className="drop_text">Популярні</span>
-                          </Link>
-                        </li>
-                        <li className="drop_items_movies">
-                          <Link to={"/now-playing"}>
-                            <span className="drop_text">Зараз у кіно</span>
-                          </Link>
-                        </li>
-                        <li className="drop_items_movies">
-                          <Link to={"/upcoming-films"}>
-                            <span className="drop_text">Очікувані</span>{" "}
-                          </Link>
-                        </li>
-                        <li className="drop_items_movies">
-                          <Link to={"/top-rated-movies"}>
-                            <span className="drop_text">Рейтингові</span>
-                          </Link>
-                        </li>
+                        {movies.map((movie) => (
+                          <li key={movie.id} className="drop_items_movies">
+                            <Link to={movie.path}>
+                              <span className="drop_text">{movie.title}</span>
+                            </Link>
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   </li>
                   <li className="li_serials">
                     <span className="serials_category category_menu">
-                      Серіали
+                     
+                      <Typography variant="h4">Серіали</Typography>
                     </span>
                     <div className="drop_serials">
                       <ul className="drop_menu_serials">
-                        <li className="drop_items_serials">
-                          <Link to={"/popular-serials"}>
-                            <span className="drop_text">Популярні</span>
-                          </Link>
-                        </li>
-                        <li className="drop_items_serials">
-                          <Link to={'/on-air-today'}>
-                          <span className="drop_text">Cьогодні в ефірі</span>
-                          </Link>
-                          
-                        </li>
-                        <li className="drop_items_serials">
-                          <Link to={'/on-tv'}>
-                          <span className="drop_text">Зараз на ТБ</span>
-                          </Link>
-                          
-                        </li>
-                        <li className="drop_items_serials">
-                          <Link to={"/top-rated-serials"}>
-                            <span className="drop_text">Рейтингові</span>
-                          </Link>
-                        </li>
+                        {serials.map((serial) => (
+                          <li className="drop_items_serials">
+                            <Link to={serial.path}>
+                              <span className="drop_text">{serial.title}</span>
+                            </Link>
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   </li>
                   <li className="li_persons">
                     <span className="persons_category category_menu">
-                      Персони
+                    <Typography variant="h4">Персони</Typography>
                     </span>
                     <div className="drop_persons">
                       <ul className="drop_menu_persons">

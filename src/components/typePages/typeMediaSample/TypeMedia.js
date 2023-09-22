@@ -1,8 +1,9 @@
 import "./typeMedia.css";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { LinearProgress } from "@mui/material";
+import { LinearProgress} from "@mui/material";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { FilterColumn } from "./filterColumn/filtersColumn";
 import {
@@ -95,6 +96,10 @@ const TypeMedia = ({
     if (flagSort) dispatch(filteSortThunk({ genre, sort }));
   }, [genre, sort, flagSort]);
 
+const checkPath=(id)=>{
+ return mediaType === 'movies'? `/films/${id}`:`/tv/${id}`
+}
+
   return (
     sort && (
       <div className="wrapper_conteiner">
@@ -107,24 +112,27 @@ const TypeMedia = ({
             <div className="cards_column">
               <section className="media_results">
                 <TransitionGroup component={null}>
-                  {data.map((film) => {
+                  {data.map(media=> {
                     return (
                       <CSSTransition
-                        key={film.id}
+                        key={media.id}
                         timeout={500}
                         classNames="my-node"
                       >
+                        <Link to={checkPath(media.id)}>
                         <div className="card_media">
                           <div className="card_image_wrapper">
-                            <img src={base_poster + film.poster_path} alt="" />
+                            <img src={base_poster + media.poster_path} alt="" />
                           </div>
                           <div className="card_text_wrapper">
                             <div className="text_title_card">
-                              <p className="title_text">{film.title}</p>
-                              <p className="date_text">{film.release_date}</p>
+                              <p className="title_text">{media.title}</p>
+                              <p className="date_text">{media.release_date}</p>
                             </div>
                           </div>
                         </div>
+                        </Link>
+                      
                       </CSSTransition>
                     );
                   })}

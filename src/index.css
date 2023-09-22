@@ -5,12 +5,14 @@ html{
 
 
 .wrapper_conteiner{
-    max-width: 1400px;
+    width: 100%;
+    max-width: 1300px;
+    min-width: 670px;
     height: 100%;
     margin: 0 auto;
 
   }
-  @media screen and (max-width: 1200px){
+/*   @media screen and (max-width: 1200px){
     .wrapper_conteiner{
       max-width: 900px;
       height: 100%;
@@ -25,7 +27,8 @@ html{
       margin: 0 auto;
     }
     
-  }
+  } */
+ 
    *{
   
     box-sizing: border-box;
@@ -61,7 +64,7 @@ html{
     background-color: #fff;
   } 
   .wrapper_all{
-    width: 100%;
+  width: 100%;
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -69,5 +72,5 @@ html{
   position: relative;
   }
   main{
-    flex: 1 1 auto;
+     flex: 1 1 auto; 
   }

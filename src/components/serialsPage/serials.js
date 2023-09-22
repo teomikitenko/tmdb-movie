@@ -1,6 +1,6 @@
  import './serials.css'
  import { useEffect, useState } from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData,Link } from 'react-router-dom'
 import {Swiper,SwiperSlide} from 'swiper/react'
 import {Scrollbar} from 'swiper/modules' 
 import 'swiper/css';
@@ -9,6 +9,7 @@ import ReactPlayer from 'react-player'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import CloseIcon from '@mui/icons-material/Close';
 import { Modal,Box,Typography } from "@mui/material"
+
 
 const Serials=()=>{
 const[open,setOpen]=useState(false)
@@ -36,8 +37,8 @@ const logo_network_base='https://image.tmdb.org/t/p/original'
     })
   },[])
 const data=useLoaderData()
-console.log(data)
-const base_img='https://image.tmdb.org/t/p/w1280'
+const base_img='https://image.tmdb.org/t/p/w500'
+const backdrop_img='https://image.tmdb.org/t/p/original'
   const buildDate=(date)=>{
     return date.split('-').reverse().join('/')
   }
@@ -64,7 +65,7 @@ return {l:'#fbfdc2',b:'#796f05'}
         <div className="wrapper"> 
         <div className="wrapper_movies wrapper_serials">
           <div className="wrapper_for_poster">
-      <img className="img_backdrop" src={base_img+data.backdrop_path} alt=""/>
+      <img className="img_backdrop" src={backdrop_img+data.backdrop_path} alt=""/>
    <div className="wrapper_conteiner">
     <div className="content">
       <div className="content_img">
@@ -157,7 +158,8 @@ return {l:'#fbfdc2',b:'#796f05'}
                         if(index<9){
                           return(
                             <SwiperSlide>
-                            <div class="card_container">
+                             <Link key={actor.id} to={`/persons/${actor.id}`}>
+                             <div class="card_container">
                               {actor.profile_path?
                               <>
                               <div className="card_block_for_img">
@@ -180,7 +182,8 @@ return {l:'#fbfdc2',b:'#796f05'}
                               }
                        
                           
-                          </div>
+                          </div> 
+                         </Link>                    
                           </SwiperSlide>
                           ) 
                      
