@@ -137,8 +137,6 @@ h3{
 
 .genres{
   position: relative;
-  margin-right: 12px;
- 
 }
 
 .genres::before{
@@ -184,11 +182,7 @@ content: "•";
   width: 100px;
   height: 75px;
 }
-.raiting_users{
-  display: inline-block;
-  font-weight: 700;
-  font-size: 16px;
-}
+
 .my_circle{
  position: relative;
  height: 60px;

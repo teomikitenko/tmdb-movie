@@ -193,11 +193,6 @@ h3{
   width: 100px;
   height: 75px;
 }
-.raiting_users{
-  display: inline-block;
-  font-weight: 700;
-  font-size: 16px;
-}
 .my_circle{
  position: relative;
  height: 60px;

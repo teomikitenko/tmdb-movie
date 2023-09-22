@@ -142,7 +142,7 @@ console.log(data)
                           {percent ? percent + "%" : "NA"}
                         </p>
                       </div>
-                      <span className="raiting_users">Оцінка користувачів</span>
+                      <Typography variant="font700" component='span' sx={{display:'inline-block'}}>Оцінка користувачів</Typography>
                       <div
                         onClick={() => setOpen(true)}
                         className="play_trailer"
