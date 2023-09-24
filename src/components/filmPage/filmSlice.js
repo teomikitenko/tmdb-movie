@@ -22,7 +22,7 @@ export const { useGetMovieByIdQuery } = findBiId;
 
 export const fetchFilms = createAsyncThunk(
   "PopularFilms/fetchFilms",
-  async (url, period) => {
+  async (period) => {
     const options = {
       method: "GET",
       headers: {
@@ -31,7 +31,9 @@ export const fetchFilms = createAsyncThunk(
           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDAxODZhZGFiZmFmYzA0MzBjOTQzOWQ3NjkxMmE4OCIsInN1YiI6IjY0YTAxNjg1NGE1MmY4MDBlODJkNjBmYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Gl1ryFSJiWHXhKjzFXBD_ZB3o9GGEOgPlw2Sr-hkhpE",
       },
     };
-    const response = await fetch(url, options);
+  
+
+    const response = await fetch(`https://api.themoviedb.org/3/trending/all/${period}?language=uk-UA`, options);
     return await response.json();
   }
 );
@@ -50,7 +52,7 @@ const filmSlice = createSlice({
         state.loadingStatus = "loading";
       })
       .addCase(fetchFilms.fulfilled, (state, action) => {
-        state.trendingFilms.push(...action.payload.results);
+        state.trendingFilms =action.payload.results;
         state.loadingStatus = "idle";
       })
       .addCase(fetchFilms.rejected, (state) => {

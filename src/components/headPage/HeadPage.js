@@ -54,7 +54,7 @@ export default function HeadPage() {
                     <div className="drop_serials">
                       <ul className="drop_menu_serials">
                         {serials.map((serial) => (
-                          <li className="drop_items_serials">
+                          <li key={serial.id} className="drop_items_serials">
                             <Link to={serial.path}>
                               <span className="drop_text">{serial.title}</span>
                             </Link>

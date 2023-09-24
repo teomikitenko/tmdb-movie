@@ -91,17 +91,17 @@
         }
         .my-node-enter {
           opacity: 0;
-          transition: opacity 800ms ease-in-out;
+          transition: opacity 500ms ease-in-out;
       
         }
         .my-node-enter-active {
           opacity: 1;
-           transition: opacity 800ms ease-in-out; 
+           transition: opacity 500ms ease-in-out; 
         }
          .my-node-exit {
           opacity: 1;
         }
         .my-node-exit-active {
           opacity: 0;
-          transition: opacity 800ms ease-in-out;
+          transition: opacity 500ms ease-in-out;
         } 

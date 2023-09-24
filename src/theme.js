@@ -8,6 +8,7 @@ let theme = createTheme({
         sm: 600,
         md: 900,
         lg: 1200,
+        max_height:1300,
         xl: 1536,
       },
     },
@@ -61,7 +62,12 @@ let theme = createTheme({
         fontWeight:700,
         lineHeight: 1,
       }, */
-
+     date:{
+      fontSize:'1rem',
+      color: 'rgba(0,0,0,.6)',
+      /* fontWeight:700, */
+      lineHeight: 1,
+     }
     },
   });
   theme.typography.font700={

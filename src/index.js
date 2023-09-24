@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import "./index.css";
-import { Header } from "./components/Header";
+import HomePage from "./components/homePage/HomePage";
 import HeadPage from "./components/headPage/HeadPage";
 import theme from "./theme";
 import {
@@ -145,7 +145,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<HeadPage />}>
       <Route index element={
        
-        <Header />
+        <HomePage />
       } />
       <Route
         path="films/:idFilm"
