@@ -1,0 +1,41 @@
+section.trailers{
+    position:relative ;
+    width: 100%;
+    height: 291px;
+    background-color: rgb(2,50,83);    
+}
+.content_video{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.content_video{
+    position: absolute;
+    top:0;
+   filter: grayscale(100%) opacity(30%) brightness(63%);
+    width: 100%;
+    height: 100%;
+   object-fit: cover;
+} 
+.wrap_video_content{
+    position: relative;
+    padding-top: 30px;
+    width: 100%;
+    height: 100%;
+display: flex;
+flex-direction: column;
+}
+.video_trailers_swiper{
+display: flex;
+ flex-grow: 1;
+}
+.title_trailers_buttons {
+display: flex;
+gap: 10px;
+}
+.wrap_button_swipe {
+display: flex;
+border: 1px solid rgb(30,213,169);
+border-radius: 30px;
+ height: 30px;
+ }

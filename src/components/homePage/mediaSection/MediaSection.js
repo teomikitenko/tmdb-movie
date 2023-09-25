@@ -10,9 +10,21 @@ import { Typography } from "@mui/material";
 
 const MediaSection = ({ period }) => {
   const arr = useSelector((state) => state.filmReducer.trendingFilms);
-  console.log(arr)
+  const date=(date)=>{
+    const d=new Date(date)
+   return  new Intl.DateTimeFormat('uk',{
+    month:'long',
+    year: "numeric",
+   day:'numeric'
+  }).format(d) 
+
+  }
   return (
+    <>
+    <div className="background_green">
+    </div>
     <div key={period} className="conteiner_swiper">
+    
       <Swiper
         scrollbar={{
           hide: false,
@@ -37,7 +49,7 @@ const MediaSection = ({ period }) => {
                 </div>
                <div className="text_card">
                 <p className="title_card">{media.media_type === 'tv'?media.name:media.title}</p>
-                <Typography sx={{marginTop:'4px'}} variant="date">{media.media_type === 'tv'?media.first_air_date:media.release_date}</Typography>
+                <Typography sx={{marginTop:'4px'}} variant="date">{media.media_type === 'tv'?date(media.first_air_date):date(media.release_date)}</Typography>
                </div>
                </div> 
             </SwiperSlide>
@@ -45,6 +57,7 @@ const MediaSection = ({ period }) => {
         })}
       </Swiper>
     </div>
+    </>
   );
 };
 

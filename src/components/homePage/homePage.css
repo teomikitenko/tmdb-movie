@@ -2,13 +2,18 @@
     max-width: 1150px;
     margin: 0 auto;
 }
+section.trending_movies{
+    position: relative;
+}
 .wrap_section{
+    
     margin-top: 30px;
     display: flex;
     gap: 10px;
     align-items: center;
 }
 .slide_button{
+    z-index: 200;
     position: relative;
     display: flex;
     justify-content: space-around;
@@ -19,10 +24,9 @@
     border:1px solid rgba(3,37,65) ;
     cursor: pointer;
 }
-.no_active_text{
-    color:rgba(3,37,65) ;
-    font-weight: 600;
-}
+
+
+
 .left{
    transform:translateX(-57%) ;
     width:110px;
@@ -50,4 +54,10 @@
     background: linear-gradient(to right,#c0fecf 0,#1ed5a9 100%);
     color: transparent !important;
     -webkit-background-clip: text;
+    cursor: pointer;
+}
+.no_active_text{
+    color:rgba(3,37,65) ;
+    font-weight: 600;
+    cursor: pointer;
 }
