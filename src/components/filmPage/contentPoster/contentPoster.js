@@ -91,7 +91,6 @@ const Func = ({ data }) => {
       return date.split("-").reverse().join("/");
     }
   };
-console.log(data)
   return (
     <div className="wrapper">
       {data ? (

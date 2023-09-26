@@ -1,20 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+const validMonth = (date) => {
+  return date.toString().length > 1 ? date : 0 + date.toString();
+};
 const takeDateSevenDays=()=>{
     const currentDate=new Date()
     const sevenDays=currentDate.setDate(currentDate.getDate() + 5);
    return `${new Date(sevenDays).getFullYear()}-${validMonth(
     new Date(sevenDays).getMonth() + 1
-  )}-${new Date(sevenDays).getDate()}`; 
+  )}-${validMonth(new Date(sevenDays).getDate())}`; 
   }
   const nowDate = () => {
     return `${new Date().getFullYear()}-${validMonth(
       new Date().getMonth() + 1
     )}-${new Date().getDate()}`;
   };
-  const validMonth = (date) => {
-    return date.toString().length > 1 ? date : 0 + date.toString();
-  };
+ 
 
 
 export const ChangeNowOnTVSerialsPage = createAsyncThunk(

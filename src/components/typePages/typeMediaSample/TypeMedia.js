@@ -50,7 +50,7 @@ const TypeMedia = ({
   const base_poster = "https://image.tmdb.org/t/p/w500";
 
   const { data, flag, genre, sort } = useSelector(mediaType === 'movies'?  selectValuesMovies:selectValuesSerials );
-  console.log(data.length)
+  console.log(data)
   const classNames = require("classnames");
   const divClass = classNames({
     download_more: true,

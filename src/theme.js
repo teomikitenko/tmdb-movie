@@ -13,14 +13,14 @@ let theme = createTheme({
       },
     },
     components: {
-      MuiSvgIcon: {
+       MuiSvgIcon: {
         styleOverrides: {
           root: {
             fontSize: "20px",
             fill: "#000",
           },
         },
-      },
+      }, 
       MuiTypography:{
         defaultProps:{
           variantMapping:{
@@ -67,7 +67,15 @@ let theme = createTheme({
       color: 'rgba(0,0,0,.6)',
       /* fontWeight:700, */
       lineHeight: 1,
-     }
+     },
+     title_block:{
+      fontSize:'1.5rem',
+        color:'#fff',
+        fontWeight:600,
+        lineHeight: 1,
+     },
+
+
     },
   });
   theme.typography.font700={
