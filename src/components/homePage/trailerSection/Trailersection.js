@@ -20,6 +20,8 @@ const TraiLerSection = () => {
   const [type, setType] = useState("on cinema");
   const [id, setId] = useState(null);
   const[open,setOpen]=useState(false)
+  const classNames = require('classnames');
+
   const base_poster = "https://image.tmdb.org/t/p/w500/";
   const endpoints = {
     "on cinema": useGetMoviesTrailersQuery(),
@@ -32,6 +34,12 @@ const TraiLerSection = () => {
     { title: "Зараз на ТВ", cb: "on tv" },
   ];
   const { data, isSuccess } = endpoints[type];
+   const btnClass=classNames({
+    'button_selected':true, 
+    'films':type === 'on cinema', 
+    'on_tv':type === 'on tv',
+    'serials':type === 'serials',
+  }) 
   return (
     <section className="trailers">
       <div className="wrapper_conteiner">
@@ -39,25 +47,28 @@ const TraiLerSection = () => {
           <div className="wrap_video_content">
             <div className="title_trailers_buttons">
               <Typography variant="title_block">Останні Трейлери</Typography>
-              <div className="wrap_button_swipe">
-                {buttons.map((b) => {
+              <div className="wrap_button_swipe ">
+                {buttons.map((b,index) => {
                   return (
                     <Typography
+                      key={index}
                       onClick={() => setType(b.cb)}
                       component="span"
                       textAlign="center"
                       fontWeight={600}
-                      sx={{ padding: "2px 21px" }}
+                      className={type ===b.cb&&'active_buttons'}
+                      sx={{ padding: "2px 21px",position:'relative',zIndex:'500',cursor:'pointer' }}
                     >
                       {b.title}
                     </Typography>
                   );
                 })}
+                <div className={btnClass}></div>
               </div>
             </div>
-            <div className="video_trailers_swiper">
+            <div
+            key={type} className="video_trailers_swiper">
               <Swiper
-                key={type}
                 scrollbar={{
                   hide: false,
                   draggable: true,
@@ -70,7 +81,7 @@ const TraiLerSection = () => {
                   data.results.map((m, index) => {
                     if (index < 7) {
                       return (
-                        <SwiperSlide key={m.id}>
+                        <SwiperSlide key={index}>
                           <div className="wrap_trailer_img">
                             <img src={base_poster + m.backdrop_path} alt="" />
                             <div className="icon_arrow_trailers">
@@ -101,7 +112,7 @@ const TraiLerSection = () => {
                     } else return null;
                   })}
               </Swiper>
-              {id&&<Player type={type} id={id} open={open} setOpen={setOpen} />}
+              {open&&<Player type={type} id={id} open={open} setOpen={setOpen} />}
             </div>
           </div>
         </div>
@@ -113,8 +124,15 @@ const TraiLerSection = () => {
 const Player = ({ type, id,open,setOpen }) => {
    const base_youtube = "https://www.youtube.com/watch?v=";
 const filterTrailer=(data)=>{
-  const trailer= data.results.filter(t=>t.type ==="Trailer")
- return trailer[0].key
+  const trailer= data?.results.filter(t=>t.type ==="Trailer")
+  if(trailer.length>0)return trailer[0]
+  else return data.results[0]
+ 
+}
+const checkType=(type)=>{
+ const f= type !== 'on cinema'? filterTrailer(data).name
+ :filterTrailer(data).title
+ return f
 }
   const style = {
     position: "relative",
@@ -129,20 +147,33 @@ const filterTrailer=(data)=>{
   };
   const findTrailer = {
     "on cinema": useGetFindMoviesTrailersQuery,
-    serials: useGetFindSerialsTrailersQuery,
-    "on tv": useGetFindSerialsTrailersQuery,
+     "serials": useGetFindSerialsTrailersQuery,
+   "on tv": useGetFindSerialsTrailersQuery, 
   };
   const { data, isSuccess } = findTrailer[type](id);
-  console.log(data);
-  console.log(isSuccess&&filterTrailer(data))
+  console.log(isSuccess&&data);
+  console.log(isSuccess&&data.results)
 
+ const errorMessage=()=>{
+  return(
+    <Typography variant="h5" color='red'>Вибачте,нажаль трейлера немає</Typography>
+  )
+ }
+ const checkExistVideo=()=>{
+    if( data.results.length>0){
+     return checkType(type)
+    }
+    else return errorMessage()
+  
+ }
   return (
-    <Modal
+    
+       <Modal
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       open={open}
       onClose={() => setOpen(false)}
-    >
-      <Box sx={style}>
+    > 
+       <Box sx={style}>
         <CloseIcon
           onClick={() => setOpen(false)}
           fontSize="small"
@@ -162,18 +193,20 @@ const filterTrailer=(data)=>{
               fontSize: "1.13rem",
             }}
           >
-            {/* {video.name} */}
+            {isSuccess&&checkExistVideo()}
           </Typography>
         </Box>
-        <ReactPlayer
-          width="984px"
-          height="553px"
-            url={isSuccess&&base_youtube + filterTrailer(data)}
-           playing="true"
-          controls="true"
-        />
-      </Box>
-    </Modal>
+        {isSuccess&&data.results.length>0?
+       <ReactPlayer
+       width="984px"
+       height="553px"
+         url={isSuccess&&base_youtube + filterTrailer(data).key}
+        playing='true'
+       controls={true}
+     /> :null 
+      } 
+      </Box> 
+     </Modal>    
   );
 };
 export default TraiLerSection;

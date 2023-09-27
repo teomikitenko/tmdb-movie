@@ -31,11 +31,23 @@ flex-direction: column;
 .trailers_conteiner {
     height: 100%;
     width: 100%;
+   
+
 }
 .video_trailers_swiper{
 padding-top: 24px;
 display: flex;
 flex-grow: 1;
+animation: 900ms ease-in-out showSwiper;
+}
+
+@keyframes showSwiper{
+from{
+opacity: 0;
+}
+to{
+opacity: 1;
+}
 }
 .title_trailers_buttons {
 display: flex;
@@ -43,6 +55,7 @@ gap: 20px;
 align-items: center;
 }
 .wrap_button_swipe {
+    position: relative;
 display: flex;
 border: 1px solid rgb(30,213,169);
 border-radius: 30px;
@@ -70,6 +83,38 @@ border-radius: 30px;
  }
  .MuiSvgIcon-fontSizeMedium:hover{
  font-size: 80px;
+ }
+
+ .button_selected{
+    color: #fff;
+    border-radius: 30px;
+    background: linear-gradient(to right,rgba(192,254,207,1) 0%,rgba(30,213,169,1) 100%);;
+    height: 100%;
+    transition:all 110ms linear
+ }
+ .films{
+    position: absolute;
+    transform:translateX(0);
+    width: 94px;
+
+ }
+ .on_tv{
+    position: absolute;
+    transform:translateX(192px);
+    width: 128px;
+ }
+ .serials{
+    position: absolute;
+    transform:translateX(95px);
+    width: 92px;
+ }
+ .active_buttons{
+   
+    color:rgba(3,37,65) ;
+
+ }
+ .no_active_buttons{
+    color: #fff;
  }
 
 
