@@ -1,5 +1,4 @@
-import { configureStore, createReducer, createSlice } from "@reduxjs/toolkit";
-import { reducer as filmReducer } from "../components/filmPage/filmSlice";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { trendingPersons } from "../components/personsPage/personQuery";
 import { reducer as searchReducer } from "../components/filmPage/searchSlice";
 import { reducer as typeFilmsCategory } from "../components/typePages/filmsTypePages/filmsTypeSlice";
@@ -11,7 +10,7 @@ import {
   findVideoTrailersMovie,
 } from "../components/homePage/trailerSection/trailersQuery";
 import { popularQuery } from "../components/homePage/popularBlock/popularBlockQuery";
-console.log(getTrailers);
+import { inTrendsQuery } from "../components/homePage/inTrendQuery";
 const myMiddleware = (store) => (next) => (action) => {
   if (typeof action === "string") {
     return next({
@@ -34,10 +33,10 @@ let { reducer: authToken } = myToken;
 export const store = configureStore({
   reducer: {
     authToken,
-    filmReducer,
     searchReducer,
     typeFilmsCategory,
     typeSerialsCategory,
+    [inTrendsQuery.reducerPath]:inTrendsQuery.reducer,
     [popularQuery.reducerPath]: popularQuery.reducer,
     [findVideoTrailersMovie.reducerPath]: findVideoTrailersMovie.reducer,
     [findVideoTrailersSerials.reducerPath]: findVideoTrailersSerials.reducer,
@@ -48,6 +47,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       myMiddleware,
+      inTrendsQuery.middleware,
       popularQuery.middleware,
       findVideoTrailersMovie.middleware,
       findVideoTrailersSerials.middleware,

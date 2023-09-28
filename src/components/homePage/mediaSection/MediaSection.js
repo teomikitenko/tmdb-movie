@@ -6,9 +6,11 @@ import "swiper/css/scrollbar";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper/modules";
 import { Typography } from "@mui/material";
-
+import { useGetTrendingMediaQuery } from "../inTrendQuery";
 const MediaSection = ({ period }) => {
-  const arr = useSelector((state) => state.filmReducer.trendingFilms);
+  
+const{data,isSuccess}=useGetTrendingMediaQuery(period)
+
   const date = (date) => {
     if (date) {
       const d = new Date(date);
@@ -32,12 +34,12 @@ const MediaSection = ({ period }) => {
           spaceBetween={15}
           modules={[Scrollbar]}
         >
-          {arr.map((media) => {
+          {isSuccess&&data.results.map((media) => {
             return (
               <SwiperSlide key={media.id}>
                 <div className="container_card">
                   <div className="img_card">
-                    <Link to={`films/${media.id}`}>
+                    <Link to={media.first_air_date? `tv/${media.id}`:`films/${media.id}`}>
                       <img
                         src={`https://image.tmdb.org/t/p/w342/${media.poster_path}`}
                         alt=""

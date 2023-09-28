@@ -1,18 +1,13 @@
 import "./homePage.css";
-import { fetchFilms } from "../filmPage/filmSlice";
-import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MediaSection from "./mediaSection/MediaSection";
 import SearchPanel from "../filmPage/serchpanel/SearchPanel";
 import TraiLerSection from "./trailerSection/Trailersection";
 import PopularBlock from "./popularBlock/popularBlock";
 const HomePage = () => {
   const [period, setPeriod] = useState("day");
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchFilms(period));
-  }, [period]);
+
 
   const classNames = require("classnames");
   const divClass = classNames({

@@ -4,7 +4,7 @@ import "swiper/css/scrollbar";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper/modules";
 import { Typography, Box, Modal } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useGetMoviesTrailersQuery,
   useGetSerialsOnTvTrailersQuery,
@@ -108,7 +108,7 @@ const TraiLerSection = () => {
                               textAlign="center"
                               sx={{ marginTop: "10px" }}
                             >
-                              {m.title}
+                              {m.title?m.title:m.name}
                             </Typography>
                           </div>
                         </SwiperSlide>
