@@ -8,8 +8,7 @@ import { Scrollbar } from "swiper/modules";
 import { Typography } from "@mui/material";
 import { useGetTrendingMediaQuery } from "../inTrendQuery";
 const MediaSection = ({ period }) => {
-  
-const{data,isSuccess}=useGetTrendingMediaQuery(period)
+  const { data, isSuccess } = useGetTrendingMediaQuery(period);
 
   const date = (date) => {
     if (date) {
@@ -34,32 +33,39 @@ const{data,isSuccess}=useGetTrendingMediaQuery(period)
           spaceBetween={15}
           modules={[Scrollbar]}
         >
-          {isSuccess&&data.results.map((media) => {
-            return (
-              <SwiperSlide key={media.id}>
-                <div className="container_card">
-                  <div className="img_card">
-                    <Link to={media.first_air_date? `tv/${media.id}`:`films/${media.id}`}>
-                      <img
-                        src={`https://image.tmdb.org/t/p/w342/${media.poster_path}`}
-                        alt=""
-                      />
-                    </Link>
+          {isSuccess &&
+            data.results.map((media) => {
+              return (
+                <SwiperSlide key={media.id}>
+                  <div className="container_card">
+                    <div className="img_card">
+                      <Link
+                        to={
+                          media.first_air_date
+                            ? `tv/${media.id}`
+                            : `films/${media.id}`
+                        }
+                      >
+                        <img
+                          src={`https://image.tmdb.org/t/p/w342/${media.poster_path}`}
+                          alt=""
+                        />
+                      </Link>
+                    </div>
+                    <div className="text_card">
+                      <p className="title_card">
+                        {media.first_air_date ? media.name : media.title}
+                      </p>
+                      <Typography sx={{ marginTop: "4px" }} variant="date">
+                        {media.first_air_date
+                          ? date(media.first_air_date)
+                          : date(media.release_date)}
+                      </Typography>
+                    </div>
                   </div>
-                  <div className="text_card">
-                    <p className="title_card">
-                      {media.first_air_date ? media.name : media.title}
-                    </p>
-                    <Typography sx={{ marginTop: "4px" }} variant="date">
-                      {media.first_air_date
-                        ? date(media.first_air_date)
-                        : date(media.release_date)}
-                    </Typography>
-                  </div>
-                </div>
-              </SwiperSlide>
-            );
-          })}
+                </SwiperSlide>
+              );
+            })}
         </Swiper>
       </div>
     </>
