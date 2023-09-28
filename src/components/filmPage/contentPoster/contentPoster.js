@@ -50,6 +50,7 @@ const Func = ({ data }) => {
       url: data.videos.results.filter((vid) => vid.type === "Trailer")[1],
     });
   }, []);
+  useEffect(()=>window.scrollTo(0,0),[])
 
   const percent =
     data.vote_average > 0 ? Math.round(data.vote_average * 10) : null;

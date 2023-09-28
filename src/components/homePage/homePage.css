@@ -24,9 +24,6 @@ section.trending_movies{
     border:1px solid rgba(3,37,65) ;
     cursor: pointer;
 }
-
-
-
 .left{
    transform:translateX(-57%) ;
     width:110px;

@@ -1,0 +1,45 @@
+section.whats_popular{
+    width: 100%;
+    padding-top: 30px;
+}
+.popular_container{
+width: 100%;
+display: flex;
+flex-direction: column;
+
+}
+.title_button_popular{
+display: flex;
+gap: 10px;
+}
+.swap_buttons{
+    position: relative;
+    display: flex;
+    border:1px solid rgba(3,37,65);
+    border-radius: 30px;
+}
+.swipe_popular_background{
+z-index: 4;
+position: absolute;
+top: 0;
+background-color: rgba(3,37,65);
+border-radius: 30px;
+height: 100%;
+transition:all 110ms linear
+
+}
+.cinema{
+    position: absolute;
+    transform:translateX(199px);
+    width: 142px;
+}
+.streaming{
+    position: absolute;
+    transform:translateX(0);
+    width: 105px;
+}
+.for_rent{
+    position: absolute;
+    transform:translateX(105px);
+    width: 98px;
+}

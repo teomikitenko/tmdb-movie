@@ -34,6 +34,8 @@ const Serials = () => {
       name: data.name,
     });
   }, []);
+  useEffect(()=>window.scrollTo(0,0),[])
+
   const searchVideo=()=>{
     const trailer=data.videos.results.filter((vid) => vid.type === "Trailer")[0]
     if(!trailer){

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import MediaSection from "./mediaSection/MediaSection";
 import SearchPanel from "../filmPage/serchpanel/SearchPanel";
 import TraiLerSection from "./trailerSection/Trailersection";
+import PopularBlock from "./popularBlock/popularBlock";
 const HomePage = () => {
   const [period, setPeriod] = useState("day");
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const HomePage = () => {
     <>
       <SearchPanel />
       <section className="trending_movies">
-      <div className="wrapper_conteiner">
+        <div className="wrapper_conteiner">
           <div className="wrap_section">
             <h2>У тренді</h2>
             <div className="slide_button">
@@ -48,15 +49,12 @@ const HomePage = () => {
               <div className={divClass}></div>
             </div>
           </div>
-          <br />
-          <br />
-          <MediaSection period={period}/>
-          </div>
-          </section>
-          
-        
-     
-      <TraiLerSection/>
+          <MediaSection period={period} />
+        </div>
+      </section>
+
+      <TraiLerSection />
+      <PopularBlock/>
     </>
   );
 };

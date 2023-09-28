@@ -19,8 +19,8 @@ import CloseIcon from "@mui/icons-material/Close";
 const TraiLerSection = () => {
   const [type, setType] = useState("on cinema");
   const [id, setId] = useState(null);
-  const[open,setOpen]=useState(false)
-  const classNames = require('classnames');
+  const [open, setOpen] = useState(false);
+  const classNames = require("classnames");
 
   const base_poster = "https://image.tmdb.org/t/p/w500/";
   const endpoints = {
@@ -34,12 +34,12 @@ const TraiLerSection = () => {
     { title: "Зараз на ТВ", cb: "on tv" },
   ];
   const { data, isSuccess } = endpoints[type];
-   const btnClass=classNames({
-    'button_selected':true, 
-    'films':type === 'on cinema', 
-    'on_tv':type === 'on tv',
-    'serials':type === 'serials',
-  }) 
+  const btnClass = classNames({
+    button_selected: true,
+    films: type === "on cinema",
+    on_tv: type === "on tv",
+    serials: type === "serials",
+  });
   return (
     <section className="trailers">
       <div className="wrapper_conteiner">
@@ -48,7 +48,7 @@ const TraiLerSection = () => {
             <div className="title_trailers_buttons">
               <Typography variant="title_block">Останні Трейлери</Typography>
               <div className="wrap_button_swipe ">
-                {buttons.map((b,index) => {
+                {buttons.map((b, index) => {
                   return (
                     <Typography
                       key={index}
@@ -56,8 +56,13 @@ const TraiLerSection = () => {
                       component="span"
                       textAlign="center"
                       fontWeight={600}
-                      className={type ===b.cb&&'active_buttons'}
-                      sx={{ padding: "2px 21px",position:'relative',zIndex:'500',cursor:'pointer' }}
+                      className={type === b.cb && "active_buttons"}
+                      sx={{
+                        padding: "2px 21px",
+                        position: "relative",
+                        zIndex: "500",
+                        cursor: "pointer",
+                      }}
                     >
                       {b.title}
                     </Typography>
@@ -66,8 +71,7 @@ const TraiLerSection = () => {
                 <div className={btnClass}></div>
               </div>
             </div>
-            <div
-            key={type} className="video_trailers_swiper">
+            <div key={type} className="video_trailers_swiper">
               <Swiper
                 scrollbar={{
                   hide: false,
@@ -86,9 +90,9 @@ const TraiLerSection = () => {
                             <img src={base_poster + m.backdrop_path} alt="" />
                             <div className="icon_arrow_trailers">
                               <PlayArrowIcon
-                                onClick={() =>{
-                                    setId(m.id)
-                                    setOpen(true)
+                                onClick={() => {
+                                  setId(m.id);
+                                  setOpen(true);
                                 }}
                                 sx={{
                                   fill: "#fff",
@@ -112,7 +116,9 @@ const TraiLerSection = () => {
                     } else return null;
                   })}
               </Swiper>
-              {open&&<Player type={type} id={id} open={open} setOpen={setOpen} />}
+              {open && (
+                <Player type={type} id={id} open={open} setOpen={setOpen} />
+              )}
             </div>
           </div>
         </div>
@@ -121,19 +127,20 @@ const TraiLerSection = () => {
   );
 };
 
-const Player = ({ type, id,open,setOpen }) => {
-   const base_youtube = "https://www.youtube.com/watch?v=";
-const filterTrailer=(data)=>{
-  const trailer= data?.results.filter(t=>t.type ==="Trailer")
-  if(trailer.length>0)return trailer[0]
-  else return data.results[0]
- 
-}
-const checkType=(type)=>{
- const f= type !== 'on cinema'? filterTrailer(data).name
- :filterTrailer(data).title
- return f
-}
+const Player = ({ type, id, open, setOpen }) => {
+  const base_youtube = "https://www.youtube.com/watch?v=";
+  const filterTrailer = (data) => {
+    const trailer = data?.results.filter((t) => t.type === "Trailer");
+    if (trailer.length > 0) return trailer[0];
+    else return data.results[0];
+  };
+  const checkType = (type) => {
+    const f =
+      type !== "on cinema"
+        ? filterTrailer(data).name
+        : filterTrailer(data).title;
+    return f;
+  };
   const style = {
     position: "relative",
     display: "flex",
@@ -147,33 +154,32 @@ const checkType=(type)=>{
   };
   const findTrailer = {
     "on cinema": useGetFindMoviesTrailersQuery,
-     "serials": useGetFindSerialsTrailersQuery,
-   "on tv": useGetFindSerialsTrailersQuery, 
+    serials: useGetFindSerialsTrailersQuery,
+    "on tv": useGetFindSerialsTrailersQuery,
   };
   const { data, isSuccess } = findTrailer[type](id);
-  console.log(isSuccess&&data);
-  console.log(isSuccess&&data.results)
+  console.log(isSuccess && data);
+  console.log(isSuccess && data.results);
 
- const errorMessage=()=>{
-  return(
-    <Typography variant="h5" color='red'>Вибачте,нажаль трейлера немає</Typography>
-  )
- }
- const checkExistVideo=()=>{
-    if( data.results.length>0){
-     return checkType(type)
-    }
-    else return errorMessage()
-  
- }
+  const errorMessage = () => {
+    return (
+      <Typography variant="h5" color="red">
+        Вибачте,нажаль трейлера немає
+      </Typography>
+    );
+  };
+  const checkExistVideo = () => {
+    if (data.results.length > 0) {
+      return checkType(type);
+    } else return errorMessage();
+  };
   return (
-    
-       <Modal
+    <Modal
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       open={open}
       onClose={() => setOpen(false)}
-    > 
-       <Box sx={style}>
+    >
+      <Box sx={style}>
         <CloseIcon
           onClick={() => setOpen(false)}
           fontSize="small"
@@ -193,20 +199,20 @@ const checkType=(type)=>{
               fontSize: "1.13rem",
             }}
           >
-            {isSuccess&&checkExistVideo()}
+            {isSuccess && checkExistVideo()}
           </Typography>
         </Box>
-        {isSuccess&&data.results.length>0?
-       <ReactPlayer
-       width="984px"
-       height="553px"
-         url={isSuccess&&base_youtube + filterTrailer(data).key}
-        playing='true'
-       controls={true}
-     /> :null 
-      } 
-      </Box> 
-     </Modal>    
+        {isSuccess && data.results.length > 0 ? (
+          <ReactPlayer
+            width="984px"
+            height="553px"
+            url={isSuccess && base_youtube + filterTrailer(data).key}
+            playing="true"
+            controls={true}
+          />
+        ) : null}
+      </Box>
+    </Modal>
   );
 };
 export default TraiLerSection;

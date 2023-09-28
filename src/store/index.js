@@ -10,7 +10,7 @@ import {
   findVideoTrailersSerials,
   findVideoTrailersMovie,
 } from "../components/homePage/trailerSection/trailersQuery";
-
+import { popularQuery } from "../components/homePage/popularBlock/popularBlockQuery";
 console.log(getTrailers);
 const myMiddleware = (store) => (next) => (action) => {
   if (typeof action === "string") {
@@ -38,6 +38,7 @@ export const store = configureStore({
     searchReducer,
     typeFilmsCategory,
     typeSerialsCategory,
+    [popularQuery.reducerPath]: popularQuery.reducer,
     [findVideoTrailersMovie.reducerPath]: findVideoTrailersMovie.reducer,
     [findVideoTrailersSerials.reducerPath]: findVideoTrailersSerials.reducer,
     [getTrailers.reducerPath]: getTrailers.reducer,
@@ -47,6 +48,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       myMiddleware,
+      popularQuery.middleware,
       findVideoTrailersMovie.middleware,
       findVideoTrailersSerials.middleware,
       getTrailers.middleware,
