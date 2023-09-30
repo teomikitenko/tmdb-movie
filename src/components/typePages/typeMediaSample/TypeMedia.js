@@ -55,6 +55,8 @@ const TypeMedia = ({
   const divClass = classNames({
     download_more: true,
   });
+  useEffect(() => window.scrollTo(0, 0), []);
+
 
   useEffect(() => {
     document.addEventListener("scroll", scrollListener);

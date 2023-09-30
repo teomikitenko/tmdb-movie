@@ -92,6 +92,14 @@ const Func = ({ data }) => {
       return date.split("-").reverse().join("/");
     }
   };
+  const showEmptyCastMessage=()=>{
+return(
+<div className="text_empty_cast">
+  <Typography variant="h2">Вибачте,немає даних про акторів</Typography></div>
+) 
+
+
+  }
   return (
     <div className="wrapper">
       {data ? (
@@ -295,12 +303,12 @@ const Func = ({ data }) => {
                             
                             </SwiperSlide>
                           );
-                        } else return null;
+                        } else return showEmptyCastMessage();
                       })}
                       <SwiperSlide>
-                        <div class="view_more">
+                      {/*   <div class="view_more">
                           <p>View more</p>
-                        </div>
+                        </div> */}
                       </SwiperSlide>
                     </Swiper>
                   </div>
@@ -382,8 +390,8 @@ const RightColumn = ({ data }) => {
 };
 
 const Media = ({ data }) => {
-  const [type, setType] = useState("backdrops");
-
+  const [type, setType] = useState("videos");
+console.log(data)
   const currentType = (name) => {
     switch (name) {
       case "posters":
@@ -403,7 +411,7 @@ const Media = ({ data }) => {
         <ul>
           <li style={{ cursor: "pointer" }} onClick={() => setType("videos")}>
             Videos
-            <span>71</span>
+            <span>{data.videos.results.length}</span>
             {type === "videos" && <span class="active_class"></span>}
           </li>
           <li
@@ -411,12 +419,12 @@ const Media = ({ data }) => {
             onClick={() => setType("backdrops")}
           >
             Backdrops
-            <span>71</span>
+            <span>{data.images.backdrops.length}</span>
             {type === "backdrops" && <span class="active_class"></span>}
           </li>
           <li style={{ cursor: "pointer" }} onClick={() => setType("posters")}>
             Posters
-            <span>71</span>
+            <span>{data.images.posters.length}</span>
             {type === "posters" && <span class="active_class"></span>}
           </li>
         </ul>

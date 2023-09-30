@@ -93,7 +93,13 @@ let theme = createTheme({
       fontWeight: "300",
        fontSize: "1.4rem",
         color: "#000"
+     },
+     text_error_empty_cast:{
+      fontWeight: "500",
+      fontSize: "1.4rem",
+       color: "#000"
      }
+
 
 
     },

@@ -325,7 +325,6 @@ const AccordionBio = ({ data }) => {
 };
 
 const Movies = ({ data, eng }) => {
-  const crewArray = {};
   const sorted = (a, b) => {
     let dateA = new Date(a[0].release_date);
     let dateB = new Date(b[0].release_date);

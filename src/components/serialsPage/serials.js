@@ -76,7 +76,12 @@ const Serials = () => {
   const showRatings = () => {
     return data.content_ratings.results[0].rating;
   };
-  console.log(data)
+  const showEmptyCastMessage=()=>{
+    return(
+    <div className="text_empty_cast">
+      <Typography variant="text_error_empty_cast">Вибачте,немає даних про акторів</Typography></div>
+    ) }
+    
   return (
     <div className="wrapper">
       <div className="wrapper_movies wrapper_serials">
@@ -203,65 +208,68 @@ const Serials = () => {
                 <div class="text_column">
                   <h3>Top Billed Cast</h3>
                 </div>
+                {data.credits.cast.length > 0 ?
                 <div class="panel_top_billed_slider_serials">
-                  <Swiper
-                    modules={[Scrollbar]}
-                    slidesPerView={6}
-                    spaceBetween={16}
-                    scrollbar={{ draggable: true }}
-                  >
-                    {data.credits.cast.map((actor, index) => {
-                      if (index < 9) {
-                        return (
-                          <SwiperSlide>
-                            <Link key={actor.id} to={`/persons/${actor.id}`}>
-                              <div class="card_container">
-                                {actor.profile_path ? (
-                                  <>
-                                    <div className="card_block_for_img">
-                                      <img
-                                        loading="lazy"
-                                        src={profile_img + actor.profile_path}
-                                        alt=""
-                                      />
-                                    </div>
-                                    <div class="text_for_card">
-                                      <p>{actor.name}</p>
-                                      <p class="character">{actor.character}</p>
-                                    </div>
-                                  </>
-                                ) : (
-                                  <>
-                                    <div
-                                      style={{ backgroundColor: "#dbdbdb" }}
-                                      className="card_block_for_img"
-                                    >
-                                      <img
-                                        style={{ transform: "scale(0.5)" }}
-                                        loading="lazy"
-                                        src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-36-user-female-grey-d9222f16ec16a33ed5e2c9bbdca07a4c48db14008bbebbabced8f8ed1fa2ad59.svg"
-                                        alt=""
-                                      />
-                                    </div>
-                                    <div class="text_for_card">
-                                      <p>{actor.name}</p>
-                                      <p class="character">{actor.character}</p>
-                                    </div>
-                                  </>
-                                )}
-                              </div>
-                            </Link>
-                          </SwiperSlide>
-                        );
-                      } else return null;
-                    })}
-                    <SwiperSlide>
-                      <div class="view_more">
-                        <p>View more</p>
-                      </div>
-                    </SwiperSlide>
-                  </Swiper>
-                </div>
+                <Swiper
+                  modules={[Scrollbar]}
+                  slidesPerView={6}
+                  spaceBetween={16}
+                  scrollbar={{ draggable: true }}
+                >
+                  {data.credits.cast.map((actor, index) => {
+                    if (index < 9) {
+                      return (
+                        <SwiperSlide>
+                          <Link key={actor.id} to={`/persons/${actor.id}`}>
+                            <div class="card_container">
+                              {actor.profile_path ? (
+                                <>
+                                  <div className="card_block_for_img">
+                                    <img
+                                      loading="lazy"
+                                      src={profile_img + actor.profile_path}
+                                      alt=""
+                                    />
+                                  </div>
+                                  <div class="text_for_card">
+                                    <p>{actor.name}</p>
+                                    <p class="character">{actor.character}</p>
+                                  </div>
+                                </>
+                              ) : (
+                                <>
+                                  <div
+                                    style={{ backgroundColor: "#dbdbdb" }}
+                                    className="card_block_for_img"
+                                  >
+                                    <img
+                                      style={{ transform: "scale(0.5)" }}
+                                      loading="lazy"
+                                      src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-36-user-female-grey-d9222f16ec16a33ed5e2c9bbdca07a4c48db14008bbebbabced8f8ed1fa2ad59.svg"
+                                      alt=""
+                                    />
+                                  </div>
+                                  <div class="text_for_card">
+                                    <p>{actor.name}</p>
+                                    <p class="character">{actor.character}</p>
+                                  </div>
+                                </>
+                              )}
+                            </div>
+                          </Link>
+                        </SwiperSlide>
+                      );
+                    } else return null
+                  })}
+                  <SwiperSlide>
+                    <div class="view_more">
+                      <p>View more</p>
+                    </div>
+                  </SwiperSlide>
+                </Swiper>
+              </div>
+                : showEmptyCastMessage()}
+               
                 <MediaSerials data={data} />
               </div>
               <RightColumnSerials data={data} />
@@ -349,7 +357,7 @@ const RightColumnSerials = ({ data }) => {
 };
 
 const MediaSerials = ({ data }) => {
-  const [type, setType] = useState("backdrops");
+  const [type, setType] = useState("videos");
 
   const currentType = (name) => {
     switch (name) {
@@ -370,7 +378,7 @@ const MediaSerials = ({ data }) => {
         <ul>
           <li style={{ cursor: "pointer" }} onClick={() => setType("videos")}>
             Videos
-            <span>71</span>
+            <span>{data.videos.results.length}</span>
             {type === "videos" && <span class="active_class"></span>}
           </li>
           <li
@@ -378,12 +386,12 @@ const MediaSerials = ({ data }) => {
             onClick={() => setType("backdrops")}
           >
             Backdrops
-            <span>71</span>
+            <span>{data.images.backdrops.length}</span>
             {type === "backdrops" && <span class="active_class"></span>}
           </li>
           <li style={{ cursor: "pointer" }} onClick={() => setType("posters")}>
             Posters
-            <span>71</span>
+            <span>{data.images.posters.length}</span>
             {type === "posters" && <span class="active_class"></span>}
           </li>
         </ul>
