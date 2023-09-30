@@ -93,8 +93,7 @@ const Filter = ({ mediaType, movies, serials }) => {
       >
         <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ fill: "#000" }} />}>
           <Typography
-            sx={{ fontSize: "1.1em", fontWeight: "600" }}
-            variant="h2"
+           variant="sorting_title"
           >
             Фільтри
           </Typography>
@@ -102,8 +101,7 @@ const Filter = ({ mediaType, movies, serials }) => {
         <AccordionDetails sx={{ borderTop: "1px solid #eee" }}>
           <div className="genres_content">
             <Typography
-              sx={{ fontWeight: "300", fontSize: ".9em", color: "#000" }}
-              variant="h3"
+             variant="filter_genres"
             >
               Жанри
             </Typography>
@@ -162,15 +160,14 @@ const Sorting = ({
       >
         <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ fill: "#000" }} />}>
           <Typography
-            sx={{ fontSize: "1.1em", fontWeight: "600" }}
-            variant="h2"
+            variant="sorting_title"
           >
             Сортування
           </Typography>
         </AccordionSummary>
         <AccordionDetails sx={{ borderTop: "1px solid #eee" }}>
           <div className="sorting_type">
-            <Typography sx={{ fontWeight: "300px" }} paragraph>
+            <Typography variant="sorting_title" >
               Сортувати результати за
             </Typography>
             <Select
@@ -183,7 +180,6 @@ const Sorting = ({
                     type: e.target.value,
                   })
                 );
-                console.log(typeArr[e.target.value]);
               }}
               sx={{
                 marginTop: "15px",

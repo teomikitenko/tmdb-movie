@@ -85,6 +85,14 @@ let theme = createTheme({
       fontWeight:400,
       lineHeight: '2rem',
       color:'#fff',
+     },
+     sorting_title:{
+      fontSize: "1.1em", fontWeight: "600",color:'black'
+     },
+     filter_genres:{
+      fontWeight: "300",
+       fontSize: "1.4rem",
+        color: "#000"
      }
 
 
