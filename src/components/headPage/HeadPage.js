@@ -9,7 +9,7 @@ export default function HeadPage() {
     { id: uuidv4(), path: "/popular-films", title: "Популярні" },
     { id: uuidv4(), path: "/now-playing", title: "Зараз у кіно" },
     { id: uuidv4(), path: "/upcoming-films", title: "Очікувані" },
-    { id: uuidv4(), path: "//top-rated-movies", title: "Рейтингові" },
+    { id: uuidv4(), path: "/top-rated-movies", title: "Рейтингові" },
   ];
   const serials = [
     { id: uuidv4(), path: "/popular-serials", title: "Популярні" },
@@ -25,7 +25,9 @@ export default function HeadPage() {
             <div className="menu_head">
               <div className="logo">
                 <Link to="/">
-                  <span>My logo</span>
+                  <div className="container_header_logo">
+                    <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" alt="" />
+                  </div>
                 </Link>
               </div>
               <div className="nav_bar_menu">

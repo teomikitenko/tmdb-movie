@@ -62,6 +62,12 @@ let theme = createTheme({
         fontWeight:700,
         lineHeight: 1,
       }, */
+      footer_title:{
+        fontWeight:'700',
+        fontSize: '1.4rem',
+        lineHeight: '1.4rem',
+        color: '#fff'
+      },
      date:{
       fontSize:'1rem',
       color: 'rgba(0,0,0,.6)',
@@ -74,6 +80,12 @@ let theme = createTheme({
         fontWeight:600,
         lineHeight: 1,
      },
+     footer_list:{
+      fontSize:'1.1rem',
+      fontWeight:400,
+      lineHeight: '2rem',
+      color:'#fff',
+     }
 
 
     },

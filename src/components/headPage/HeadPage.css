@@ -13,6 +13,19 @@
     align-items: center;
 
   }
+  .container_header_logo {
+    position: relative;
+    width: 154px;
+    height: 20px;
+  }
+  .container_header_logo img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  object-fit: cover;
+  }
   .head_top{
     width: 100%;
     height: 100%;
@@ -141,4 +154,5 @@ cursor: pointer;
  }  
   main{
   position: relative;
+ 
  } 

@@ -1,5 +1,4 @@
 
- 
  .poster_container{
   position: relative;
   height: 300px;
@@ -52,6 +51,10 @@ position: relative;
 
  }
  input[type='submit']{
+  font-size: 16px;
+  font-family: 'Source Sans 3';
+  font-weight: 700;
+  cursor: pointer;
   position: absolute;
   top:0;
   right: -1px;
@@ -65,3 +68,6 @@ position: relative;
  form{
   display: flex;
  } 
+ input[type='submit']:hover{
+  color: rgba(3,37,65,1);
+ }

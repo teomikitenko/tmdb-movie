@@ -1,10 +1,42 @@
 .footer{
     margin-top: 25px;
-    height: 100px;
+     height: 333px; 
    text-align: center;
    color: aliceblue;
     background-image:radial-gradient(at 30% top,#031d33 0%,rgba(3,37,65,1) 70%);
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
+}
+.container_footer {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 90px;
+    width: 100%;
+}
+.logo_container_footer {
+    position: relative;
+    width: 130px;
+    height: 94px;
+    margin-left: 125px;
+    top: -28px;
+}
+.logo_container_footer img{
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ object-fit: cover;
+}
+
+.text_fields_footer {
+    display: flex;
+    gap: 10px;
+    flex-grow: 1;
+    gap: 30px;
 }

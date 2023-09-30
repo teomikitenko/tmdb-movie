@@ -1,7 +1,6 @@
 .container_info_person{
     padding: 30px 40px;
     display: flex;
-    justify-content: center;
     width: 100%;
   }
   .left_person_column{
@@ -320,10 +319,10 @@
   background-color: #fff !important;
   opacity: 1 !important;
 }
-.MuiMenu-root{
+ .MuiMenu-root{
   width: 400px;
   height: 300px;
-}
+} 
 
 .MuiPaper-root{
   overflow: hidden;
@@ -348,4 +347,10 @@
 }
 .MuiMenuList-padding{
   padding: 8px !important;
+}
+.-MuiButton-root:hover{
+ background-color: inherit;
+}
+.MuiSvgIcon-fontSizeMedium:hover{
+font-size: 20px;
 }

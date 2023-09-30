@@ -76,6 +76,7 @@ const Serials = () => {
   const showRatings = () => {
     return data.content_ratings.results[0].rating;
   };
+  console.log(data)
   return (
     <div className="wrapper">
       <div className="wrapper_movies wrapper_serials">
@@ -273,7 +274,7 @@ const Serials = () => {
 };
 
 const RightColumnSerials = ({ data }) => {
-  const logo_network_base = "https://image.tmdb.org/t/p/original";
+  const logo_network_base = "https://image.tmdb.org/t/p/h30";
   return (
     <div class="right_grey_column">
       <div class="info_status_links">

@@ -21,7 +21,6 @@ export default function Person() {
   const [choise, setChoise] = useState("movies");
 
   const data = useLoaderData();
-
   useEffect(() => window.scrollTo(0, 0), []);
 
   const moviesKnown = (dep) => {
@@ -38,18 +37,24 @@ export default function Person() {
   const howOld = (date) => {
     return new Date().getFullYear() - new Date(date).getFullYear() + "років";
   };
+  const links_base={
+    fb:'https://www.facebook.com/',
+    inst:'https://www.instagram.com/',
+    twitter:'https://twitter.com/',
+    youtube:'https://www.youtube.com/'
+  }
 
   const eng = {
     Acting: "Акторська гра",
     Directing: ["Режисура", "Режисер"],
     Writing: ["Сценарій", "Сценарист"],
-    Crew:'Персонал',
+    Crew: "Персонал",
     0: "Не вказана",
     1: "Жіноча",
     2: "Чоловіча",
     3: "Не бінарна",
   };
-   const choiseType = (type) => {
+  const choiseType = (type) => {
     switch (type) {
       case "movies":
         return <Movies data={data} eng={eng} />;
@@ -67,82 +72,65 @@ export default function Person() {
           <div className="container_profile">
             <div className="poster_profile">
               <div className="profile_img_container">
-                <img
-                  src={/* isSuccess&& */ base_url + data.profile_path}
-                  alt=""
-                />
+                <img src={base_url + data.profile_path} alt="" />
               </div>
             </div>
             <div className="column_another_info">
-              {
-                /* isSuccess? */
-                data.external_ids.facebook_id ||
-                data.external_ids.twitter_id ||
-                data.external_ids.instagram_id ||
-                data.external_ids.youtube_id ? (
-                  <div className="social_links">
-                    {
-                      /* isSuccess&& */ data.external_ids.facebook_id ? (
-                        <div className="icon_link">
-                          <a href={data.external_ids.facebook_id}>
-                            <div className="logo_social">
-                              <img
-                                src="https://www.themoviedb.org/assets/2/v4/glyphicons/social/facebook-2c5718e4ece8eb3a3cc49ae97000e541c0aad50869b419b5aa579693bc0ad059.svg"
-                                alt="fb"
-                              />
-                            </div>
-                          </a>
+              {data.external_ids.facebook_id ||
+              data.external_ids.twitter_id ||
+              data.external_ids.instagram_id ||
+              data.external_ids.youtube_id ? (
+                <div className="social_links">
+                  {data.external_ids.facebook_id ? (
+                    <div className="icon_link">
+                      <a href={links_base.fb + data.external_ids.facebook_id}>
+                        <div className="logo_social">
+                          <img
+                            src="https://www.themoviedb.org/assets/2/v4/glyphicons/social/facebook-2c5718e4ece8eb3a3cc49ae97000e541c0aad50869b419b5aa579693bc0ad059.svg"
+                            alt="fb"
+                          />
                         </div>
-                      ) : null
-                    }
-                    {
-                      /* isSuccess&& */ data.external_ids.twitter_id ? (
-                        <div className="icon_link">
-                          {" "}
-                          <a href={data.external_ids.twitter_id}>
-                            <div className="logo_social">
-                              <img
-                                src="https://www.themoviedb.org/assets/2/v4/glyphicons/social/twitter-a6ff8c172b8e086f4a64578cee0a16676c1a067b47a1b1b186d58795d241a852.svg"
-                                alt="twitter"
-                              />
-                            </div>
-                          </a>
+                      </a>
+                    </div>
+                  ) : null}
+                  {data.external_ids.twitter_id ? (
+                    <div className="icon_link">
+                      <a href={links_base.twitter + data.external_ids.twitter_id}>
+                        <div className="logo_social">
+                          <img
+                            src="https://www.themoviedb.org/assets/2/v4/glyphicons/social/twitter-a6ff8c172b8e086f4a64578cee0a16676c1a067b47a1b1b186d58795d241a852.svg"
+                            alt="twitter"
+                          />
                         </div>
-                      ) : null
-                    }
-                    {
-                      /* isSuccess&& */ data.external_ids.instagram_id ? (
-                        <div className="icon_link">
-                          {" "}
-                          <a href={data.external_ids.instagram_id}>
-                            <div className="logo_social">
-                              <img
-                                src="https://www.themoviedb.org/assets/2/v4/glyphicons/social/instagram-74e6299c864adc384258da3b3a8eb09282b7ccda4dd1dfa9a4158ba2ea8583b9.svg"
-                                alt="instagram"
-                              />
-                            </div>
-                          </a>
+                      </a>
+                    </div>
+                  ) : null}
+                  {data.external_ids.instagram_id ? (
+                    <div className="icon_link">
+                      <a href={links_base.inst + data.external_ids.instagram_id}>
+                        <div className="logo_social">
+                          <img
+                            src="https://www.themoviedb.org/assets/2/v4/glyphicons/social/instagram-74e6299c864adc384258da3b3a8eb09282b7ccda4dd1dfa9a4158ba2ea8583b9.svg"
+                            alt="instagram"
+                          />
                         </div>
-                      ) : null
-                    }
-                    {
-                      /* isSuccess&& */ data.external_ids.youtube_id ? (
-                        <div className="icon_link">
-                          <a href={data.external_ids.youtube_id}>
-                            <div className="logo_social">
-                              <img
-                                src="https://www.themoviedb.org/assets/2/v4/glyphicons/social/youtube-de379f898e1a71c488c71075eb00f5c003699069b9cb1f38c8ac7ea99c8a6338.svg"
-                                alt="youtube"
-                              />
-                            </div>
-                          </a>
+                      </a>
+                    </div>
+                  ) : null}
+                  {data.external_ids.youtube_id ? (
+                    <div className="icon_link">
+                      <a href={links_base.youtube + data.external_ids.youtube_id}>
+                        <div className="logo_social">
+                          <img
+                            src="https://www.themoviedb.org/assets/2/v4/glyphicons/social/youtube-de379f898e1a71c488c71075eb00f5c003699069b9cb1f38c8ac7ea99c8a6338.svg"
+                            alt="youtube"
+                          />
                         </div>
-                      ) : null
-                    }
-                  </div>
-                ) : null
-                /* :null */
-              }
+                      </a>
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
             </div>
             <div className="facts_about_person">
               <h2>Особиста інформація</h2>
@@ -155,20 +143,20 @@ export default function Person() {
                 </li>
                 <li>
                   <strong>Cтать</strong>
-                  <p>{/* isSuccess&& */ eng[data.gender]}</p>
+                  <p>{ eng[data.gender]}</p>
                 </li>
                 <li>
                   <strong>День народження</strong>
                   <div className="years_field">
-                    <p>{/* isSuccess&& */ data.birthday} </p>
+                    <p>{ data.birthday} </p>
                     <p p className="ex_years">
-                      ({/* isSuccess&& */ howOld(data.birthday)})
+                      ({ howOld(data.birthday)})
                     </p>
                   </div>
                 </li>
                 <li>
                   <strong>Місце народження</strong>
-                  <p>{/* isSuccess&& */ data.place_of_birth}</p>
+                  <p>{data.place_of_birth}</p>
                 </li>
                 <li>
                   <strong>Також відомий (-а) як</strong>
@@ -187,7 +175,7 @@ export default function Person() {
           <section>
             <div className="title">
               <h2 className="title_name">
-                <a href="">{/* isSuccess&& */ data.name}</a>
+                <a href="">{ data.name}</a>
               </h2>
             </div>
           </section>
@@ -204,7 +192,7 @@ export default function Person() {
                     <br />
                   </p>
                 ))
-              ) /* :null */
+              ) 
             }
           </section>
           <section className="swiper_movies">
@@ -224,7 +212,7 @@ export default function Person() {
                   moviesKnown(data.known_for_department).map((res, index) => {
                     if (index > 3 && index < 12) {
                       return (
-                        <SwiperSlide className="swiper-slide">
+                        <SwiperSlide key={index} className="swiper-slide">
                           <div className="img_slide">
                             <img
                               loading="lazy"
@@ -247,7 +235,7 @@ export default function Person() {
           </section>
           <section className="works">
             <MyMenu set={setChoise} choise={choise} />
-             {data.movie_credits && choiseType(choise)} 
+            {data.movie_credits && choiseType(choise)}
           </section>
         </div>
       </div>
@@ -271,14 +259,14 @@ const MyMenu = ({ set, choise }) => {
       sx={{
         position: "absolute",
         width: 70,
-        left: 767,
+        right: 15,
       }}
     >
-      <Button ref={anchor} onClick={() => setOpen(true)}>
+      <Button className="button_mui_base" sx={{width:'85px',height:'38px'}} ref={anchor} onClick={() => setOpen(true)}>
         <p className="button_name" style={{ textTransform: "none" }}>
           {choise === "movies" ? "Фільми" : "Серіали"}
         </p>
-        <ArrowDropDownIcon sx={{ color: "#000" }} />
+        <ArrowDropDownIcon fontSize="medium" sx={{ color: "#000" }} />
       </Button>
       <Popper open={open} anchorEl={anchor.current}>
         <ClickAwayListener onClickAway={setClose}>
@@ -337,9 +325,7 @@ const AccordionBio = ({ data }) => {
 };
 
 const Movies = ({ data, eng }) => {
-  const crewArray={
-
-  }
+  const crewArray = {};
   const sorted = (a, b) => {
     let dateA = new Date(a[0].release_date);
     let dateB = new Date(b[0].release_date);
@@ -351,8 +337,7 @@ const Movies = ({ data, eng }) => {
     }
     return 0;
   };
-  console.log(data)
-
+ 
   const allYears = (dep) => {
     const origArray = new Set();
     movies(dep).map((film) => {
@@ -370,12 +355,10 @@ const Movies = ({ data, eng }) => {
     );
 
   const roleFim = (dep, res) => {
-    console.log(res)
     if (dep === "Acting" && !res.character) {
       return null;
     }
- 
-  
+
     return dep === "Acting" ? (
       <span className="group">
         як
@@ -389,42 +372,38 @@ const Movies = ({ data, eng }) => {
       </span>
     );
   };
-  const movies = (dep) =>{
- return(
-  dep === "Acting"
- ? data.movie_credits.cast
- : data.movie_credits.crew.filter((job) => job.department === dep)
- )     
-  }
- console.log(data.known_for_department)
- const crewWorld={
-  Stunts:'Трюки',
-  "Stunt Double":'Дублер',
-  'Stunt Coordinator':'Координатор трюків',
-  'Stunt Driver':'Водій каскадер',
-  "Utility Stunts":'Трюки'
- }
- const crewFilm=(job)=>{
- return (
-    <span className="group">
-      <span className="character">
-        ...{crewWorld[job[0].job]}
+  const movies = (dep) => {
+    return dep === "Acting"
+      ? data.movie_credits.cast
+      : data.movie_credits.crew.filter((job) => job.department === dep);
+  };
+  const crewWorld = {
+    Stunts: "Трюки",
+    "Stunt Double": "Дублер",
+    "Stunt Coordinator": "Координатор трюків",
+    "Stunt Driver": "Водій каскадер",
+    "Utility Stunts": "Трюки",
+  };
+  const crewFilm = (job) => {
+    return (
+      <span className="group">
+        <span className="character">...{crewWorld[job[0].job]}</span>
       </span>
-    </span>
-  )
- }
+    );
+  };
   return (
     <div className="container_works_list">
       <h3>
-         {data.known_for_department === "Acting"||data.known_for_department === "Crew"
+        {data.known_for_department === "Acting" ||
+        data.known_for_department === "Crew"
           ? eng[data.known_for_department]
-          :eng[data.known_for_department][0]} 
+          : eng[data.known_for_department][0]}
       </h3>
       <table className="works_list">
         <tbody>
           {movies(data.known_for_department)
             .filter((res) => !res.release_date)
-            /*  .toSorted(sorted) */ .map((res) => (
+             .map((res) => (
               <tr key={res.id}>
                 <td>
                   <table className="credit_group">
@@ -451,7 +430,9 @@ const Movies = ({ data, eng }) => {
                           <a className="tooltip" href="">
                             <p>{res.title}</p>
                           </a>
-                          {data.known_for_department === "Crew"?crewFilm(data.job[0]):roleFim(data.known_for_department, res)}
+                          {data.known_for_department === "Crew"
+                            ? crewFilm(data.job[0])
+                            : roleFim(data.known_for_department, res)}
                         </td>
                       </tr>
                     </tbody>
@@ -473,7 +454,7 @@ const Movies = ({ data, eng }) => {
                   <tbody>
                     {res.map((movie) => (
                       <>
-                        <tr>
+                        <tr key={index}>
                           <td className="year">
                             {new Date(res[0].release_date).getFullYear()}
                           </td>
@@ -496,7 +477,9 @@ const Movies = ({ data, eng }) => {
                             <a className="tooltip" href="">
                               <p>{movie.title}</p>
                             </a>
-                            {data.known_for_department === "Crew"?crewFilm(res):roleFim(data.known_for_department, movie)}
+                            {data.known_for_department === "Crew"
+                              ? crewFilm(res)
+                              : roleFim(data.known_for_department, movie)}
                           </td>
                         </tr>
                       </>
@@ -553,7 +536,7 @@ const Serials = ({ data }) => {
       <table className="works_list">
         <tbody>
           {originalArray.toSorted(sorted).map((res, index) => (
-            <tr>
+            <tr key={index}>
               <td>
                 <table
                   className={
