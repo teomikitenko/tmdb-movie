@@ -1,5 +1,5 @@
 import "./persons.css";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -212,8 +212,9 @@ export default function Person() {
                   moviesKnown(data.known_for_department).map((res, index) => {
                     if (index > 3 && index < 12) {
                       return (
-                        <SwiperSlide key={index} className="swiper-slide">
+                        <SwiperSlide  key={index} className="swiper-slide">
                           <div className="img_slide">
+                            <Link to={`/films/${res.id}`} >
                             <img
                               loading="lazy"
                               src={
@@ -222,6 +223,8 @@ export default function Person() {
                               }
                               alt=""
                             />
+                            </Link>
+                        
                           </div>
                           <div className="container_for_title">
                             <p className="title_movie">{res.title}</p>
