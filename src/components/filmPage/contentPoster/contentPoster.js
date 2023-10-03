@@ -515,6 +515,7 @@ const Video = ({ data }) => {
                   <div className="play_circle">
                     <div className="icon_arrow">
                       <PlayArrowIcon
+                    
                         onClick={() => {
                           setOpen(true);
                           setVideo({ name: video.name, key: video.key });
@@ -524,6 +525,7 @@ const Video = ({ data }) => {
                           position: "absolute",
                           zIndex: "200",
                           fill: "#fff",
+                          fontSize:'20px'
                         }}
                       />
                     </div>

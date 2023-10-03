@@ -3,7 +3,7 @@ import { createApi,fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 const nowDate = () => {
   return `${new Date().getFullYear()}-${validMonth(
     new Date().getMonth() + 1
-  )}-${new Date().getDate()}`;
+  )}-${validMonth(new Date().getDate())}`;
 };
 const validMonth = (date) => {
   return date.toString().length > 1 ? date : 0 + date.toString();

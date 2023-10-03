@@ -1,8 +1,11 @@
 import './footer.css'
 import { Link } from 'react-router-dom'
 import { Typography } from '@mui/material'
+import { useState } from 'react'
+import FormConnect from './form'
 
 const Footer=()=>{
+    const[open,setOpen]=useState(false)
     const films=[
         {title:'Популярні',page:'/popular-films'},
         {title:'Зараз в кіно',page:'/now-playing'},
@@ -55,8 +58,11 @@ const Footer=()=>{
                         </li>)}
                    </div>
                 </div>
-
-
+                <div className="feedback_form">
+                <Typography  variant='footer_list'>
+                    <button onClick={()=>setOpen(!open)}>Залиште ваш відгук </button> </Typography>
+                </div>
+           <FormConnect setOpen={setOpen} open={open}/> 
             </div>
             </div>
          

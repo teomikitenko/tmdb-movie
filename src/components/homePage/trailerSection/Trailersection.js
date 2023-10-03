@@ -34,12 +34,14 @@ const TraiLerSection = () => {
     { title: "Зараз на ТВ", cb: "on tv" },
   ];
   const { data, isSuccess } = endpoints[type];
+  console.log(endpoints[type])
   const btnClass = classNames({
     button_selected: true,
     films: type === "on cinema",
     on_tv: type === "on tv",
     serials: type === "serials",
   });
+  console.log(isSuccess&&data)
   return (
     <section className="trailers">
       <div className="wrapper_conteiner">
@@ -95,9 +97,12 @@ const TraiLerSection = () => {
                                   setOpen(true);
                                 }}
                                 sx={{
+                                  '&:hover': {
+                                    fontSize: "80px",
+                                  },
                                   fill: "#fff",
                                   fontSize: "65px",
-                                  transition: " all 200ms ease-in-out",
+                                  transition: " all 195ms ease-in-out",
                                 }}
                               />
                             </div>

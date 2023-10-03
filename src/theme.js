@@ -13,14 +13,8 @@ let theme = createTheme({
       },
     },
     components: {
-       MuiSvgIcon: {
-        styleOverrides: {
-          root: {
-            fontSize: "20px",
-            fill: "#000",
-          },
-        },
-      }, 
+     
+       
       MuiTypography:{
         defaultProps:{
           variantMapping:{

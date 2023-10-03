@@ -17,7 +17,7 @@ import Persons from "./components/personsPage/persons";
 import Person from "./components/person/Person";
 import Serials from "./components/serialsPage/serials";
 import EnterInPage from "./components/authorizationPage/authorization";
-import { createTheme, ThemeProvider, responsiveFontSizes } from "@mui/material/styles";
+import {ThemeProvider} from "@mui/material/styles";
 import {
   ChangeUpcomingFilmsPage,
   SortGenreUpcomingFilms,
