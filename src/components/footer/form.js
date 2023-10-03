@@ -28,10 +28,10 @@ const FormConnect = ({ open, setOpen }) => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
-    height: 400,
-    backgroundImage: "radial-gradient(at 30% top,#031d33 0%,rgba(3,37,65,1) 70%);",
-    border: "2px solid #000",
-    boxShadow: 24,
+    height:450,
+    backgroundColor: "#fff",
+    boxShadow: 20,
+    borderRadius:8,
     p: 4,
   };
   const { field:nickname } = useController({ name: 'Nickname',control })
@@ -41,12 +41,15 @@ const FormConnect = ({ open, setOpen }) => {
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
       <Box sx={style}>
-        <Box sx={{ height:'50%', display:'flex',flexDirection:'column',backgroundColor:'#fff' }}>
+        <Box sx={{ height:'70%', display:'flex',flexDirection:'column',backgroundColor:'#fff' }}>
           <form style={{display:'flex',flexDirection:'column',gap:'10px'}} id="myForm" onSubmit={handleSubmit(sendForm)}>
           <Input {...nickname}/>
           <TextField {...feedback}/>
          </form>
-          <Button form='myForm' type="submit" sx={{background: 'linear-gradient(to right,rgba(192,254,207,1) 0%,rgba(30,213,169,1) 100%)'}}>Відправити</Button>
+          <Button form='myForm' type="submit" sx={{
+            flexGrow:1,
+            marginTop:'20px',
+            background: 'linear-gradient(to right,rgba(192,254,207,1) 0%,rgba(30,213,169,1) 100%)'}}>Відправити</Button>
         </Box>
       </Box>
     </Modal>
