@@ -1,9 +1,9 @@
 import "./typeMedia.css";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { LinearProgress} from "@mui/material";
+import { LinearProgress } from "@mui/material";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { FilterColumn } from "./filterColumn/filtersColumn";
 import {
@@ -11,7 +11,11 @@ import {
   clearSortingValue,
   resetData,
 } from "../filmsTypePages/filmsTypeSlice";
-import { changeSerialsSortingType,clearSerialsSortingValue,resetSerialsData } from "../serialsTypePages/serialsTypeSlice";
+import {
+  changeSerialsSortingType,
+  clearSerialsSortingValue,
+  resetSerialsData,
+} from "../serialsTypePages/serialsTypeSlice";
 
 const selectValuesMovies = createSelector(
   (state) => state.typeFilmsCategory.filmsArray,
@@ -19,10 +23,13 @@ const selectValuesMovies = createSelector(
   (state) => state.typeFilmsCategory.filterType,
   (state) => state.typeFilmsCategory.sortingType,
   (data, flag, genre, sort) => ({
-    data, flag, genre, sort
+    data,
+    flag,
+    genre,
+    sort,
   })
 );
-const selectValuesSerials=createSelector(
+const selectValuesSerials = createSelector(
   (state) => state.typeSerialsCategory.serialsArray,
   (state) => state.typeSerialsCategory.loadingStatus,
   (state) => state.typeSerialsCategory.filterType,
@@ -44,53 +51,58 @@ const TypeMedia = ({
   endpoint,
 }) => {
   const dispatch = useDispatch();
+  const inputEl = useRef(null);
   const [hideButton, setHideButton] = useState(false);
   const [page, setPage] = useState(1);
   const [flagSort, setFlagSort] = useState(false);
   const base_poster = "https://image.tmdb.org/t/p/w500";
 
-  const { data, flag, genre, sort } = useSelector(mediaType === 'movies'?  selectValuesMovies:selectValuesSerials );
-  console.log(data)
+  const { data, flag, genre, sort } = useSelector(
+    mediaType === "movies" ? selectValuesMovies : selectValuesSerials
+  );
+  console.log(data);
   const classNames = require("classnames");
   const divClass = classNames({
     download_more: true,
+    hide_button:hideButton
   });
   useEffect(() => window.scrollTo(0, 0), []);
 
-
   useEffect(() => {
-    document.addEventListener("scroll", scrollListener);
-    return () => document.removeEventListener("scroll", scrollListener);
-  }, [data]);
+    const options = {
+      rootMargin:'0% 0% 60% 0%',
+      threshold: 0.1,
+    };
+    const callback = function (entries, observer) {
+      console.log(entries);
 
-  const scrollListener = () => {
-    let scrollHeight = Math.max(
-      document.body.scrollHeight,
-      document.documentElement.scrollHeight,
-      document.body.offsetHeight,
-      document.documentElement.offsetHeight,
-      document.body.clientHeight,
-      document.documentElement.clientHeight
-    );
-    if (
-      hideButton &&
-      document.documentElement.clientHeight + window.pageYOffset >=
-        scrollHeight - 400
-    ) {
-      setPage(page + 1);
-    }
-  };
+      if (entries[0].isIntersecting&&hideButton) setPage(page + 1);
+    };
+    const observer = new IntersectionObserver(callback, options);
+    if (inputEl.current) observer.observe(inputEl.current);
+    return () => {
+      if (inputEl.current) observer.disconnect(inputEl.current);
+    };
+  }, [data]);
 
   useEffect(() => {
     if (page >= 2) dispatch(changePageThunk({ page, genre, sort }));
   }, [page]);
 
   useEffect(() => {
-    dispatch(mediaType==='movies'?resetData(type):resetSerialsData(type));
+    dispatch(mediaType === "movies" ? resetData(type) : resetSerialsData(type));
     setFlagSort(true);
-    dispatch(mediaType==="movies"?changeSortingType({endpoint,type}):changeSerialsSortingType({endpoint,type}));
+    dispatch(
+      mediaType === "movies"
+        ? changeSortingType({ endpoint, type })
+        : changeSerialsSortingType({ endpoint, type })
+    );
     return () => {
-      dispatch(mediaType='movies'?clearSortingValue():clearSerialsSortingValue());
+      dispatch(
+        (mediaType = "movies"
+          ? clearSortingValue()
+          : clearSerialsSortingValue())
+      );
     };
   }, []);
 
@@ -98,9 +110,9 @@ const TypeMedia = ({
     if (flagSort) dispatch(filteSortThunk({ genre, sort }));
   }, [genre, sort, flagSort]);
 
-const checkPath=(id)=>{
- return mediaType === 'movies'? `/films/${id}`:`/tv/${id}`
-}
+  const checkPath = (id) => {
+    return mediaType === "movies" ? `/films/${id}` : `/tv/${id}`;
+  };
 
   return (
     sort && (
@@ -111,10 +123,10 @@ const checkPath=(id)=>{
           </div>
           <div className="content_media">
             <FilterColumn type={type} mediaType={mediaType} />
-            <div className="cards_column">
+            <div   className="cards_column">
               <section className="media_results">
                 <TransitionGroup component={null}>
-                  {data.map(media=> {
+                  {data.map((media) => {
                     return (
                       <CSSTransition
                         key={media.id}
@@ -122,35 +134,40 @@ const checkPath=(id)=>{
                         classNames="my-node"
                       >
                         <Link to={checkPath(media.id)}>
-                        <div className="card_media">
-                          <div className="card_image_wrapper">
-                            <img src={base_poster + media.poster_path} alt="" />
-                          </div>
-                          <div className="card_text_wrapper">
-                            <div className="text_title_card">
-                              <p className="title_text">{media.title}</p>
-                              <p className="date_text">{media.release_date}</p>
+                          <div className="card_media">
+                            <div className="card_image_wrapper">
+                              <img
+                                src={base_poster + media.poster_path}
+                                alt=""
+                              />
+                            </div>
+                            <div className="card_text_wrapper">
+                              <div className="text_title_card">
+                                <p className="title_text">{media.title}</p>
+                                <p className="date_text">
+                                  {media.release_date}
+                                </p>
+                              </div>
                             </div>
                           </div>
-                        </div>
                         </Link>
-                      
                       </CSSTransition>
                     );
                   })}
                 </TransitionGroup>
                 {flag === "loading" && <Loader />}
-                {page <= 1 && flag === "success" && data.length === 20 && (
+                { page >=1&& data.length >= 20 && (  
                   <div
+                  ref={inputEl}
                     onClick={() => {
                       setPage(page + 1);
-                      setHideButton(true);
+                      setHideButton(true); 
                     }}
                     className={divClass}
                   >
                     <p>Завантажити більше</p>
                   </div>
-                )}
+                  )}    
               </section>
             </div>
           </div>
