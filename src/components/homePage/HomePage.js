@@ -1,7 +1,7 @@
 import "./homePage.css";
 import { useState } from "react";
 import MediaSection from "./mediaSection/MediaSection";
-import SearchPanel from "../filmPage/serchpanel/SearchPanel";
+import SearchPanel from "./serchpanel/SearchPanel";
 import TraiLerSection from "./trailerSection/Trailersection";
 import PopularBlock from "./popularBlock/popularBlock";
 const HomePage = () => {

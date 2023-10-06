@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-const validMonth = (date) => {
+import { takePlusDays,nowDate } from "../../../../hooks/dateFunction/date";
+/* const validMonth = (date) => {
   return date.toString().length > 1 ? date : 0 + date.toString();
 };
 const takeDateSevenDays=()=>{
@@ -14,7 +14,7 @@ const takeDateSevenDays=()=>{
     return `${new Date().getFullYear()}-${validMonth(
       new Date().getMonth() + 1
     )}-${new Date().getDate()}`;
-  };
+  }; */
  
 
 
@@ -30,7 +30,7 @@ export const ChangeNowOnTVSerialsPage = createAsyncThunk(
         },
       };
       const res = await fetch(
-        `https://api.themoviedb.org/3/discover/tv?air_date.gte=${nowDate()}&air_date.lte=${takeDateSevenDays()}&include_adult=false&include_null_first_air_dates=false&language=uk-UA&page=${page}&sort_by=${sort}&vote_count.gte=250&with_genres=${genre}`,
+        `https://api.themoviedb.org/3/discover/tv?air_date.gte=${nowDate()}&air_date.lte=${takePlusDays(7)}&include_adult=false&include_null_first_air_dates=false&language=uk-UA&page=${page}&sort_by=${sort}&vote_count.gte=250&with_genres=${genre}`,
         options
       );
   
@@ -50,7 +50,7 @@ export const ChangeNowOnTVSerialsPage = createAsyncThunk(
         },
       };
       const res = await fetch(
-          `https://api.themoviedb.org/3/discover/tv?air_date.gte=${nowDate()}&air_date.lte=${takeDateSevenDays()}&include_adult=false&include_null_first_air_dates=false&language=uk-UA&page=1&sort_by=${sort}&vote_count.gte=250&with_genres=${genre}`,
+          `https://api.themoviedb.org/3/discover/tv?air_date.gte=${nowDate()}&air_date.lte=${takePlusDays(7)}&include_adult=false&include_null_first_air_dates=false&language=uk-UA&page=1&sort_by=${sort}&vote_count.gte=250&with_genres=${genre}`,
         options
       );
       return await res.json();

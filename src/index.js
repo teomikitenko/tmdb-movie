@@ -11,7 +11,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import ContentPoster from "./components/filmPage/contentPoster/contentPoster";
+import Film from "./components/filmPage/films";
 import SearchAllResults from "./components/resultsPage/searchAllResult";
 import Persons from "./components/personsPage/persons";
 import Person from "./components/person/Person";
@@ -155,7 +155,7 @@ const router = createBrowserRouter(
             options
           );
         }}
-        element={<ContentPoster />}
+        element={<Film />}
       />
 
       {moviesPagesType.map((page) => {

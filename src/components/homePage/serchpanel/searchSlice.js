@@ -42,5 +42,5 @@ const initSearch={
     },
   
   })
-     export const{filter,knownFor}=searchSlice.actions
+     export const{filter}=searchSlice.actions
   export const{reducer} = searchSlice;

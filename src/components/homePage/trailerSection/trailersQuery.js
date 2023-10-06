@@ -1,20 +1,5 @@
 import { createApi,fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-const nowDate = () => {
-  return `${new Date().getFullYear()}-${validMonth(
-    new Date().getMonth() + 1
-  )}-${validMonth(new Date().getDate())}`;
-};
-const validMonth = (date) => {
-  return date.toString().length > 1 ? date : 0 + date.toString();
-};
-const takeDateSevenDays = () => {
-  const currentDate = new Date();
-  const sevenDays = currentDate.setDate(currentDate.getDate() + 5);
-  return `${new Date(sevenDays).getFullYear()}-${validMonth(
-    new Date(sevenDays).getMonth() + 1
-  )}-${validMonth(new Date(sevenDays).getDate())}`;
-};
+import { takePlusDays,nowDate } from '../../../hooks/dateFunction/date';
 export const getTrailers = createApi({
   reducerPath: "VideoTrailers",
   baseQuery: fetchBaseQuery({
@@ -31,7 +16,7 @@ export const getTrailers = createApi({
     }),
       getSerialsTrailers: builder.query({
       query: () =>
-        `tv?air_date.gte=${nowDate()}&air_date.lte=${takeDateSevenDays()}&include_adult=false&include_null_first_air_dates=false&language=uk-UA&page=1&sort_by=popularity.desc&vote_count.gte=250`,
+        `tv?air_date.gte=${nowDate()}&air_date.lte=${takePlusDays(7)}&include_adult=false&include_null_first_air_dates=false&language=uk-UA&page=1&sort_by=popularity.desc&vote_count.gte=250`,
     }),
     getSerialsOnTvTrailers: builder.query({
       query: () =>

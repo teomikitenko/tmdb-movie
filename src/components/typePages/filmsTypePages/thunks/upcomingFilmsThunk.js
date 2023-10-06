@@ -1,12 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-const nowDate = () => {
+import { nowDate } from "../../../../hooks/dateFunction/date";
+/* const nowDate = () => {
   return `${new Date().getFullYear()}-${validMonth(
     new Date().getMonth() + 1
   )}-${new Date().getDate()}`;
 };
 const validMonth = (date) => {
   return date.toString().length > 1 ? date : 0 + date.toString();
-};
+}; */
 export const ChangeUpcomingFilmsPage = createAsyncThunk(
   "ChangeUpcomingPage",
   async ({ page, genre, sort }) => {

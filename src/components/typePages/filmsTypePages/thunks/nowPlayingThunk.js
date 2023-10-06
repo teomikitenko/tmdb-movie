@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-const takeDateForward=()=>{
+import { takeMinusDate,nowDate } from "../../../../hooks/dateFunction/date";
+/* const takeDateForward=()=>{
   const tenDays = 30*86400000 
  const days=new Date(new Date().getTime()-tenDays) 
  return `${new Date(days).getFullYear()}-${validMonth(
@@ -15,7 +15,7 @@ const nowDate = () => {
 const validMonth = (date) => {
   return date.toString().length > 1 ? date : 0 + date.toString();
 };
-
+ */
 
 export const ChangeNowPlayingPage = createAsyncThunk(
   "changePageNowPlaying",
@@ -30,7 +30,7 @@ export const ChangeNowPlayingPage = createAsyncThunk(
       },
     };
     const res = await fetch(
-      `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=uk-UA&page=${page}&primary_release_date.gte=${takeDateForward()}&primary_release_date.lte=${nowDate()}&sort_by=${sort}&with_genres=${genre}`,
+      `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=uk-UA&page=${page}&primary_release_date.gte=${takeMinusDate(10)}&primary_release_date.lte=${nowDate()}&sort_by=${sort}&with_genres=${genre}`,
       options
     );
 
@@ -50,7 +50,7 @@ export const SortGenreNowPlaying = createAsyncThunk(
     };
     const res = await fetch(
       
-      `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=uk-UA&page=1&primary_release_date.gte=${takeDateForward()}&primary_release_date.lte=${nowDate()}&sort_by=${sort}&with_genres=${genre}`,
+      `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=uk-UA&page=1&primary_release_date.gte=${takeMinusDate(10)}&primary_release_date.lte=${nowDate()}&sort_by=${sort}&with_genres=${genre}`,
       options
     );
 

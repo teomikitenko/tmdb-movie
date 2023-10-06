@@ -1,9 +1,9 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { trendingPersons } from "../components/personsPage/personQuery";
-import { reducer as searchReducer } from "../components/filmPage/searchSlice";
+import { reducer as searchReducer } from "../components/homePage/serchpanel/searchSlice";
 import { reducer as typeFilmsCategory } from "../components/typePages/filmsTypePages/filmsTypeSlice";
 import { reducer as typeSerialsCategory } from "../components/typePages/serialsTypePages/serialsTypeSlice";
-import { multiFind } from "../components/filmPage/searchSlice";
+import { multiFind } from "../components/homePage/serchpanel/searchSlice";
 import { getTrailers } from "../components/homePage/trailerSection/trailersQuery";
 import {
   findVideoTrailersSerials,

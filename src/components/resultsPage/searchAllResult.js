@@ -1,9 +1,9 @@
 import  './resultsPage.css'
 import { useState,useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { filter } from '../filmPage/searchSlice'
+import { filter } from '../homePage/serchpanel/searchSlice'
 import { Link, useParams } from 'react-router-dom'
-import { useGetAllFindQuery } from '../filmPage/searchSlice'
+import { useGetAllFindQuery } from '../homePage/serchpanel/searchSlice'
 
 
 

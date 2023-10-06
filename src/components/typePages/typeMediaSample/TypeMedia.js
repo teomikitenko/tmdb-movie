@@ -1,22 +1,12 @@
 import "./typeMedia.css";
 import { Link } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { LinearProgress } from "@mui/material";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { FilterColumn } from "./filterColumn/filtersColumn";
-import {
-  changeSortingType,
-  clearSortingValue,
-  resetData,
-} from "../filmsTypePages/filmsTypeSlice";
-import {
-  changeSerialsSortingType,
-  clearSerialsSortingValue,
-  resetSerialsData,
-} from "../serialsTypePages/serialsTypeSlice";
 
+import useTypeMedia from "../../../hooks/typeMediaHook";
 const selectValuesMovies = createSelector(
   (state) => state.typeFilmsCategory.filmsArray,
   (state) => state.typeFilmsCategory.loadingStatus,
@@ -50,69 +40,20 @@ const TypeMedia = ({
   mediaType,
   endpoint,
 }) => {
-  const dispatch = useDispatch();
-  const inputEl = useRef(null);
-  const [hideButton, setHideButton] = useState(false);
-  const [page, setPage] = useState(1);
-  const [flagSort, setFlagSort] = useState(false);
-  const base_poster = "https://image.tmdb.org/t/p/w500";
+
 
   const { data, flag, genre, sort } = useSelector(
     mediaType === "movies" ? selectValuesMovies : selectValuesSerials
   );
-  console.log(data);
-  const classNames = require("classnames");
-  const divClass = classNames({
-    download_more: true,
-    hide_button:hideButton
-  });
-  useEffect(() => window.scrollTo(0, 0), []);
 
-  useEffect(() => {
-    const options = {
-      rootMargin:'0% 0% 60% 0%',
-      threshold: 0.1,
-    };
-    const callback = function (entries, observer) {
-      console.log(entries);
-
-      if (entries[0].isIntersecting&&hideButton) setPage(page + 1);
-    };
-    const observer = new IntersectionObserver(callback, options);
-    if (inputEl.current) observer.observe(inputEl.current);
-    return () => {
-      if (inputEl.current) observer.disconnect(inputEl.current);
-    };
-  }, [data]);
-
-  useEffect(() => {
-    if (page >= 2) dispatch(changePageThunk({ page, genre, sort }));
-  }, [page]);
-
-  useEffect(() => {
-    dispatch(mediaType === "movies" ? resetData(type) : resetSerialsData(type));
-    setFlagSort(true);
-    dispatch(
-      mediaType === "movies"
-        ? changeSortingType({ endpoint, type })
-        : changeSerialsSortingType({ endpoint, type })
-    );
-    return () => {
-      dispatch(
-        (mediaType = "movies"
-          ? clearSortingValue()
-          : clearSerialsSortingValue())
-      );
-    };
-  }, []);
-
-  useEffect(() => {
-    if (flagSort) dispatch(filteSortThunk({ genre, sort }));
-  }, [genre, sort, flagSort]);
-
-  const checkPath = (id) => {
-    return mediaType === "movies" ? `/films/${id}` : `/tv/${id}`;
-  };
+  const{divClass,checkPath,base_poster,setHideButton,page,setPage,inputEl} = useTypeMedia(changePageThunk,
+    filteSortThunk,
+    title,
+    type,
+    mediaType,
+    endpoint,
+    genre,
+    sort,data)
 
   return (
     sort && (
