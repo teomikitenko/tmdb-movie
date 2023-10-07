@@ -1,13 +1,12 @@
-import { useForm, useController } from "react-hook-form";
+import { useForm, useController,Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
-import { Input } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-
+import { Typography } from "@mui/material";
+import { useEffect } from "react";
 const FormConnect = ({ open, setOpen }) => {
-    console.log('render form')
-  const { handleSubmit,reset,control } = useForm({
+  const { handleSubmit,reset,control,formState: { errors,isValid } } = useForm({
     defaultValues: {
       Nickname: "",
       Feedback:''
@@ -34,22 +33,47 @@ const FormConnect = ({ open, setOpen }) => {
     borderRadius:8,
     p: 4,
   };
-  const { field:nickname } = useController({ name: 'Nickname',control })
-  const { field:feedback } = useController({ name: 'Feedback',control })
+  console.log(errors)
 
-
+useEffect(()=>reset(),[open])
+console.log(isValid)
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
       <Box sx={style}>
-        <Box sx={{ height:'70%', display:'flex',flexDirection:'column',backgroundColor:'#fff' }}>
-          <form style={{display:'flex',flexDirection:'column',gap:'10px'}} id="myForm" onSubmit={handleSubmit(sendForm)}>
-          <Input {...nickname}/>
-          <TextField {...feedback}/>
+        <Box sx={{ height:'100%', display:'flex',flexDirection:'column',backgroundColor:'#fff' }}>
+        <Typography fontSize='1.2rem' fontWeight='500' sx={{display:'inline-block'}}>Залиште ваш відгук</Typography>  
+          <form style={{display:'flex',marginTop:'25px',flexDirection:'column',gap:'10px'}} id="myForm" onSubmit={handleSubmit(sendForm)}>
+         
+<Controller
+name="Nickname"
+control={control}
+rules={{required:'Закороткий нік',minLength:4}}
+render={({ field })=>
+<TextField   label='Ваш Нікнейм' {...field}/>
+}
+/>
+{errors.Nickname?
+<Typography color='red' variant="caption">Закороткий нік</Typography> :null
+}
+       
+<Controller
+name="Feedback"
+control={control}
+rules={{required:true,minLength:4}}
+render={({ field })=>
+<TextField label='Ваш відгук' 
+multiline
+rows={5}
+{...field}/>
+}
+/> 
+{errors.Feedback?
+  <Typography color='red' variant="caption">Введіть від 6 символів</Typography> :null
+}     
          </form>
-          <Button form='myForm' type="submit" sx={{
-            flexGrow:1,
-            marginTop:'20px',
-            background: 'linear-gradient(to right,rgba(192,254,207,1) 0%,rgba(30,213,169,1) 100%)'}}>Відправити</Button>
+          <Button disabled={!isValid}  variant="contained" form='myForm' type={isValid&&"submit"} sx={{
+            marginTop:'5px',
+          }}>Відправити</Button>
         </Box>
       </Box>
     </Modal>

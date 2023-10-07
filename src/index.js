@@ -17,7 +17,7 @@ import Persons from "./components/personsPage/persons";
 import Person from "./components/person/Person";
 import Serials from "./components/serialsPage/serials";
 import EnterInPage from "./components/authorizationPage/authorization";
-import {ThemeProvider} from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import {
   ChangeUpcomingFilmsPage,
   SortGenreUpcomingFilms,
@@ -42,9 +42,15 @@ import {
   ChangeRaitingSerialsPage,
   SortGenreTopRatedSerials,
 } from "./components/typePages/serialsTypePages/thunks/topRatedSerialsThunk";
-import { ChangeAiringTodaySerialsPage,SortGenreAiringTodaySerials } from "./components/typePages/serialsTypePages/thunks/airingTodaySerialsThunk";
+import {
+  ChangeAiringTodaySerialsPage,
+  SortGenreAiringTodaySerials,
+} from "./components/typePages/serialsTypePages/thunks/airingTodaySerialsThunk";
 import TypeMedia from "./components/typePages/typeMediaSample/TypeMedia";
-import { ChangeNowOnTVSerialsPage, SortGenreNowOnTVSerials } from "./components/typePages/serialsTypePages/thunks/nowOnTvSerialsThunk";
+import {
+  ChangeNowOnTVSerialsPage,
+  SortGenreNowOnTVSerials,
+} from "./components/typePages/serialsTypePages/thunks/nowOnTvSerialsThunk";
 const token =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDAxODZhZGFiZmFmYzA0MzBjOTQzOWQ3NjkxMmE4OCIsInN1YiI6IjY0YTAxNjg1NGE1MmY4MDBlODJkNjBmYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Gl1ryFSJiWHXhKjzFXBD_ZB3o9GGEOgPlw2Sr-hkhpE";
 
@@ -108,7 +114,7 @@ const serialPagesType = [
     endpoint: "popularity.desc",
     type: "Популярні",
   },
-   {
+  {
     id: 6,
     path: "/top-rated-serials",
     mediaType: "serials",
@@ -143,10 +149,7 @@ const serialPagesType = [
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<HeadPage />}>
-      <Route index element={
-       
-        <HomePage />
-      } />
+      <Route index element={<HomePage />} />
       <Route
         path="films/:idFilm"
         loader={async ({ params }) => {
@@ -161,18 +164,17 @@ const router = createBrowserRouter(
       {moviesPagesType.map((page) => {
         return (
           <Route
-          
             path={page.path}
             element={
-                <TypeMedia
-                  key={page.id} 
-                  mediaType={page.mediaType}
-                  changePageThunk={page.changePageThunk}
-                  filteSortThunk={page.filteSortThunk}
-                  title={page.title}
-                  endpoint={page.endpoint}
-                  type={page.type}
-                />
+              <TypeMedia
+                key={page.id}
+                mediaType={page.mediaType}
+                changePageThunk={page.changePageThunk}
+                filteSortThunk={page.filteSortThunk}
+                title={page.title}
+                endpoint={page.endpoint}
+                type={page.type}
+              />
             }
           />
         );
@@ -180,7 +182,6 @@ const router = createBrowserRouter(
       {serialPagesType.map((page) => {
         return (
           <Route
-            
             path={page.path}
             element={
               <ThemeProvider theme={theme}>
@@ -229,7 +230,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </ThemeProvider>
   </Provider>
 );

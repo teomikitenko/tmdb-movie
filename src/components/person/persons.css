@@ -316,7 +316,7 @@
     right: 0;
 }
 .Mui-disabled{
-  background-color: #fff !important;
+  /* background-color: #fff !important; */
   opacity: 1 !important;
 }
  .MuiMenu-root{

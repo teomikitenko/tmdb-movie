@@ -57,10 +57,10 @@ const Footer=()=>{
                            </Link>
                         </li>)}
                    </div>
+                   <div className="feedback_form">
+                <Typography variant='footer_title' sx={{cursor:'pointer'}} onClick={()=>setOpen(!open)} >
+                    Залиште побажання</Typography>
                 </div>
-                <div className="feedback_form">
-                <Typography  variant='footer_list'>
-                    <button onClick={()=>setOpen(!open)}>Залиште ваш відгук </button> </Typography>
                 </div>
            <FormConnect setOpen={setOpen} open={open}/> 
             </div>
