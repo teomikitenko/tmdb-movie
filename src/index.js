@@ -5,18 +5,14 @@ import "./index.css";
 import HomePage from "./components/homePage/HomePage";
 import HeadPage from "./components/headPage/HeadPage";
 import theme from "./theme";
+import { lazy,Suspense } from "react";
 import {
   Route,
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import Film from "./components/filmPage/films";
-import SearchAllResults from "./components/resultsPage/searchAllResult";
-import Persons from "./components/personsPage/persons";
-import Person from "./components/person/Person";
-import Serials from "./components/serialsPage/serials";
-import EnterInPage from "./components/authorizationPage/authorization";
+ import EnterInPage from "./components/authorizationPage/authorization";
 import { ThemeProvider } from "@mui/material/styles";
 import {
   ChangeUpcomingFilmsPage,
@@ -46,13 +42,22 @@ import {
   ChangeAiringTodaySerialsPage,
   SortGenreAiringTodaySerials,
 } from "./components/typePages/serialsTypePages/thunks/airingTodaySerialsThunk";
-import TypeMedia from "./components/typePages/typeMediaSample/TypeMedia";
 import {
   ChangeNowOnTVSerialsPage,
   SortGenreNowOnTVSerials,
 } from "./components/typePages/serialsTypePages/thunks/nowOnTvSerialsThunk";
 const token =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNDAxODZhZGFiZmFmYzA0MzBjOTQzOWQ3NjkxMmE4OCIsInN1YiI6IjY0YTAxNjg1NGE1MmY4MDBlODJkNjBmYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Gl1ryFSJiWHXhKjzFXBD_ZB3o9GGEOgPlw2Sr-hkhpE";
+
+ const Serials = lazy(() => import('./components/serialsPage/serials'));
+  const Film = lazy(() => import('./components/filmPage/films'));
+  const TypeMedia = lazy(() => import('./components/typePages/typeMediaSample/TypeMedia')); 
+ const SearchAllResults = lazy(() => import('./components/resultsPage/searchAllResult')); 
+ const Persons = lazy(() => import('./components/personsPage/persons'));
+  const Person = lazy(() => import('./components/person/Person')); 
+
+
+
 
 const options = {
   method: "GET",
@@ -158,7 +163,10 @@ const router = createBrowserRouter(
             options
           );
         }}
-        element={<Film />}
+        element={
+        <Suspense fallback={<div>...loading</div>}> 
+        <Film />
+        </Suspense>}
       />
 
       {moviesPagesType.map((page) => {
@@ -184,7 +192,8 @@ const router = createBrowserRouter(
           <Route
             path={page.path}
             element={
-              <ThemeProvider theme={theme}>
+              <Suspense fallback={<div>...loading</div>}>          
+                 <ThemeProvider theme={theme}>
                 <TypeMedia
                   key={page.id}
                   mediaType={page.mediaType}
@@ -195,12 +204,20 @@ const router = createBrowserRouter(
                   type={page.type}
                 />
               </ThemeProvider>
+              </Suspense> 
             }
           />
         );
       })}
-      <Route path="results/:res" element={<SearchAllResults />} />
-      <Route path="persons" element={<Persons />} />
+      <Route path="results/:res" element={
+      <Suspense fallback={<div>...loading</div>}>
+      <SearchAllResults />
+      </Suspense>} />
+      <Route path="persons" element={
+      <Suspense fallback={<div>...loading</div>}>
+        <Persons />
+      </Suspense>
+      } />
       <Route
         path="persons/:idPerson"
         loader={async ({ params }) => {
@@ -209,7 +226,10 @@ const router = createBrowserRouter(
             options
           );
         }}
-        element={<Person />}
+        element={
+        <Suspense fallback={<div>...loading</div>}>
+        <Person />
+        </Suspense>}
       />
       <Route
         path="tv/:idSerial"

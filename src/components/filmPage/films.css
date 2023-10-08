@@ -1,23 +1,6 @@
 
-ol{
-    list-style: none;
-    padding:  0 !important;
-    margin: 0;
-  }
-  span{
-    padding: 0;
-    margin: 0;
-    font-family:'Source Sans 3';
-    color: aliceblue;
-  }
-  p{
-    padding: 0 !important;
-    margin: 0 !important  ;
-    font-family:'Source Sans 3';
-    color: aliceblue;
-    word-wrap: normal;
-  
-  }
+
+
   .wrapper_movies {
     padding: 0;
     margin: 0;

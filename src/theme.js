@@ -45,11 +45,14 @@ let theme = createTheme({
       fontSize: "3rem",
       fontWeight: 700,
       lineHeight: 1,
+      
+
     },
     h3: {
       fontSize: "2rem",
       fontWeight: 600,
       lineHeight: 1,
+      color: "#fff",
     },
     h6: {
       fontSize: "1rem",
